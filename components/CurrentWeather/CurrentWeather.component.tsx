@@ -3,7 +3,7 @@ import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner.component";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FcBrokenLink } from "react-icons/fc";
-import { convertToF } from "lib/utils";
+
 
 export default function CurrentWeather() {
   const [weather, setWeather] = useState(null);
@@ -19,7 +19,6 @@ export default function CurrentWeather() {
         const weatherObj = {
           ...data,
           timestamp: new Date().getTime(),
-          temp_f: convertToF(data.temp),
         };
         console.log('weatherObj', weatherObj)
         window.localStorage.setItem(

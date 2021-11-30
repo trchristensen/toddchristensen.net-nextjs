@@ -1,26 +1,29 @@
-import React, { useState, useRef } from 'react';
-import { format } from 'date-fns';
-import { signIn, useSession } from 'next-auth/react';
-import useSWR, { useSWRConfig } from 'swr';
+import React, { useState, useRef } from "react";
+import { format } from "date-fns";
+import { signIn, useSession } from "next-auth/react";
+import useSWR, { useSWRConfig } from "swr";
 
-import fetcher from 'lib/fetcher';
-import { Form, FormState } from 'lib/types';
+import fetcher from "lib/fetcher";
+import { Form, FormState } from "lib/types";
 // import SuccessMessage from 'components/SuccessMessage';
 // import ErrorMessage from 'components/ErrorMessage';
-import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner.component';
+import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner.component";
 
-import { TiStarOutline, TiStarFullOutline, TiStarHalfOutline} from 'react-icons/ti'
+import {
+  TiStarOutline,
+  TiStarFullOutline,
+  TiStarHalfOutline,
+} from "react-icons/ti";
 
 export interface StarRatingProps {
   rating: number;
 }
 
 function StarRating(props: StarRatingProps) {
-
-  const whole = Math.floor(props.rating)
+  const whole = Math.floor(props.rating);
   const rounded = Math.round(props.rating / 0.5) * 0.5;
   const halfStar = props.rating % 1;
-  const empty = 5 - Math.ceil(props.rating)
+  const empty = 5 - Math.ceil(props.rating);
 
   const arr = [...Array(whole)];
   const emptyArr = [...Array(empty)];
@@ -36,7 +39,7 @@ function StarRating(props: StarRatingProps) {
         {halfStar ? <TiStarHalfOutline /> : null}
         {emptyArr.map((star, idx) => (
           <span key={idx}>
-            <TiStarOutline/>
+            <TiStarOutline />
           </span>
         ))}
       </div>
@@ -51,48 +54,88 @@ function BookEntry({ entry, user }) {
     e.preventDefault();
 
     await fetch(`/api/books/${entry.id}`, {
-      method: 'DELETE'
+      method: "DELETE",
     });
 
-    mutate('/api/books');
+    mutate("/api/books");
   };
 
-  let created = format(new Date(entry.updated_at), 'd MMM yyyy');
+  let created = format(new Date(entry.updated_at), "d MMM yyyy");
 
   return (
-    <div className="flex flex-col border-b border-solid border-gray-200 dark:border-gray-800 pb-2">
-      <div className="prose dark:prose-dark w-full">
-        <span className="font-bold text-lg">{entry.title}</span>
-        <span className="prose dark:prose-dark w-full text-sm text-gray-600 dark:text-gray-400 ml-2">
-          {' by '}
-          {entry.author}
-        </span>{' '}
-      </div>
-      <div className="prose dark:prose-dark w-full">
-        {entry.description}
-        {entry.description.length > 400 && '...'}
-      </div>
-      <div className="flex items-end space-x-3 text-gray-400 dark:text-gray-600">
-        <p className="text-sm text-gray-500">
-          <StarRating rating={entry.rating} />
-        </p>
-        <span className="text-gray-200 dark:text-gray-800 line text-xs">/</span>
-        <div className="spacing-0 mt-[-6px]">
-          <p className="text-xs text-gray-400 dark:text-gray-600 leading-none">
-            {created}
-          </p>
+    <div className="flex flex-col gap-1 border-b border-solid border-gray-200 dark:border-gray-800 pb-2">
+      <div className="flex flex-row w-full gap-4">
+        <div className="flex flex-col">
+          <a href={entry.key} target="_blank">
+            {entry.cover_src ? (
+              <img
+                className="shadow-lg rounded-sm"
+                width={70}
+                src={entry.cover_src}
+                alt={entry.title + "cover"}
+              />
+            ) : (
+              <div className="shadow-lg w-[70px] h-[100px] border rounded-sm bg-gray-200 dark:bg-gray-800"></div>
+            )}
+          </a>
         </div>
-        {user && entry.created_by === user.name && (
-          <>
-            <span className="text-gray-200 dark:text-gray-800">/</span>
-            <button
-              className="text-sm text-red-600 dark:text-red-400"
-              onClick={deleteEntry}
-            >
-              Delete
-            </button>
-          </>
-        )}
+        <div>
+          <a href={entry.key} target="_blank">
+            <span className="font-bold text-lg text-gray-600 dark:text-gray-400">
+              {entry.title}
+            </span>
+          </a>
+          <span className="w-full flex flex-row spacing-2 text-sm text-gray-600 dark:text-gray-400">
+            {" by "}
+            <div className="ml-1 flex">
+              {entry.author &&
+                entry.author
+                  .slice(2, entry.author.length - 2)
+                  .split(`","`)
+                  .map((author) => <span className="mr-2">{author}</span>)}
+            </div>
+          </span>
+          <div className="mt-2 flex items-end space-x-3 text-gray-400 dark:text-gray-600">
+            <p className="text-sm text-gray-500">
+              <StarRating rating={entry.rating} />
+            </p>
+            <span className="text-gray-200 dark:text-gray-800 line text-xs">
+              /
+            </span>
+            <div className="spacing-0 mt-[-6px]">
+              <p className="text-xs text-gray-400 dark:text-gray-600 leading-none">
+                {created}
+              </p>
+            </div>
+            {user && entry.created_by === user.name && (
+              <>
+                <span className="text-gray-200 dark:text-gray-800">/</span>
+                <button
+                  className="text-sm text-red-600 dark:text-red-400"
+                  onClick={deleteEntry}
+                >
+                  Delete
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="prose dark:prose-dark w-full">
+        {entry.description && entry.description}
+        {entry.description && entry.description.length > 400 && "..."}
+      </div>
+      <div className="prose dark:prose-dark w-full">
+        {entry.comment && entry.comment}
+        {entry.comment && entry.comment.length > 400 && "..."}
+      </div>
+      <div className="flex text-gray-600 dark:text-gray-400 text-xs">
+        {entry.subjects &&
+          entry.subjects
+            .slice(2, entry.subjects.length - 2)
+            .split(`","`)
+            .map((subject) => <span className="mr-2">{subject}</span>)}
       </div>
     </div>
   );
@@ -103,52 +146,49 @@ export default function Books({ fallbackData }) {
   const { mutate } = useSWRConfig();
   const [form, setForm] = useState<FormState>({ state: Form.Initial });
 
-  const { data: entries } = useSWR('/api/books', fetcher, {
-    fallbackData
+  const { data: entries } = useSWR("/api/books", fetcher, {
+    fallbackData,
   });
 
-  const [title, setTitle] = useState<string>();
-  const [author, setAuthor] = useState<string>();
-  const [description, setDescription] = useState<string>();
-  const [rating, setRating] = useState<number>(0);
+  const [ISBN, setISBN] = useState<string>();
+  // const [description, setDescription] = useState<string>();
+  // const [rating, setRating] = useState<number>(0);
 
   const clearForm = () => {
-    setTitle('');
-    setAuthor('');
-    setDescription('');
-    setRating(0);
+    setISBN("");
+    // setDescription('');
+    // setRating(0);
   };
 
   const leaveEntry = async (e) => {
     e.preventDefault();
     setForm({ state: Form.Loading });
 
-    const res = await fetch('/api/books', {
+    const res = await fetch("/api/books", {
       body: JSON.stringify({
-        title,
-        author,
-        description,
-        rating
+        isbn: ISBN,
+        // description,
+        // rating
       }),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      method: 'POST'
+      method: "POST",
     });
 
     const { error } = await res.json();
     if (error) {
       setForm({
         state: Form.Error,
-        message: error
+        message: error,
       });
       return;
     }
 
-    mutate('/api/books');
+    mutate("/api/books");
     setForm({
       state: Form.Success,
-      message: `Book has been added to the list!`
+      message: `Book has been added to the list!`,
     });
   };
 
@@ -173,7 +213,7 @@ export default function Books({ fallbackData }) {
             className="flex items-center justify-center my-4 font-bold h-8 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded w-28"
             onClick={(e) => {
               e.preventDefault();
-              signIn('github');
+              signIn("github");
             }}
           >
             Login
@@ -181,30 +221,20 @@ export default function Books({ fallbackData }) {
         )}
         {session?.user && (
           <form
-            className="relative my-4 text-gray-900 dark:text-gray-100"
+            className="relative my-4 text-gray-900 dark:text-gray-100 flex flex-col gap-2"
             onSubmit={leaveEntry}
           >
             <input
-              value={title}
+              value={ISBN}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setTitle(e.target.value)
+                setISBN(e.target.value)
               }
-              aria-label="Book title"
-              placeholder="Book title..."
+              aria-label="Book ISBN"
+              placeholder="Book ISBN..."
               required
               className="pl-4 pr-32 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full border-gray-300 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             />
-            <input
-              value={author}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setAuthor(e.target.value)
-              }
-              aria-label="Book author"
-              placeholder="Book author..."
-              required
-              className="pl-4 pr-32 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full border-gray-300 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-            />
-            <input
+            {/* <input
               value={description}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setDescription(e.target.value)
@@ -213,8 +243,8 @@ export default function Books({ fallbackData }) {
               placeholder="Book description..."
               required
               className="pl-4 pr-32 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full border-gray-300 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-            />
-            <div className="flex flex-row items-center justify-start">
+            /> */}
+            {/* <div className="flex flex-row items-center justify-start">
               <label htmlFor="rating" className="mr-4">Rating</label>
               <div className="w-auto">
               <input
@@ -229,23 +259,23 @@ export default function Books({ fallbackData }) {
                 className="w-full pl-4 pr-32 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 block border-gray-300 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               />
               </div>
-            </div>
+            </div> */}
 
             <button
               className="flex items-center justify-center px-4 pt-1 font-medium h-8 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded w-28"
               type="submit"
             >
-              {form.state === Form.Loading ? <LoadingSpinner /> : 'Add Book'}
+              {form.state === Form.Loading ? <LoadingSpinner /> : "Add Book"}
             </button>
           </form>
         )}
-        {form.state === Form.Error ? (
-          // <ErrorMessage>{form.message}</ErrorMessage>
-          console.log('error')
-        ) : form.state === Form.Success ? (
-          console.log('success')
-          // <SuccessMessage>{form.message}</SuccessMessage>
-        ) : null}
+        {form.state === Form.Error
+          ? // <ErrorMessage>{form.message}</ErrorMessage>
+            console.log("error")
+          : form.state === Form.Success
+          ? console.log("success")
+          : // <SuccessMessage>{form.message}</SuccessMessage>
+            null}
       </div>
     </>
   );

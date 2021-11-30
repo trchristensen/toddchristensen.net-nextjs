@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { convertToF } from 'lib/utils'
 
 const getTheWeather = async (city: string, countryCode: string) => {
   const response = await fetch(
@@ -27,6 +28,7 @@ export default async function handler(
 
   const weather = response.weather;
   const temp = response.main.temp;
+  const temp_f = convertToF(temp);
   const id = response.weather[0].id;
   const main = response.weather[0].main;
   const description = response.weather[0].description;
@@ -34,6 +36,7 @@ export default async function handler(
 
   return res.status(200).json({
     temp,
+    temp_f,
     id,
     main,
     description,
