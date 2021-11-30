@@ -1,7 +1,6 @@
 datasource db {
     provider             = "mysql"
-    // url                  = env("DATABASE_URL")
-    url                  = env("PRISMA_DATA_PROXY_URL")
+    url                  = env("DATABASE_URL")
     shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
     referentialIntegrity = "prisma"
 }
