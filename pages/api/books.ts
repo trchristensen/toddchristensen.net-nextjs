@@ -49,7 +49,7 @@ export default async function handler(
   console.log("SESSION USER ====> ", session);
 
   const bodyData = {
-    description: (req.body.description || "").slice(0, 500),
+    description: (req.body.description).slice(0, 500),
     rating: req.body.rating,
   };
 
@@ -65,22 +65,33 @@ export default async function handler(
           .then((res) => res.json())
           .then((d) => {
             let b = d[Object.keys(d)[0]];
+            
+            let title = null;
+            let subtitle = null;
+            let author = null;
+            let description = null;
+            let num_pages = null;
+            let cover_src = null;
+            let publish_date = null;
+            let subjects = null;
+            let key = null;
+            let comment = null;
+            let rating = null;
 
+            
             let subjectsArr = typeof b.subjects != "undefined" ? (b.subjects.map((subject) => subject.name).slice(0, 4)) : null
-
-
             let data = {
               title: b.title,
               subtitle: b?.subtitle,
               author: b?.authors
                 ? JSON.stringify(b?.authors?.map((author) => author.name))
                 : null,
-              description: (b?.description || "").slice(0, 500),
+              description: (b?.description).slice(0, 500),
               num_pages: b?.number_of_pages,
               cover_src: b?.cover?.large,
               publish_date: b?.publish_date,
               subjects: typeof b?.subjects != "undefined"
-                ? (JSON.stringify(subjectsArr) || "")
+                ? (JSON.stringify(subjectsArr))
                 : null,
               key: `https://openlibrary.org${b?.key}`,
               comment: bodyData?.description,
