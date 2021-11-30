@@ -73,7 +73,7 @@ export default async function handler(
             let num_pages = null;
             let cover_src = null;
             let publish_date = null;
-            let subjects = null;
+            let subjects = [];
             let key = null;
             let comment = null;
             let rating = null;
