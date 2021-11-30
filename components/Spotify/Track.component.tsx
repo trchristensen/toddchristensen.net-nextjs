@@ -3,19 +3,18 @@ import Image from 'next/image'
 export default function Track(track) {
   return (
     <div className="flex flex-row items-start border-b border-gray-200 dark:border-gray-800 max-w-3xl w-full mt-6">
-      <div className="relative mr-3">
-        <p className="absolute text-sm font-bold text-gray-400 dark:text-gray-600">
+      <div className="relative md:mr-3">
+        <p className="relative md:absolute text-sm font-bold text-gray-400 dark:text-gray-600">
           {track.ranking}
         </p>
       </div>
       <div className="flex flex-row w-full pl-3 pb-6">
-        <div className="rounded overflow-hidden shadow-lg h-[64px] w=[64px]">
+        <div className="rounded overflow-hidden shadow-lg h-[50px] w-[50px]">
           <Image
             height={64}
             width={64}
             src={track.image.url}
             alt={track.image.title}
-            layout="fixed"
           />
         </div>
         <div className="flex flex-col pl-3">
