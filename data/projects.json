@@ -1,0 +1,117 @@
+{
+  "data": [
+    {
+      "title": "Christy Vault Company",
+      "description": "A static (SSG) website built for a client from scratch using Next and Contentful API.",
+      "href": "https://christyvault.com",
+      "icon": null,
+      "tags": [
+        { "name": "Next" },
+        { "name": "React" },
+        { "name": "static" },
+        { "name": "jamstack" },
+        { "name": "chakra-ui" },
+        { "name": "graphql" },
+        { "name": "Apollo" }
+      ],
+      "imageObject": {
+        "src": "https://toddchristensen.net/assets/christy-c.jpeg",
+        "alt": "Portfolio"
+      },
+      "links": [
+        {
+          "href": "https://christy.vercel.app/",
+          "alt": "github",
+          "icon": "github",
+          "text": "get more info",
+          "blank": true
+        }
+      ]
+    },
+    {
+      "title": "stackd",
+      "description": "A question/answer platform built on the Hive social media blockchain.",
+      "href": "https://dstack-zeta.vercel.app/",
+      "icon": null,
+      "tags": [
+        { "name": "Next" },
+        { "name": "React" },
+        { "name": "hive" },
+        { "name": "blockchain" },
+        { "name": "social" },
+        { "name": "graphql" },
+        { "name": "Apollo" },
+        { "name": "react-query" }
+      ],
+      "imageObject": {
+        "src": "https://toddchristensen.net/assets/dstack-c.jpeg",
+        "alt": "Portfolio"
+      },
+      "links": [
+        {
+          "href": "https://christy.vercel.app/",
+          "alt": "github",
+          "icon": "github",
+          "text": "get more info",
+          "blank": true
+        }
+      ]
+    },
+    {
+      "title": "Binance Taker Trades",
+      "description": "A Binance cryptocurrency exchange market order volume monitor.",
+      "href": "https://binance-taker-trades.herokuapp.com/",
+      "icon": null,
+      "tags": [
+        { "name": "VueJs" },
+        { "name": "Node" },
+        { "name": "Express" },
+        { "name": "Redis" },
+        { "name": "TailwindCSS" }
+      ],
+      "imageObject": {
+        "src": "https://toddchristensen.net/assets/binance-taker-trades-c.jpeg",
+        "alt": "Portfolio"
+      },
+      "links": [
+        {
+          "href": "https://christy.vercel.app/",
+          "alt": "github",
+          "icon": "github",
+          "text": "get more info",
+          "blank": true
+        }
+      ]
+    },
+    {
+      "title": "Portfolio V2",
+      "description": "My second portfolio website, built using create-react-app.",
+      "href": "https://react-portfolio-christensentr.vercel.app/",
+      "icon": null,
+      "tags": [
+        {
+          "name": "React"
+        },
+        {
+          "name": "Firebase"
+        },
+        {
+          "name": "React Router"
+        },
+        {
+          "name": "Recoil"
+        },
+        {
+          "name": "React Hook Form"
+        },
+        {
+          "name": "TailwindCSS"
+        }
+      ],
+      "imageObject": {
+        "src": "https://toddchristensen.net/assets/toddchristensen.net-c.jpeg",
+        "alt": "Portfolio"
+      }
+    }
+  ]
+}

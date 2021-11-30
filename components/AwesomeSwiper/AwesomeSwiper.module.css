@@ -1,0 +1,55 @@
+
+.swiper {
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+
+.swiper-slide.swiperSlide  {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.swiperSlide img {
+  display: block;
+  width: 100%;
+}
+
+.wtf {
+  width: 100%;
+  position: relative;
+}
+
+
+
+.swiperButtonNext, .swiperButtonPrev {
+  font-size: 80px;
+  font-weight: bold;
+  width: auto;
+  height: auto;
+  opacity: 0;
+  
+}
+
+.swiper:hover .swiperButtonNext, .swiper:hover .swiperButtonPrev {
+  opacity: .70;
+}
+
+.swiperButtonNext.hidden, .swiperButtonPrev.hidden{
+  opacity: 0;
+}
+
+.swiperButtonNext:after, .swiperButtonPrev:after {
+  content: '';
+}
+
+@media only screen and (max-width: 767px) {
+.swiper:hover .swiperButtonNext, .swiper:hover .swiperButtonPrev {
+  opacity: 0;
+}
+}
+
+
