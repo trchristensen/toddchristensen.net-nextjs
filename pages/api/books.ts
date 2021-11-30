@@ -66,7 +66,7 @@ export default async function handler(
           .then((d) => {
             let b = d[Object.keys(d)[0]];
 
-            let subjectsArr = b.subjects.length ? (b.subjects.map((subject) => subject.name).slice(0, 4)) : null
+            let subjectsArr = typeof b.subjects != "undefined" ? (b.subjects.map((subject) => subject.name).slice(0, 4)) : null
 
 
             let data = {
@@ -79,7 +79,7 @@ export default async function handler(
               num_pages: b?.number_of_pages,
               cover_src: b?.cover?.large,
               publish_date: b?.publish_date,
-              subjects: b?.subjects
+              subjects: typeof b?.subjects != "undefined"
                 ? (JSON.stringify(subjectsArr) || "")
                 : null,
               key: `https://openlibrary.org${b?.key}`,
