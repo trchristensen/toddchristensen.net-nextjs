@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import Image from 'next/image'
 import { format } from "date-fns";
 import { signIn, useSession } from "next-auth/react";
 import useSWR, { useSWRConfig } from "swr";
@@ -60,17 +61,21 @@ function BookEntry({ entry, user }) {
     mutate("/api/books");
   };
 
+
+
   let created = format(new Date(entry.updated_at), "d MMM yyyy");
 
   return (
     <div className="flex flex-col gap-1 border-b border-solid border-gray-200 dark:border-gray-800 pb-2">
       <div className="flex flex-row w-full gap-4">
         <div className="flex flex-col">
-          <a href={entry.key} target="_blank">
+          <a className="w-[100px]" href={entry.key} target="_blank">
             {entry.cover_src ? (
-              <img
+              <Image
                 className="shadow-lg rounded-sm"
-                width={70}
+                width={329}
+                height={500}
+                layout="responsive"
                 src={entry.cover_src}
                 alt={entry.title + "cover"}
               />
@@ -79,7 +84,7 @@ function BookEntry({ entry, user }) {
             )}
           </a>
         </div>
-        <div>
+        <div className="flex flex-col">
           <a href={entry.key} target="_blank">
             <span className="font-bold text-lg text-gray-600 dark:text-gray-400">
               {entry.title}
@@ -92,11 +97,11 @@ function BookEntry({ entry, user }) {
                 entry.author
                   .slice(2, entry.author.length - 2)
                   .split(`","`)
-                  .map((author) => <span className="mr-2">{author}</span>)}
+                  .map((author, idx) => <span key={idx} className="mr-2">{author}</span>)}
             </div>
           </span>
-          <div className="mt-2 flex items-end space-x-3 text-gray-400 dark:text-gray-600">
-            <p className="text-sm text-gray-500">
+          <div className="flex items-end space-x-3 text-gray-400 dark:text-gray-600">
+            <p className="mt-2 text-sm text-gray-500">
               <StarRating rating={entry.rating} />
             </p>
             <span className="text-gray-200 dark:text-gray-800 line text-xs">
@@ -104,7 +109,7 @@ function BookEntry({ entry, user }) {
             </span>
             <div className="spacing-0 mt-[-6px]">
               <p className="text-xs text-gray-400 dark:text-gray-600 leading-none">
-                {created}
+                added {created}
               </p>
             </div>
             {user && entry.created_by === user.name && (
@@ -119,24 +124,30 @@ function BookEntry({ entry, user }) {
               </>
             )}
           </div>
+          <div className="mt-2 flex flex-wrap gap-2 gap-y-0 text-gray-300 dark:text-gray-700 text-xs">
+            {
+              
+              typeof entry.subjects
+              }
+          </div>
+          <div className="mt-2 flex flex-wrap gap-2 gap-y-0 text-gray-300 dark:text-gray-700 text-xs">
+            {entry.subjects &&
+              entry.subjects
+                .slice(2, entry.subjects.length - 2)
+                .split(`","`)
+                .map((subject, idx) => <span key={idx} className="">{subject}</span>)}
+          </div>
+          <div className="text-gray-600 leading-tight mt-2 dark:text-gray-400 w-full">
+            {entry.comment && entry.comment}
+            {entry.comment && entry.comment.length > 400 && "..."}
+          </div>
         </div>
       </div>
-
-      <div className="prose dark:prose-dark w-full">
+      {/* <span className="text-black dark:text-white">{JSON.stringify(entry)}</span> */}
+      {/* <div className="prose dark:prose-dark w-full">
         {entry.description && entry.description}
         {entry.description && entry.description.length > 400 && "..."}
-      </div>
-      <div className="prose dark:prose-dark w-full">
-        {entry.comment && entry.comment}
-        {entry.comment && entry.comment.length > 400 && "..."}
-      </div>
-      <div className="flex text-gray-600 dark:text-gray-400 text-xs">
-        {entry.subjects &&
-          entry.subjects
-            .slice(2, entry.subjects.length - 2)
-            .split(`","`)
-            .map((subject) => <span className="mr-2">{subject}</span>)}
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -151,12 +162,12 @@ export default function Books({ fallbackData }) {
   });
 
   const [ISBN, setISBN] = useState<string>();
-  // const [description, setDescription] = useState<string>();
+  const [comment, setComment] = useState<string>();
   // const [rating, setRating] = useState<number>(0);
 
   const clearForm = () => {
     setISBN("");
-    // setDescription('');
+    setComment('');
     // setRating(0);
   };
 
@@ -167,7 +178,7 @@ export default function Books({ fallbackData }) {
     const res = await fetch("/api/books", {
       body: JSON.stringify({
         isbn: ISBN,
-        // description,
+        comment,
         // rating
       }),
       headers: {
@@ -234,16 +245,16 @@ export default function Books({ fallbackData }) {
               required
               className="pl-4 pr-32 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full border-gray-300 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             />
-            {/* <input
-              value={description}
+            <input
+              value={comment}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setDescription(e.target.value)
+                setComment(e.target.value)
               }
               aria-label="Book description"
               placeholder="Book description..."
               required
               className="pl-4 pr-32 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full border-gray-300 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-            /> */}
+            />
             {/* <div className="flex flex-row items-center justify-start">
               <label htmlFor="rating" className="mr-4">Rating</label>
               <div className="w-auto">

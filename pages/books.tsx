@@ -41,7 +41,7 @@ export async function getStaticProps() {
     num_pages: entry.num_pages,
     cover_src: entry.cover_src,
     publish_date: entry.publish_date,
-    subjects: entry.subjects,
+    subjects: JSON.parse(JSON.stringify(entry.subjects)),
     key: entry.key,
     comment: entry.comment,
   }));

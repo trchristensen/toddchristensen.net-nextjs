@@ -38,6 +38,7 @@ export default function ProjectCard({
                 links.map((link: ILink, idx: number) =>
                   link.icon === 'github' ? (
                     <a
+                      key={idx}
                       href={link.href}
                       className="flex justify-center items-center gap-1"
                       target={link.blank ? '_blank' : '_self'}
@@ -46,7 +47,7 @@ export default function ProjectCard({
                       <FaGithub /> <span>{link.text}</span>
                     </a>
                   ) : (
-                    <div className="flex justify-center items-center gap-1">
+                    <div key={idx} className="flex justify-center items-center gap-1">
                       <BiLinkExternal /> <span>{link.text}</span>
                     </div>
                   )

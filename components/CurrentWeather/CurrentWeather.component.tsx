@@ -1,30 +1,36 @@
 import styles from "./CurrentWeather.module.css";
-import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner.component";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FcBrokenLink } from "react-icons/fc";
+import { utcToZonedTime } from "date-fns-tz";
+import { format } from "date-fns";
 
-
-export default function CurrentWeather() {
+export default function CurrentWeather({ city, countryCode, timezone }) {
   const [weather, setWeather] = useState(null);
   const [err, setErr] = useState(null);
 
   const [useFahrenheit, setUseFahrenheit] = useState(true);
 
   const fetchWeather = async () => {
-    fetch("/api/weather?city=Angeles City&country_code=PH")
+    fetch(`/api/weather?city=${city}&country_code=${countryCode}`)
       .then((res) => res.json())
       .then((data) => {
+        let timestamp = new Date().getTime();
+        let zonedTimestamp = utcToZonedTime(timestamp, timezone);
+
         console.log("fresh weather data", data);
+        console.log("The weather data has been updated!");
+        console.log(
+          `Current Temperature in ${city}, ${countryCode} as of ${format(
+            timestamp,
+            "eee "
+          )} is:
+          ${Math.round(data.temp)}°C / ${Math.round(data.temp_f)}°F`
+        );
         const weatherObj = {
           ...data,
-          timestamp: new Date().getTime(),
+          timestamp,
         };
-        console.log('weatherObj', weatherObj)
-        window.localStorage.setItem(
-          "weather",
-          JSON.stringify(weatherObj)
-        );
+        window.localStorage.setItem("weather", JSON.stringify(weatherObj));
         setWeather(data);
         setErr(null);
       })
@@ -45,7 +51,7 @@ export default function CurrentWeather() {
     const currentTime = new Date().getTime();
     const weatherStore = window.localStorage.getItem("weather");
 
-    // set fahrenheit pref in state
+    // set fahrenheit preference in local state
     const fahrenheitLSString = window.localStorage.getItem("useFahrenheit");
     if (fahrenheitLSString === "false") {
       setUseFahrenheit(false);
@@ -53,12 +59,7 @@ export default function CurrentWeather() {
 
     if (weatherStore) {
       const weatherParsed = JSON.parse(weatherStore);
-      console.log("found weather in local storage.", weatherParsed);
       // check timestamp if it's been 15 minutes
-      console.log(
-        "seconds until weather refetch",
-        Math.round((1000000 - (currentTime - weatherParsed.timestamp)) / 1000)
-      );
       if (
         currentTime - weatherParsed.timestamp > 1000000 ||
         weatherParsed.timestamp == NaN
@@ -74,10 +75,18 @@ export default function CurrentWeather() {
     }
   }, []);
 
-  if (err) return <FcBrokenLink />;
-  if (!weather) return <LoadingSpinner />;
+  if (err) return (
+    <p className="capsize text-gray-800 dark:text-gray-200 font-medium">
+      Weather 404 :(
+    </p>
+  );
+  if (!weather)
+    return (
+      <p className="capsize text-gray-800 dark:text-gray-200 font-medium">
+        Loading Weather...
+      </p>
+    );
 
-  // return <>{JSON.stringify(data)}</>;
   return (
     <div
       className="flex flex-row items-center cursor-pointer"
@@ -90,6 +99,7 @@ export default function CurrentWeather() {
       </span>
       {/* @ts-ignore */}
       <Image
+        alt={weather.description}
         width={50}
         height={50}
         src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`}
@@ -97,81 +107,3 @@ export default function CurrentWeather() {
     </div>
   );
 }
-
-// icons from https://codepen.io/joshbader/pen/EjXgqr?editors=1100
-
-const RainyIcon = ({ fontSize = "sm" }) => {
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.icon}>
-        <div className={styles.cloud}></div>
-        <div className={styles.rain}></div>
-      </div>
-    </div>
-  );
-};
-
-const SunnyIcon = () => {
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.icon}>
-        <div className={styles.sun}>
-          <div className={styles.rays}></div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const FlurriesIcon = () => {
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.icon}>
-        <div className={styles.cloud}></div>
-        <div className={styles.snow}>
-          <div className={styles.flake}></div>
-          <div className={styles.flake}></div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const CloudyIcon = () => {
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.icon}>
-        <div className={styles.cloud}></div>
-        <div className={styles.cloud}></div>
-      </div>
-    </div>
-  );
-};
-
-const ThunderStormIcon = () => {
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.icon}>
-        <div className={styles.cloud}></div>
-        <div className={styles.lightning}>
-          <div className={styles.bolt}></div>
-          <div className={styles.bolt}></div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const SunShowerIcon = () => {
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.icon}>
-        <div className={styles.cloud}></div>
-        <div className={styles.sun}>
-          <div className={styles.rays}></div>
-        </div>
-        <div className={styles.rain}></div>
-      </div>
-    </div>
-  );
-};

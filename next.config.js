@@ -13,7 +13,8 @@ module.exports = {
       "images.unsplash.com",
       "toddchristensen.net",
       "openweathermap.org",
-      "i.scdn.co"
+      "i.scdn.co",
+      "covers.openlibrary.org"
     ],
   },
 };

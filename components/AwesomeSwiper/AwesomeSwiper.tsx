@@ -58,10 +58,12 @@ export default function AwesomeSwiper({ children }) {
           </span>
         </div> */}
         <Swiper
-          effect={"coverflow"}
+          // effect={"coverflow"}
+          // spaceBetween={-20}
+          spaceBetween={20}
+          effect={'cards'}
           grabCursor={true}
           centeredSlides={true}
-          spaceBetween={-20}
           createElements
           loop
           autoplay={{

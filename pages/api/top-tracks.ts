@@ -16,7 +16,6 @@ export default async function handler(
     image: track.album.images[2]
   }));
 
-//   console.log(tracks)
 
   res.setHeader(
     "Cache-Control",

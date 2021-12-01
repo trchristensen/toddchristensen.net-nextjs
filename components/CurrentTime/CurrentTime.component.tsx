@@ -1,19 +1,18 @@
 const { zonedTimeToUtc, utcToZonedTime, format } = require("date-fns-tz");
 
-const CurrentTime = () => {
+const CurrentTime = ({ timezone, city, countryCode }) => {
 
     const date = new Date();
-    const timeZone = "Asia/Manila";
-    const zonedDate = utcToZonedTime(date, timeZone);
+    const zonedDate = utcToZonedTime(date, timezone);
 
   return (
-    <article>
+    <div className="flex flex-wrap">
       <span>
         {format(zonedDate, "eee ")}
         {format(zonedDate, "p")}
       </span>
-      <span> @ Angeles City, PH</span>
-    </article>
+      <span> @ {city}, {countryCode}</span>
+    </div>
   );
 };
 

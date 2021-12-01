@@ -12,8 +12,8 @@ export default function Home() {
     <Container>
       <div className="flex flex-col justify-center items-start max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pb-16 w-full">
         <IntroSection />
-        <FeaturedProjects />
-        <Hobbies />
+        {/* <FeaturedProjects /> */}
+        <Todo />
       </div>
     </Container>
   );
@@ -73,12 +73,18 @@ const FeaturedProjects = () => {
   );
 };
 
-const Hobbies = () => (
+const Todo = () => (
   <section id="Hobbies">
-    <ul className="dark:text-white mt-16">
-      <li>featured posts (blog)</li>
+    <h3 className="mt-16 font-bold text-2xl md:text-4xl tracking-tight mb-6 text-black dark:text-white flex flex-row items-end justify-between w-full">
+      To do:{" "}
+    </h3>
+    <ol className="list-inside ml-8 text-gray-600 dark:text-gray-400">
+      <li>Header component</li>
+      <li>finish books page and features.</li>
+      <li>blog (powered by hive blockchain)</li>
       <li>Resume</li>
-      <li>Hobbies Section (music, gaming, books i've read, travel</li>
-    </ul>
+      <li>Custom chat window with AI</li>
+      <li>Hobbies page (music production, gaming production, <span className="line-through">books i've read</span>, travel</li>
+    </ol>
   </section>
 );

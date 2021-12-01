@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import NextLink from "next/link";
 import cn from "classnames";
-import Footer from 'components/Footer/Footer.component'
+import Footer from "components/Footer/Footer.component";
 import MobileMenu from "components/MobileMenu/MobileMenu.component";
-
+import { site } from "config/site.config";
 
 function NavItem({ href, text }) {
   const router = useRouter();
@@ -38,9 +38,9 @@ export default function Container(props) {
   const { children, ...customMeta } = props;
   const router = useRouter();
   const meta = {
-    title: "Todd Christensen – Developer, writer, creator.",
-    description: `Front-end developer, JavaScript enthusiast, and baby maker.`,
-    image: "https://leerob.io/static/images/banner.png",
+    title: "Todd Christensen – Developer, JavaScript enthusiast.",
+    description: `Front-end developer, JavaScript enthusiast.`,
+    // image: "https://leerob.io/static/images/banner.png",
     type: "website",
     ...customMeta,
   };
@@ -80,12 +80,9 @@ export default function Container(props) {
           </a>
           <div className="ml-[-0.60rem]">
             <MobileMenu />
-            <NavItem href="/" text="Home" />
-            <NavItem href="/guestbook" text="Guestbook" />
-            <NavItem href="/books" text="Books I've Read" />
-            <NavItem href="/dashboard" text="Dashboard" />
-            <NavItem href="/blog" text="Blog" />
-            <NavItem href="/snippets" text="Snippets" />
+            {site.mainMenu.map((navItem, idx) => (
+              <NavItem key={idx} href={navItem.path} text={navItem.title} />
+            ))}
           </div>
 
           <button

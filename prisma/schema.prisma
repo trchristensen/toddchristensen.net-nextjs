@@ -29,13 +29,13 @@ model books {
   title          String     @db.VarChar(256)
   subtitle       String?    @db.VarChar(256)
   author         String     @db.VarChar(256)
-  description    String?    @db.VarChar(500)
-  publish_date   String?    @db.VarChar(256)
+  description    String?    @db.VarChar(1000)
+  publish_date   String?    @db.VarChar(128)
   num_pages      Int?       @db.Int
   cover_src      String?    @db.VarChar(256)
-  subjects       String?    @db.VarChar(256)
+  subjects       String?    @db.VarChar(2000)
   key            String?    @db.VarChar(256)
-  comment        String?    @db.VarChar(500)
+  comment        String?    @db.VarChar(1000)
   rating         Float?     @db.Float
   created_at     DateTime   @default(now()) @db.DateTime(6)
   updated_at     DateTime   @default(now()) @db.DateTime(6)
