@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import prisma from "lib/prisma";
 import { Book } from "lib/types";
-import { getBookByISBN } from "lib/openLibrary";
 
 // @ts-ignore
 BigInt.prototype.toJSON = function () {
@@ -15,6 +14,11 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     const entries = await prisma.books.findMany({
+      where: {
+        created_by: {
+          equals: "toddchristensen@protonmail.com",
+        },
+      },
       orderBy: {
         updated_at: "desc",
       },
@@ -36,6 +40,7 @@ export default async function handler(
         rating: entry.rating,
         created_at: entry.created_at,
         updated_at: entry.updated_at,
+        created_by: entry.created_by,
       }))
     );
   }
@@ -49,22 +54,21 @@ export default async function handler(
 
   if (req.method === "POST") {
     if (email === "toddchristensen@protonmail.com") {
-      const ISBN = req?.body?.isbn;
-
-      const book = await getBookByISBN(ISBN);
-
-
-      let data = {
-        ...book,
-        comment: req?.body?.comment ? req.body.comment : null,
-        rating: req?.body?.rating ? req.body.rating : null,
+      const payload: Book = {
+        title: req.body?.bookData.title,
+        author: req.body?.bookData.author[req.body?.bookData.author.length - 1],
+        created_by: email,
+        subjects: req.body?.bookData.subjects.toString() || null,
+        publish_date: req.body?.bookData.publish_date[0] || null,
+        cover_src: req.body?.bookData.cover ? req.body?.bookData.cover.toString() : null,
+        key: req.body?.bookData.id,
+        comment: req?.body?.comment,
+        rating: req?.body?.rating,
       };
 
       const newEntry = await prisma.books.create({
-        data,
+        data: payload,
       });
-
-      console.log('DATA ===D~~~ ', data)
 
       return res.status(200).json({
         id: newEntry.id.toString(),

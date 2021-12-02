@@ -79,8 +79,8 @@ const Todo = () => (
       To do:{" "}
     </h3>
     <ol className="list-inside ml-8 text-gray-600 dark:text-gray-400">
+      <li>books page needs work on crud. add whole link function for adding books. add a recommend feature for people to add books who aren't me... add a read or will read feature</li>
       <li>Header component</li>
-      <li>finish books page and features.</li>
       <li>blog (powered by hive blockchain)</li>
       <li>Resume</li>
       <li>Custom chat window with AI</li>

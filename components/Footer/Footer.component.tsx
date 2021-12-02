@@ -26,10 +26,12 @@ export default function Footer() {
         {site.footerMenu.map((link, idx) => {
           idx++;
           return link.external_link ? (
-            <ExternalLink key={idx} href={link.path}>{link.title}</ExternalLink>
+            <ExternalLink key={idx} href={link.path}>
+              {link.title}
+            </ExternalLink>
           ) : (
-            <Link href={link.path}>
-              <a key={idx} className="text-gray-500 hover:text-gray-600 transition">
+            <Link key={idx} href={link.path}>
+              <a className="text-gray-500 hover:text-gray-600 transition">
                 {link.title}
               </a>
             </Link>
