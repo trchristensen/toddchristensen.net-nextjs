@@ -12,9 +12,8 @@ import { Form, FormState } from "lib/types";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner.component";
 import BookEntry from "./BookEntry.component";
 import CounterInput from "components/CounterInput/CounterInput.component";
-import AddBookSearch from "./AddBookSearch.component";
 import { books } from ".prisma/client";
-import { locale } from "config/locale.config"
+import { locale } from "config/locale.config";
 const { EMAIL } = locale;
 
 export default function Books({ fallbackData }) {
@@ -23,8 +22,6 @@ export default function Books({ fallbackData }) {
   const { data: entries } = useSWR("/api/books", fetcher, {
     fallbackData,
   });
-
-
 
   return (
     <>
@@ -51,8 +48,7 @@ export default function Books({ fallbackData }) {
           {entries
             ?.filter(
               (_: books) =>
-                _.read_status == "HAS_NOT_READ" &&
-                _.created_by == EMAIL
+                _.read_status == "HAS_NOT_READ" && _.created_by == EMAIL
             )
             .map((entry) => (
               <BookEntry key={entry.id} entry={entry} user={session?.user} />
@@ -66,8 +62,7 @@ export default function Books({ fallbackData }) {
           {entries
             ?.filter(
               (_: books) =>
-                _.read_status == "HAS_NOT_READ" &&
-                _.created_by != EMAIL
+                _.read_status == "HAS_NOT_READ" && _.created_by != EMAIL
             )
             .map((entry) => (
               <BookEntry key={entry.id} entry={entry} user={session?.user} />
@@ -75,7 +70,6 @@ export default function Books({ fallbackData }) {
         </div>
       </div>
       <AddBook session={session} />
-      {/* <AddBook session={session} /> */}
     </>
   );
 }
