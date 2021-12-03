@@ -45,14 +45,16 @@ export default function Books({ fallbackData }) {
           <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-black dark:text-white">
             Books I plan to read
           </h2>
-          {entries
-            ?.filter(
-              (_: books) =>
-                _.read_status == "HAS_NOT_READ" && _.created_by == EMAIL
-            )
-            .map((entry) => (
-              <BookEntry key={entry.id} entry={entry} user={session?.user} />
-            ))}
+          <div className="flex flex-col gap-4">
+            {entries
+              ?.filter(
+                (_: books) =>
+                  _.read_status == "HAS_NOT_READ" && _.created_by == EMAIL
+              )
+              .map((entry) => (
+                <BookEntry key={entry.id} entry={entry} user={session?.user} />
+              ))}
+          </div>
         </div>
 
         <div>

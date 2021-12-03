@@ -24,7 +24,7 @@ export default function BookEntry({ entry, user }) {
   let created = format(new Date(entry.updated_at), "d MMM yyyy");
 
   return (
-    <div className="BookEntry w-full flex flex-col gap-1 border-b border-solid border-gray-200 dark:border-gray-800 pb-2">
+    <div className="BookEntry w-full flex flex-col gap-1 pb-4 border-b border-solid border-gray-200 dark:border-gray-800 pb-2">
       <div className="flex flex-col sm:flex-row w-full gap-4">
         <div className="flex flex-col relative">
           <a
@@ -49,7 +49,7 @@ export default function BookEntry({ entry, user }) {
 
         <div className="flex flex-col">
           <a href={`https://openlibrary.org/${entry.key}`} target="_blank">
-            <span className="font-bold text-lg text-gray-600 dark:text-gray-400">
+            <span className="font-bold text-lg text-gray-800 dark:text-gray-200">
               {entry.title}
             </span>
           </a>
@@ -65,7 +65,7 @@ export default function BookEntry({ entry, user }) {
               /
             </span>
             <div className="spacing-0 mt-2 sm:mt-[-6px]">
-              <p className="text-xs text-gray-400 dark:text-gray-600 leading-none">
+              <p className="text-xs text-gray-500 leading-none">
                 added {created}
               </p>
             </div>
@@ -84,10 +84,10 @@ export default function BookEntry({ entry, user }) {
             )}
           </div>
 
-          <div className="mt-2 flex flex-wrap gap-2 gap-y-0 text-gray-300 dark:text-gray-700 text-xs">
+          <div className="mt-2 flex flex-wrap gap-2 gap-y-0 text-gray-500 text-sm leading-tight line-clamp-2">
             {entry.subjects && entry.subjects}
           </div>
-          <div className="text-gray-600 leading-tight mt-2 dark:text-gray-400 w-full">
+          <div className="text-gray-500 leading-tight mt-2 w-full">
             {entry.comment && entry.comment}
             {entry.comment && entry.comment.length > 400 && "..."}
           </div>

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import styles from "./CounterInput.module.css";
+import cn from "classnames";
 
 interface ICounterInput {
   onCounterChange: Function;
@@ -48,7 +50,7 @@ export default function CounterInput({
       <div className="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
         <button
           onClick={(e) => decrement(e)}
-          className=" bg-white dark:bg-gray-800 text-gray-400 hover:text-gray-700 h-full w-20 rounded-l cursor-pointer outline-none"
+          className="customNumberInputButton bg-white dark:bg-gray-800 text-gray-400 hover:text-gray-700 h-full w-20 rounded-l cursor-pointer outline-none"
         >
           <span className="m-auto text-2xl font-thin">−</span>
         </button>
@@ -58,12 +60,12 @@ export default function CounterInput({
           min={min ? min : null}
           value={value}
           type="number"
-          className="outline-none focus:outline-none text-center w-full bg-white dark:bg-gray-800 font-semibold text-md text-gray-900 dark:text-gray-100  md:text-basecursor-default flex items-center"
+          className={cn([styles.customNumberInputInput, `customNumberInputInput outline-none focus:outline-none text-center w-full bg-white dark:bg-gray-800 font-semibold text-md text-gray-900 dark:text-gray-100  md:text-basecursor-default flex items-center`])}
           name="custom-input-number"
         ></input>
         <button
           onClick={(e) => increment(e)}
-          className="bg-white dark:bg-gray-800 text-gray-400 hover:text-gray-700 h-full w-20 rounded-r cursor-pointer"
+          className="customNumberInputButton bg-white dark:bg-gray-800 text-gray-400 hover:text-gray-700 h-full w-20 rounded-r cursor-pointer"
         >
           <span className="m-auto text-2xl font-thin">+</span>
         </button>

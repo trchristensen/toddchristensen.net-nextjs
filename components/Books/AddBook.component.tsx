@@ -70,8 +70,9 @@ function AutocompleteSearch({ onSelect }) {
   return (
     <div className="w-full flex flex-col">
       <AsyncSelect
+        classNamePrefix="react-select"
         placeholder="📕 Start typing to search for a book..."
-        className="w-full"
+        className="w-full rounded-md"
         cacheOptions
         defaultOptions
         value={selectedValue}
@@ -81,7 +82,7 @@ function AutocompleteSearch({ onSelect }) {
         onInputChange={handleInputChange}
         onChange={handleChange}
       />
-      <BookResult book={selectedValue} />
+      {selectedValue && <BookResult book={selectedValue} />}
     </div>
   );
 }
@@ -217,7 +218,15 @@ export default function AddBook({ session }) {
                   />
                 </div>
               </div>
+              <div>
+              <label
+                htmlFor="comment"
+                className="w-full text-gray-800 dark:text-gray-200 text-sm font-semibold"
+              >
+                Comment
+              </label>
               <input
+              name="comment"
                 value={comment}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setComment(e.target.value)
@@ -227,12 +236,15 @@ export default function AddBook({ session }) {
                 required
                 className="pl-4 pr-32 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full border-gray-300 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               />
+              </div>
+              <div>
               <button
-                className="flex items-center justify-center px-4 pt-1 font-medium h-8 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded w-28"
+                className="flex items-center justify-center px-4 pt-1 mt-2 font-medium h-8 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded w-28"
                 type="submit"
               >
                 {form.state === Form.Loading ? <LoadingSpinner /> : "Add Book"}
               </button>
+              </div>
             </form>
           </div>
         )}

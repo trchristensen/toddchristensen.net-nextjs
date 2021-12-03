@@ -1,0 +1,13 @@
+  .customNumberInputInput::-webkit-inner-spin-button,
+.customNumberInputInput::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .customNumberInputInput:focus {
+    outline: none !important;
+  }
+
+  .customNumberInputButton:focus {
+    outline: none !important;
+  }
