@@ -1,4 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  ReactComponentElement,
+  FC,
+} from "react";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import useSWR, { useSWRConfig } from "swr";
@@ -9,12 +15,116 @@ import { Form, FormState } from "lib/types";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner.component";
 import BookEntry from "./BookEntry.component";
 import CounterInput from "components/CounterInput/CounterInput.component";
+import AsyncSelect from "react-select/async";
+import { colors } from "react-select/dist/declarations/src/theme";
+import { locale } from "config/locale.config";
+import { books } from ".prisma/client";
+
+function SearchResult({ book }) {
+  return (
+    <div>
+      <div className="w-full flex py-2 border-b">{book.title}</div>
+      <div className="w-full flex">{book.author}</div>
+    </div>
+  );
+}
+
+function AutocompleteSearch({ onSelect }) {
+  const [inputValue, setValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState(null);
+  const [timer, setTimer] = useState(null);
+
+  const changeDelay = (change) => {
+    if (timer) {
+      clearTimeout(timer);
+      setTimer(null);
+    }
+    setTimer(
+      setTimeout(() => {
+        console.log(change);
+      }, 300)
+    );
+  };
+
+  // handle input change event
+  const handleInputChange = (value) => {
+    changeDelay(setValue(value));
+  };
+
+  // handle selection
+  const handleChange = (value) => {
+    console.log("VALUE", value);
+
+    setSelectedValue(value);
+    onSelect(value);
+  };
+
+  //   load options using API call
+  const loadOptions = async (value) => {
+    const results = await fetch(`/api/books/api-search?query=${value}`)
+      .then((res) => res.json())
+      .catch((err) => console.error(err));
+    return results;
+  };
+
+  return (
+    <div className="w-full flex flex-col">
+      <AsyncSelect
+        placeholder="📕 Start typing to search for a book..."
+        className="w-full"
+        cacheOptions
+        defaultOptions
+        value={selectedValue}
+        getOptionLabel={(e) => `${e.title} by ${e.author}`}
+        getOptionValue={(e) => e.id}
+        loadOptions={loadOptions}
+        onInputChange={handleInputChange}
+        onChange={handleChange}
+      />
+      <BookResult book={selectedValue} />
+    </div>
+  );
+}
+
+interface IBookResult {
+  book: books;
+}
+
+const BookResult = ({ book }) => (
+  <div className="w-full">
+    <div className="BookResult__Card flex flex-row gap-2 p-4">
+      {book?.cover && (
+        <div className="BookResult__Image-wrapper w-[100px]">
+          <img src={book.cover} />
+        </div>
+      )}
+      <div className="BookResult__Content flex flex-col y-gap-2">
+        <p className="BookResult__Title font-bold text-lg text-gray-600 dark:text-gray-400">
+          {book?.title}
+        </p>
+        <p className="BookResult__Author text-sm text-gray-600 dark:text-gray-400">
+          {book?.author}
+        </p>
+        {book?.publish_date && (
+          <p className="BookResult__Published text-xs mb-1 mt-3 italic text-gray-600 dark:text-gray-400">
+            First published: {book?.publish_date[book?.publish_date.length - 1]}
+          </p>
+        )}
+        {book?.subjects && (
+          <p className="BookResult__Subjects text-gray-300 dark:text-gray-700 text-xs">
+            {book?.subjects.join(", ")}
+          </p>
+        )}
+      </div>
+    </div>
+  </div>
+);
 
 export default function AddBook({ session }) {
   const { mutate } = useSWRConfig();
   const [form, setForm] = useState<FormState>({ state: Form.Initial });
 
-  const [ISBN, setISBN] = useState<string>();
+  const [bookData, setBookData] = useState<any>();
   const [comment, setComment] = useState<string>();
   const [rating, setRating] = useState<number>(0);
 
@@ -23,7 +133,7 @@ export default function AddBook({ session }) {
   };
 
   const clearForm = () => {
-    setISBN("");
+    setBookData(null);
     setComment("");
     setRating(0);
   };
@@ -34,9 +144,10 @@ export default function AddBook({ session }) {
 
     const res = await fetch("/api/books", {
       body: JSON.stringify({
-        isbn: ISBN,
+        ...bookData,
         comment,
         rating,
+        read_status: "HAS_READ",
       }),
       headers: {
         "Content-Type": "application/json",
@@ -64,23 +175,28 @@ export default function AddBook({ session }) {
     <>
       <div className="AddBook border border-blue-200 rounded p-6 my-4 w-full dark:border-gray-800 bg-blue-50 dark:bg-blue-opaque">
         <h5 className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100">
-          Add a book
+          {session && session.user.email == locale.EMAIL
+            ? "Add a book"
+            : "Recommend a book"}
         </h5>
-        <p className="my-1 text-gray-800 dark:text-gray-200">
-          You must be me, in order to add a new book.
-        </p>
+
         {!session && (
-          // eslint-disable-next-line @next/next/no-html-link-for-pages
-          <a
-            href="/api/auth/signin/github"
-            className="flex items-center justify-center my-4 font-bold h-8 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded w-28"
-            onClick={(e) => {
-              e.preventDefault();
-              signIn("github");
-            }}
-          >
-            Login
-          </a>
+          <>
+            <p className="my-1 text-gray-800 dark:text-gray-200">
+              You must be logged in to add a book
+            </p>
+            {/* // eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <a
+              href="/api/auth/signin/github"
+              className="flex items-center justify-center my-4 font-bold h-8 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded w-28"
+              onClick={(e) => {
+                e.preventDefault();
+                signIn("github");
+              }}
+            >
+              Login
+            </a>
+          </>
         )}
         {session?.user && (
           <div className="AddBook__form">
@@ -88,19 +204,10 @@ export default function AddBook({ session }) {
               className="relative my-4 text-gray-900 dark:text-gray-100 flex flex-col gap-2"
               onSubmit={leaveEntry}
             >
+              <div className="w-full flex">
+                <AutocompleteSearch onSelect={(value) => setBookData(value)} />
+              </div>
               <div className="flex flex-row justify-between gap-4">
-                <div className="w-full flex items-end">
-                  <input
-                    value={ISBN}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setISBN(e.target.value)
-                    }
-                    aria-label="Book ISBN"
-                    placeholder="Book ISBN..."
-                    required
-                    className=" w-full pl-4 pr-32 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 block border-gray-300 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                  />
-                </div>
                 <div className="w-auto flex justify-end">
                   <CounterInput
                     onCounterChange={onCounterChange}
@@ -115,8 +222,8 @@ export default function AddBook({ session }) {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setComment(e.target.value)
                 }
-                aria-label="Book description"
-                placeholder="Book description..."
+                aria-label="What did you think of the book?"
+                placeholder="What did you think of the book?"
                 required
                 className="pl-4 pr-32 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full border-gray-300 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               />

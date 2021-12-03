@@ -57,6 +57,12 @@ export type TopTracks = {
   tracks: Song[];
 };
 
+export enum ReadStatus {
+  HAS_READ = "HAS_READ",
+  HAS_NOT_READ = "HAS_NOT_READ",
+  READING = "READING"
+}
+
 export type Book = {
   id?: bigint | number;
   title: string;
@@ -72,5 +78,6 @@ export type Book = {
   rating?: number;
   created_at?: any;
   updated_at?: any;
-  created_by: string
+  created_by: string;
+  read_status: ReadStatus;
 }

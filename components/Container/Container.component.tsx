@@ -7,6 +7,7 @@ import cn from "classnames";
 import Footer from "components/Footer/Footer.component";
 import MobileMenu from "components/MobileMenu/MobileMenu.component";
 import { site } from "config/site.config";
+import { FaRocket } from "react-icons/fa";
 
 function NavItem({ href, text }) {
   const router = useRouter();
@@ -46,7 +47,8 @@ export default function Container(props) {
   };
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900">
+    // <div className="bg-gray-50 dark:bg-gray-900">
+    <div>
       <Head>
         <title>{meta.title}</title>
         <meta name="robots" content="follow, index" />
@@ -74,7 +76,7 @@ export default function Container(props) {
         )}
       </Head>
       <div className="flex flex-col justify-center px-4">
-        <nav className="flex items-center justify-between w-full relative max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pt-8 pb-8 sm:pb-16  text-gray-900 bg-gray-50  dark:bg-gray-900 bg-opacity-60 dark:text-gray-100">
+        <nav className="glass flex items-center justify-between w-full relative max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pt-8 pb-8 sm:pb-16  text-gray-900 bg-gray-50  dark:bg-gray-900 bg-opacity-60 dark:text-gray-100">
           <a href="#skip" className="skip-nav">
             Skip to content
           </a>
@@ -84,6 +86,16 @@ export default function Container(props) {
               <NavItem key={idx} href={navItem.path} text={navItem.title} />
             ))}
           </div>
+          <button
+            aria-label="Space Mode"
+            type="button"
+            className="w-9 h-9 rounded-lg flex items-center justify-center  hover:ring-2 ring-gray-300  transition-all"
+            onClick={() =>
+              setTheme("space")
+            }
+          >
+            <FaRocket />
+          </button>
 
           <button
             aria-label="Toggle Dark Mode"
@@ -123,7 +135,8 @@ export default function Container(props) {
       </div>
       <main
         id="skip"
-        className="flex flex-col justify-center px-4 bg-gray-50 dark:bg-gray-900"
+        // className="flex flex-col justify-center px-4 bg-gray-50 dark:bg-gray-900"
+        className="flex flex-col justify-center px-4"
       >
         {children}
         <Footer />

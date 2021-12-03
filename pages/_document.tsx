@@ -48,7 +48,8 @@ export default function Document(props) {
         />
        
       </Head>
-      <body className="bg-white dark:bg-black text-white dark:text-black">
+      {/* <body className="bg-white dark:bg-black text-white dark:text-black"> */}
+      <body>
         <Main />
         <NextScript />
       </body>

@@ -92,6 +92,7 @@ module.exports = {
             "blockquote p:last-of-type::after": false,
           },
         },
+
         dark: {
           css: {
             color: theme("colors.gray.200"),
@@ -134,6 +135,7 @@ module.exports = {
           },
         },
       }),
+
       spacing: {
         "2/3": "66.666667%",
       },

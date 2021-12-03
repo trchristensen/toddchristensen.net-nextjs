@@ -42,7 +42,7 @@ export default function BookEntry({ entry, user }) {
                 alt={entry.title + "cover"}
               />
             ) : (
-              <div className="shadow-lg w-[100px] h-[152px] border rounded-sm bg-gray-200 dark:bg-gray-800"></div>
+              <div className="shadow-lg w-[100px] h-[152px] border dark:border-gray-700 rounded-sm bg-gray-200 dark:bg-gray-900"></div>
             )}
           </a>
         </div>
@@ -86,7 +86,6 @@ export default function BookEntry({ entry, user }) {
 
           <div className="mt-2 flex flex-wrap gap-2 gap-y-0 text-gray-300 dark:text-gray-700 text-xs">
             {entry.subjects && entry.subjects}
-            {JSON.stringify(entry.subjects)}
           </div>
           <div className="text-gray-600 leading-tight mt-2 dark:text-gray-400 w-full">
             {entry.comment && entry.comment}

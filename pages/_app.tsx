@@ -7,7 +7,12 @@ import { SessionProvider } from "next-auth/react";
 function App({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider session={pageProps.session}>
-      <ThemeProvider attribute="class">
+      <ThemeProvider
+        enableColorScheme
+        enableSystem
+        attribute="class"
+        themes={["dark", "light", "space"]}
+      >
         <Component {...pageProps} />
       </ThemeProvider>
     </SessionProvider>

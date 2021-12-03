@@ -8,6 +8,7 @@ import { ArrowLink } from "components/ArrowLink/ArrowLink.component";
 import PROJECTS from "data/projects.json";
 
 export default function Home() {
+  
   return (
     <Container>
       <div className="flex flex-col justify-center items-start max-w-2xl border-gray-200 dark:border-gray-700 mx-auto pb-16 w-full">
@@ -25,7 +26,7 @@ const IntroSection = () => (
     className="flex flex-col-reverse sm:flex-row items-start"
   >
     <div className="flex flex-col pr-8">
-      <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-1 text-black dark:text-white">
+      <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-1 text-black dark:text-white space:text-green-900">
         Todd Christensen
       </h1>
       <div className="flex flex-row items-center mb-4">

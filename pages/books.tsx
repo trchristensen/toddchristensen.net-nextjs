@@ -1,7 +1,7 @@
 import prisma from "lib/prisma";
 import Container from "components/Container/Container.component";
 import Books from "components/Books/Books.component";
-import { Book } from "lib/types";
+import { books } from ".prisma/client";
 
 export default function BookPage({ fallbackData }) {
   return (
@@ -25,17 +25,12 @@ export default function BookPage({ fallbackData }) {
 
 export async function getStaticProps() {
   const entries = await prisma.books.findMany({
-    where: {
-      created_by: {
-        equals: "toddchristensen@protonmail.com"
-      }
-    },
     orderBy: {
       updated_at: "desc",
     },
   });
 
-  const fallbackData = entries.map((entry:Book) => ({
+  const fallbackData = entries.map((entry:books) => ({
     id: entry.id.toString(),
     title: entry.title,
     author: entry.author,
@@ -50,7 +45,8 @@ export async function getStaticProps() {
     subjects: entry.subjects,
     key: entry.key,
     comment: entry.comment,
-    created_by: entry.created_by
+    created_by: entry.created_by,
+    read_status: entry?.read_status
   }));
 
   return {

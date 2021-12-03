@@ -13,6 +13,9 @@ import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner.component";
 import BookEntry from "./BookEntry.component";
 import CounterInput from "components/CounterInput/CounterInput.component";
 import AddBookSearch from "./AddBookSearch.component";
+import { books } from ".prisma/client";
+import { locale } from "config/locale.config"
+const { EMAIL } = locale;
 
 export default function Books({ fallbackData }) {
   const { data: session } = useSession();
@@ -21,14 +24,57 @@ export default function Books({ fallbackData }) {
     fallbackData,
   });
 
+
+
   return (
     <>
       <div className="flex flex-col mb-4 space-y-4 w-full">
-        {entries?.map((entry) => (
-          <BookEntry key={entry.id} entry={entry} user={session?.user} />
-        ))}
+        <div>
+          <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-black dark:text-white">
+            Books I've read
+          </h2>
+          {entries
+            ?.filter(
+              (_: books) =>
+                _.read_status == "HAS_READ" &&
+                _.created_by == "toddchristensen@protonmail.com"
+            )
+            .map((entry) => (
+              <BookEntry key={entry.id} entry={entry} user={session?.user} />
+            ))}
+        </div>
+
+        <div>
+          <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-black dark:text-white">
+            Books I plan to read
+          </h2>
+          {entries
+            ?.filter(
+              (_: books) =>
+                _.read_status == "HAS_NOT_READ" &&
+                _.created_by == EMAIL
+            )
+            .map((entry) => (
+              <BookEntry key={entry.id} entry={entry} user={session?.user} />
+            ))}
+        </div>
+
+        <div>
+          <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-black dark:text-white">
+            User recommended Books
+          </h2>
+          {entries
+            ?.filter(
+              (_: books) =>
+                _.read_status == "HAS_NOT_READ" &&
+                _.created_by != EMAIL
+            )
+            .map((entry) => (
+              <BookEntry key={entry.id} entry={entry} user={session?.user} />
+            ))}
+        </div>
       </div>
-      <AddBookSearch session={session} />
+      <AddBook session={session} />
       {/* <AddBook session={session} /> */}
     </>
   );
