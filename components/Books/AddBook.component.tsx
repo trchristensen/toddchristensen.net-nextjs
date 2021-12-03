@@ -93,26 +93,26 @@ interface IBookResult {
 
 const BookResult = ({ book }) => (
   <div className="w-full">
-    <div className="BookResult__Card flex flex-row gap-2 p-4">
+    <div className="BookResult__Card flex flex-col gap-y-4 sm:gap-y-0 sm:flex-row gap-4 pt-8">
       {book?.cover && (
-        <div className="BookResult__Image-wrapper w-[100px]">
+        <div className="BookResult__Image-wrapper w-[150px] flex-shrink-0">
           <img src={book.cover} />
         </div>
       )}
       <div className="BookResult__Content flex flex-col y-gap-2">
-        <p className="BookResult__Title font-bold text-lg text-gray-600 dark:text-gray-400">
+        <p className="BookResult__Title font-bold text-lg text-gray-800 dark:text-gray-200">
           {book?.title}
         </p>
-        <p className="BookResult__Author text-sm text-gray-600 dark:text-gray-400">
+        <p className="BookResult__Author text-sm text-gray-700 dark:text-gray-300">
           {book?.author}
         </p>
         {book?.publish_date && (
-          <p className="BookResult__Published text-xs mb-1 mt-3 italic text-gray-600 dark:text-gray-400">
+          <p className="BookResult__Published text-xs mb-1 mt-3 italic text-gray-500">
             First published: {book?.publish_date[book?.publish_date.length - 1]}
           </p>
         )}
         {book?.subjects && (
-          <p className="BookResult__Subjects text-gray-300 dark:text-gray-700 text-xs">
+          <p className="BookResult__Subjects text-gray-500 text-sm">
             {book?.subjects.join(", ")}
           </p>
         )}
@@ -128,16 +128,21 @@ export default function AddBook({ session }) {
   const [bookData, setBookData] = useState<any>();
   const [comment, setComment] = useState<string>();
   const [rating, setRating] = useState<number>(0);
+  const [readBook, setReadBook] = useState(false)
 
   const onCounterChange = (counterValue) => {
     setRating(counterValue);
   };
 
-  const clearForm = () => {
-    setBookData(null);
-    setComment("");
-    setRating(0);
-  };
+
+  const handleReadBook = () => {
+    setReadBook(!readBook)
+    if(!readBook) {
+      setRating(0)
+      setComment("")
+    }
+  }
+
 
   const leaveEntry = async (e) => {
     e.preventDefault();
@@ -174,7 +179,7 @@ export default function AddBook({ session }) {
 
   return (
     <>
-      <div className="AddBook border border-blue-200 rounded p-6 my-4 w-full dark:border-gray-800 bg-blue-50 dark:bg-blue-opaque">
+      <div className="AddBook border border-blue-200 rounded p-2 sm:p-6 my-4 w-full dark:border-gray-800 bg-blue-50 dark:bg-blue-opaque">
         <h5 className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100">
           {session && session.user.email == locale.EMAIL
             ? "Add a book"
@@ -208,42 +213,66 @@ export default function AddBook({ session }) {
               <div className="w-full flex">
                 <AutocompleteSearch onSelect={(value) => setBookData(value)} />
               </div>
-              <div className="flex flex-row justify-between gap-4">
-                <div className="w-auto flex justify-end">
-                  <CounterInput
-                    onCounterChange={onCounterChange}
-                    min={0}
-                    max={5}
-                    step={0.5}
+
+              <div>
+                <label className="inline-flex items-center mt-3">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox rounded-md h-5 w-5 text-blue-500"
+                    onClick={handleReadBook}
                   />
-                </div>
+                  <span className="ml-2 text-gray-700 dark:text-gray-300 font-semibold">
+                    Have you read the book yet?
+                  </span>
+                </label>
               </div>
+
+              {readBook && (
+                <>
+                  <div className="flex flex-row justify-between gap-4">
+                    <div className="w-auto flex justify-end">
+                      <CounterInput
+                        onCounterChange={onCounterChange}
+                        min={0}
+                        max={5}
+                        step={0.5}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="comment"
+                      className="w-full text-gray-800 dark:text-gray-200 text-sm font-semibold"
+                    >
+                      Comment
+                    </label>
+                    <input
+                      name="comment"
+                      value={comment}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setComment(e.target.value)
+                      }
+                      aria-label="What did you think of the book?"
+                      placeholder="What did you think of the book?"
+                      required
+                      className="pl-4 pr-32 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full border-gray-300 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                    />
+                  </div>
+                </>
+              )}
+
               <div>
-              <label
-                htmlFor="comment"
-                className="w-full text-gray-800 dark:text-gray-200 text-sm font-semibold"
-              >
-                Comment
-              </label>
-              <input
-              name="comment"
-                value={comment}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setComment(e.target.value)
-                }
-                aria-label="What did you think of the book?"
-                placeholder="What did you think of the book?"
-                required
-                className="pl-4 pr-32 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full border-gray-300 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-              />
-              </div>
-              <div>
-              <button
-                className="flex items-center justify-center px-4 pt-1 mt-2 font-medium h-8 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded w-28"
-                type="submit"
-              >
-                {form.state === Form.Loading ? <LoadingSpinner /> : "Add Book"}
-              </button>
+                <button
+                  className="flex items-center justify-center px-4 py-5 mt-2 font-medium h-8 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded w-28"
+                  type="submit"
+                >
+                  {form.state === Form.Loading ? (
+                    <LoadingSpinner />
+                  ) : (
+                    "Add Book"
+                  )}
+                </button>
               </div>
             </form>
           </div>

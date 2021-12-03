@@ -11,11 +11,10 @@ export default function BookPage({ fallbackData }) {
     >
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-          Books I've read
+          Books
         </h1>
         <p className="text-gray-600 dark:text-gray-400 mb-8">
-          This is a list of the books I've recently read. This list is more for
-          me to keep track, than anything.
+          I try to read as much as I can. This is a list of the books I've recently read, am currently reading, and am going to read. I ready non-fiction almost exclusively but am open to reading just about anything. You can also recommend any books if you'd like, at the bottom of the page. Might add a comments feature if this page gets any engagement, at all.
         </p>
         <Books fallbackData={fallbackData} />
       </div>

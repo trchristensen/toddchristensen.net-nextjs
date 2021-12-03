@@ -43,17 +43,21 @@ html {
 }
 
 .space .glass {
-  @apply bg-black bg-opacity-50
+  @apply bg-black bg-opacity-50;
 }
 
-.space h1, .space h2, .space h3 {
-  @apply text-green-300
+.space h1,
+.space h2,
+.space h3 {
+  @apply text-green-300;
 }
 
-.space p, .space ul, .space ol, .space li  {
-  @apply text-gray-200
+.space p,
+.space ul,
+.space ol,
+.space li {
+  @apply text-gray-200;
 }
-
 
 /* https://seek-oss.github.io/capsize/ */
 .capsize::before {
@@ -246,19 +250,30 @@ table {
   white-space: nowrap;
 }
 
-
 .react-select__control {
-  @apply focus:ring-blue-500 focus:border-blue-500 block w-full border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
+  @apply block w-full border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100;
 }
 
 .react-select__menu {
-  @apply dark:bg-gray-800
+  @apply dark:bg-gray-800 w-full outline-none;
 }
 
-.react-select__option, .react-select__option:first-child {
-  @apply dark:hover:bg-blue-opaque
+.react-select__input-container {
+  @apply w-full text-gray-800 dark:text-gray-200;
 }
 
-.react-select__single-value {
-  @apply dark:text-gray-300
+.react-select__option,
+.react-select__option:first-child {
+  @apply dark:hover:bg-blue-opaque dark:bg-gray-800 outline-none;
+}
+
+.react-select__single-value,
+.react-select__input {
+  @apply text-gray-800 dark:text-gray-200 outline-none;
+}
+
+.react-select__input,
+.react-select__input:focus {
+  @apply focus:shadow-none text-gray-800 dark:text-gray-200;
+  box-shadow: none !important;
 }

@@ -24,7 +24,7 @@ export default function BookEntry({ entry, user }) {
   let created = format(new Date(entry.updated_at), "d MMM yyyy");
 
   return (
-    <div className="BookEntry w-full flex flex-col gap-1 pb-4 border-b border-solid border-gray-200 dark:border-gray-800 pb-2">
+    <div className="BookEntry w-full flex flex-col gap-1 border-b border-solid border-gray-200 dark:border-gray-800 pb-4">
       <div className="flex flex-col sm:flex-row w-full gap-4">
         <div className="flex flex-col relative">
           <a
