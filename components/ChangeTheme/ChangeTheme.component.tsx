@@ -1,7 +1,7 @@
 import { useTheme } from "next-themes";
 import { BiAlarm, BiDice3 } from "react-icons/bi";
 import { FaFileCsv } from "react-icons/fa";
-import { GrDocumentCsv } from "react-icons/gr"
+import { ImProfile } from "react-icons/im"
 
 export default function ChangeTheme() {
 
@@ -23,7 +23,7 @@ export default function ChangeTheme() {
           href="https://drive.google.com/file/d/1O9dOB56jeDlxIn7lXGC0SIW36Zu8q0B0/view?usp=sharing"
           target="_blank"
         >
-          <FaFileCsv />
+          <ImProfile />
         </a>
       </li>
       <li
