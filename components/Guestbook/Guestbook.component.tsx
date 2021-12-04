@@ -21,23 +21,33 @@ function GuestbookEntry({ entry, user }) {
     mutate("/api/guestbook");
   };
 
+
   return (
-    <div className="rounded card bg-base-200 p-2 sm:p-4 flex flex-col space-y-2 w-full">
-      <div className="w-full text-medium">{entry.body}</div>
-      <div className="flex items-center space-x-3">
-        <p className="text-sm text-base-content">{entry.created_by}</p>
-        <span className="opacity-40">/</span>
-        <p className="text-sm text-base-content">
-          {format(new Date(entry.updated_at), "d MMM yyyy 'at' h:mm bb")}
-        </p>
-        {user && entry.created_by === user.name && (
-          <>
-            <span className="opacity-40">/</span>
-            <button className="text-sm text-accent" onClick={deleteEntry}>
-              Delete
-            </button>
-          </>
-        )}
+    <div className="GuestbookEntry flex flex-row gap-4">
+      {entry.avatar_src && (
+        <div className="avatar">
+          <div className="mb-8 rounded shadow-xl w-14 h-14">
+            <img src={entry.avatar_src} />
+          </div>
+        </div>
+      )}
+      <div className="GuestbookEntry__card rounded card overflow-visible bg-base-200 p-2 sm:p-4 flex flex-col space-y-2 w-full before:content-[''] before:bg-base-200 before:w-[15px] before:h-[15px] before:absolute before:left-[-7px] before:top-[25%] before:transform before:rotate-45 before:rounded before:-z-1">
+        <div className="w-full text-medium">{entry.body}</div>
+        <div className="flex items-center space-x-3">
+          <p className="text-sm text-base-content">{entry.created_by}</p>
+          <span className="opacity-40">/</span>
+          <p className="text-sm text-base-content">
+            {format(new Date(entry.updated_at), "d MMM yyyy 'at' h:mm bb")}
+          </p>
+          {user && entry.created_by === user.name && (
+            <>
+              <span className="opacity-40">/</span>
+              <button className="text-sm text-accent" onClick={deleteEntry}>
+                Delete
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -86,12 +96,8 @@ export default function Guestbook({ fallbackData }) {
   return (
     <>
       <div className="shadow rounded bg-secondary-focus text-secondary-content p-6 my-4 w-full">
-        <h5 className="text-lg md:text-xl font-bold">
-          Sign the Guestbook
-        </h5>
-        <p className="my-1">
-          Share a message for a future visitor of my site.
-        </p>
+        <h5 className="text-lg md:text-xl font-bold">Sign the Guestbook</h5>
+        <p className="my-1">Share a message for a future visitor of my site.</p>
         {!session && (
           // eslint-disable-next-line @next/next/no-html-link-for-pages
           <a
@@ -115,7 +121,7 @@ export default function Guestbook({ fallbackData }) {
               className="input input-bordered pl-4 pr-32 py-2 mt-1 block w-full rounded-md"
             />
             <button
-              style={{minHeight: 40}}
+              style={{ minHeight: 40 }}
               className="btn btn-secondary shadow flex items-center justify-center absolute right-1 top-1 px-4 pt-1 font-medium h-8 rounded w-28"
               type="submit"
             >
@@ -124,11 +130,11 @@ export default function Guestbook({ fallbackData }) {
           </form>
         )}
         {form.state === Form.Error ? (
-        //   <ErrorMessage>{form.message}</ErrorMessage>
-        'error'
+          //   <ErrorMessage>{form.message}</ErrorMessage>
+          "error"
         ) : form.state === Form.Success ? (
-        //   <SuccessMessage>{form.message}</SuccessMessage>
-        'success'
+          //   <SuccessMessage>{form.message}</SuccessMessage>
+          "success"
         ) : (
           <p className="text-sm">
             Your information is only used to display your name and reply by
