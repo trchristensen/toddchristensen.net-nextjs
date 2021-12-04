@@ -24,7 +24,7 @@ function NavItem({ href, text }) {
           isActive
             ? "font-semibold"
             : "font-normal",
-          "hidden md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg transition-all"
+          "hidden md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-base-200 transition-all"
         )}
       >
         <span className="capsize">{text}</span>

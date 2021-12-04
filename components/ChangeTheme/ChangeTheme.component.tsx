@@ -16,7 +16,7 @@ export default function ChangeTheme() {
   return (
     <div className="flex items-center gap-6 cursor-pointer">
       <li
-        className="tooltip tooltip-bottom text-xl list-none"
+        className="tooltip tooltip-bottom text-xl list-none hover:text-accent-focus"
         data-tip="Resume"
       >
         <a
@@ -28,7 +28,7 @@ export default function ChangeTheme() {
       </li>
       <li
         data-tip="Random Theme"
-        className="tooltip tooltip-bottom list-none text-2xl"
+        className="tooltip tooltip-bottom list-none text-2xl hover:text-accent-focus"
         onClick={selectRandomTheme}
       >
         <a>
@@ -38,7 +38,7 @@ export default function ChangeTheme() {
       <div className="dropdown dropdown-end">
         <div
           tabIndex={0}
-          className="m-1 cursor-pointer tooltip tooltip-bottom"
+          className="m-1 cursor-pointer tooltip tooltip-bottom hover:text-accent-focus"
           data-tip="Theme Menu"
         >
           <svg
