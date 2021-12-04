@@ -6,12 +6,12 @@ const CurrentTime = ({ timezone, city, countryCode }) => {
     const zonedDate = utcToZonedTime(date, timezone);
 
   return (
-    <div className="flex flex-wrap">
-      <span>
+    <div className="text-accent flex flex-wrap">
+      <span className="mr-2 font-semibold text-base-content">
         {format(zonedDate, "eee ")}
         {format(zonedDate, "p")}
       </span>
-      <span> @ {city}, {countryCode}</span>
+      <span className="text-accent"> @ {city}, {countryCode}</span>
     </div>
   );
 };

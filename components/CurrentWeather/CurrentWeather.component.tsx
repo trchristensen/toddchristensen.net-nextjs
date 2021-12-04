@@ -76,20 +76,20 @@ export default function CurrentWeather({ city, countryCode, timezone }) {
   }, []);
 
   if (err) return (
-    <p className="capsize text-gray-800 dark:text-gray-200 font-medium">
+    <p className="capsize font-medium">
       Weather 404 :(
     </p>
   );
   if (!weather)
     return (
-      <p className="capsize text-gray-800 dark:text-gray-200 font-medium">
+      <p className="capsize font-medium">
         Loading Weather...
       </p>
     );
 
   return (
     <div
-      className="flex flex-row items-center cursor-pointer"
+      className="text-accent flex flex-row items-center cursor-pointer"
       onClick={handleUseFahrenheit}
     >
       <span>

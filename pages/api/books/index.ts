@@ -55,8 +55,10 @@ export default async function handler(
         key: req.body?.id,
         comment: req?.body?.comment,
         rating: req?.body?.rating,
-        read_status: req?.body?.ReadStatus
+        read_status: req?.body?.read_status
       };
+
+      console.log('PAYLOAD ==> ', payload)
 
       const newEntry = await prisma.books.create({
         data: payload,

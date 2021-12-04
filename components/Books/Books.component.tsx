@@ -27,13 +27,13 @@ export default function Books({ fallbackData }) {
     <>
       <div className="flex flex-col mb-4 space-y-4 w-full">
         <div>
-          <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-black dark:text-white">
+          <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16">
             Currently reading
           </h2>
           {entries
             ?.filter(
               (_: books) =>
-                _.read_status == "HAS_READ" &&
+                _.read_status == "READING" &&
                 _.created_by == "toddchristensen@protonmail.com"
             )
             .map((entry) => (
@@ -41,7 +41,7 @@ export default function Books({ fallbackData }) {
             ))}
         </div>
         <div>
-          <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-black dark:text-white">
+          <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16">
             Books I've read
           </h2>
           {entries
@@ -56,7 +56,7 @@ export default function Books({ fallbackData }) {
         </div>
 
         <div>
-          <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-black dark:text-white">
+          <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16">
             Plan on reading
           </h2>
           <div className="flex flex-col gap-4">
@@ -72,7 +72,7 @@ export default function Books({ fallbackData }) {
         </div>
 
         <div>
-          <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-black dark:text-white">
+          <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16">
             User recommended Books
           </h2>
           {entries

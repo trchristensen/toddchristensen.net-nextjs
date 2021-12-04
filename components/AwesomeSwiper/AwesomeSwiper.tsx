@@ -42,8 +42,7 @@ export default function AwesomeSwiper({ children }) {
   return (
     <div
       className={`${styles.wtf} 
-      shadow-lg rounded-xl w-full 
-      bg-white dark:bg-black border border-1 border-gray-200 dark:border-gray-800 
+      rounded-xl w-full
       `}
     >
       <div className="rounded-xl relative">
@@ -61,14 +60,14 @@ export default function AwesomeSwiper({ children }) {
           // effect={"coverflow"}
           // spaceBetween={-20}
           spaceBetween={20}
-          effect={'cards'}
+          effect={"cards"}
           grabCursor={true}
           centeredSlides={true}
           createElements
           loop
-          autoplay={{
-            delay: 5000,
-          }}
+          // autoplay={{
+          //   delay: 5000,
+          // }}
           slidesPerView={1}
           keyboard={{
             enabled: true,
@@ -86,6 +85,8 @@ export default function AwesomeSwiper({ children }) {
             modifier: 1,
             slideShadows: true,
           }}
+          // autoHeight={true}
+          
           // scrollbar={{ draggable: true }}
           className={`${styles.swiper}`}
           modules={[
@@ -107,7 +108,7 @@ export default function AwesomeSwiper({ children }) {
             className={`swiper-button-prev ${styles.swiperButtonPrev}  duration-300`}
           >
             <svg
-              className="w-[50px] rotate-180 text-gray-500 transition-colors duration-300 group-hover:text-deep-purple-accent-400"
+              className="w-[50px] rotate-180 text-accent transition-colors duration-300 group-hover:text-accent-focus"
               fill="currentColor"
               viewBox="0 0 12 12"
             >
@@ -118,7 +119,7 @@ export default function AwesomeSwiper({ children }) {
             className={`swiper-button-next ${styles.swiperButtonNext}  duration-300`}
           >
             <svg
-              className="w-[50px] text-gray-500 transition-colors duration-300 group-hover:text-deep-purple-accent-400"
+              className="w-[50px] text-accent transition-colors duration-300 group-hover:text-accent-focus"
               fill="currentColor"
               viewBox="0 0 12 12"
             >

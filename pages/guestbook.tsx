@@ -9,10 +9,10 @@ export default function GuestbookPage({ fallbackData }) {
       description="Sign my digital guestbook and share some wisdom."
     >
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
+        <h1 className="text-primary font-bold text-3xl md:text-5xl tracking-tight mb-4">
           Guestbook
         </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
+        <p className="mb-4">
           Leave a comment below. It could be anything – appreciation,
           information, wisdom, or even humor. Surprise me!
         </p>

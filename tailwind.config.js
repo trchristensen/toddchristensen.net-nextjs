@@ -7,130 +7,16 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      backgroundImage: {
-        conic: "conic-gradient(var(--tw-gradient-stops))",
-        "conic-to-t": "conic-gradient(at top, var(--tw-gradient-stops))",
-        "conic-to-b": "conic-gradient(at bottom, var(--tw-gradient-stops))",
-        "conic-to-l": "conic-gradient(at left, var(--tw-gradient-stops))",
-        "conic-to-r": "conic-gradient(at right, var(--tw-gradient-stops))",
-        "conic-to-tl": "conic-gradient(at top left, var(--tw-gradient-stops))",
-        "conic-to-tr": "conic-gradient(at top right, var(--tw-gradient-stops))",
-        "conic-to-bl":
-          "conic-gradient(at bottom left, var(--tw-gradient-stops))",
-        "conic-to-br":
-          "conic-gradient(at bottom right, var(--tw-gradient-stops))",
-        radial: "radial-gradient(ellipse at center, var(--tw-gradient-stops))",
-        "radial-at-t":
-          "radial-gradient(ellipse at top, var(--tw-gradient-stops))",
-        "radial-at-b":
-          "radial-gradient(ellipse at bottom, var(--tw-gradient-stops))",
-        "radial-at-l":
-          "radial-gradient(ellipse at left, var(--tw-gradient-stops))",
-        "radial-at-r":
-          "radial-gradient(ellipse at right, var(--tw-gradient-stops))",
-        "radial-at-tl":
-          "radial-gradient(ellipse at top left, var(--tw-gradient-stops))",
-        "radial-at-tr":
-          "radial-gradient(ellipse at top right, var(--tw-gradient-stops))",
-        "radial-at-bl":
-          "radial-gradient(ellipse at bottom left, var(--tw-gradient-stops))",
-        "radial-at-br":
-          "radial-gradient(ellipse at bottom right, var(--tw-gradient-stops))",
-      },
-      colors: {
-        "blue-opaque": "rgb(13 42 148 / 18%)",
-        gray: {
-          0: "#fff",
-          100: "#fafafa",
-          200: "#eaeaea",
-          300: "#999999",
-          400: "#888888",
-          500: "#666666",
-          600: "#444444",
-          700: "#333333",
-          800: "#222222",
-          900: "#111111",
-        },
-        "blue-gray": colors.blueGray,
-        "cool-gray": colors.coolGray,
-        "true-gray": colors.trueGray,
-        "warm-gray": colors.warmGray,
-        orange: colors.orange,
-        amber: colors.amber,
-        lime: colors.lime,
-        emerald: colors.emerald,
-        teal: colors.teal,
-        cyan: colors.cyan,
-        sky: colors.sky,
-        violet: colors.violet,
-        purple: colors.purple,
-        fuchsia: colors.fuchsia,
-        rose: colors.rose,
-      },
+      colors: require("daisyui/colors"),
+
       fontFamily: {
         sans: ["IBM Plex Sans", ...fontFamily.sans],
       },
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            color: theme("colors.gray.700"),
-            a: {
-              color: theme("colors.blue.500"),
-              "&:hover": {
-                color: theme("colors.blue.700"),
-              },
-              code: { color: theme("colors.blue.400") },
-            },
             "h2,h3,h4": {
               "scroll-margin-top": spacing[32],
-            },
-            thead: {
-              borderBottomColor: theme("colors.gray.200"),
-            },
-            code: { color: theme("colors.pink.500") },
-            "blockquote p:first-of-type::before": false,
-            "blockquote p:last-of-type::after": false,
-          },
-        },
-
-        dark: {
-          css: {
-            color: theme("colors.gray.200"),
-            a: {
-              color: theme("colors.blue.400"),
-              "&:hover": {
-                color: theme("colors.blue.600"),
-              },
-              code: { color: theme("colors.blue.400") },
-            },
-            blockquote: {
-              borderLeftColor: theme("colors.gray.700"),
-              color: theme("colors.gray.300"),
-            },
-            "h2,h3,h4": {
-              color: theme("colors.gray.100"),
-              "scroll-margin-top": spacing[32],
-            },
-            hr: { borderColor: theme("colors.gray.700") },
-            ol: {
-              li: {
-                "&:before": { color: theme("colors.gray.500") },
-              },
-            },
-            ul: {
-              li: {
-                "&:before": { backgroundColor: theme("colors.gray.500") },
-              },
-            },
-            strong: { color: theme("colors.gray.100") },
-            thead: {
-              color: theme("colors.gray.100"),
-              borderBottomColor: theme("colors.gray.600"),
-            },
-            tbody: {
-              tr: {
-                borderBottomColor: theme("colors.gray.700"),
-              },
             },
           },
         },
@@ -141,10 +27,87 @@ module.exports = {
       },
     },
   },
+
+  daisyui: {
+    themes: [
+      {
+        dark: {
+          primary: "#793ef9",
+          "primary-focus": "#570df8",
+          "primary-content": "#ffffff",
+          secondary: "#f000b8",
+          "secondary-focus": "#bd0091",
+          "secondary-content": "#ffffff",
+          accent: "#37cdbe",
+          "accent-focus": "#2aa79b",
+          "accent-content": "#ffffff",
+          neutral: "#2a2e37",
+          "neutral-focus": "#16181d",
+          "neutral-content": "#ffffff",
+          "base-100": "#3d4451", // make this darker
+          "base-200": "#2a2e37",
+          "base-300": "#16181d",
+          "base-content": "#ebecf0",
+          info: "#66c6ff",
+          success: "#87d039",
+          warning: "#e2d562",
+          error: "#ff6f6f",
+        },
+      },
+      {
+        black: {
+          primary: "#ffffff",
+          "primary-focus": "#ffffff",
+          "primary-content": "#111111",
+          secondary: "#eaeaea",
+          "secondary-focus": "#eaeaea",
+          "secondary-content": "#111111",
+          accent: "#ffffff",
+          "accent-focus": "#ffffff",
+          "accent-content": "#111111",
+          "base-100": "#111111",
+          "base-200": "#333333",
+          "base-300": "#4d4d4d",
+          "base-content": "#888888",
+          neutral: "#333333",
+          "neutral-focus": "#4d4d4d",
+          "neutral-content": "#ffffff",
+          info: "#0000ff",
+          success: "#008000",
+          warning: "#ffff00",
+          error: "#ff0000",
+          "--border-color": "var(--b3)",
+          "--rounded-box": "4",
+          "--rounded-btn": "4",
+          "--rounded-badge": "0",
+          "--animation-btn": "0",
+          "--animation-input": "0",
+          "--btn-text-case": "lowercase",
+          "--btn-focus-scale": "1",
+          "--navbar-padding": ".5rem",
+          "--border-btn": "1px",
+          "--tab-border": "1px",
+          "--tab-radius": "0",
+        },
+      },
+      "light",
+      "cupcake",
+      "bumblebee",
+      "emerald",
+      "corporate",
+      "synthwave",
+      "retro",
+      "cyberpunk",
+      "valentine",
+      "luxury",
+      "emerald",
+    ],
+  },
   variants: {
     typography: ["dark"],
   },
   plugins: [
+    require("daisyui"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/line-clamp"),
     require("@tailwindcss/forms"),

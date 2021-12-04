@@ -45,12 +45,12 @@ export default function MobileMenu() {
         <ul
           className={cn(
             styles.menu,
-            "flex flex-col absolute bg-gray-100 dark:bg-gray-900 overflowY-scroll",
+            "flex flex-col absolute overflowY-scroll bg-base-100",
             isMenuRendered && styles.menuRendered
           )}
         >
           <li
-            className="border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 text-sm font-semibold"
+            className="border-b text-sm font-semibold"
             style={{ transitionDelay: "150ms" }}
           >
             <Link href="/">
@@ -58,7 +58,7 @@ export default function MobileMenu() {
             </Link>
           </li>
           <li
-            className="border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 text-sm font-semibold"
+            className="border-b text-sm font-semibold"
             style={{ transitionDelay: "175ms" }}
           >
             <Link href="/guestbook">
@@ -66,7 +66,7 @@ export default function MobileMenu() {
             </Link>
           </li>
           <li
-            className="border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 text-sm font-semibold"
+            className="border-b text-sm font-semibold"
             style={{ transitionDelay: "175ms" }}
           >
             <Link href="/books">
@@ -74,7 +74,7 @@ export default function MobileMenu() {
             </Link>
           </li>
           <li
-            className="border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 text-sm font-semibold"
+            className="border-b text-sm font-semibold"
             style={{ transitionDelay: "200ms" }}
           >
             <Link href="/dashboard">
@@ -82,7 +82,7 @@ export default function MobileMenu() {
             </Link>
           </li>
           <li
-            className="border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 text-sm font-semibold"
+            className="border-b text-sm font-semibold"
             style={{ transitionDelay: "250ms" }}
           >
             <Link href="/blog">
@@ -90,7 +90,7 @@ export default function MobileMenu() {
             </Link>
           </li>
           <li
-            className="border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 text-sm font-semibold"
+            className="border-b text-sm font-semibold"
             style={{ transitionDelay: "275ms" }}
           >
             <Link href="/snippets">
@@ -98,7 +98,7 @@ export default function MobileMenu() {
             </Link>
           </li>
           <li
-            className="border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 text-sm font-semibold"
+            className="border-b text-sm font-semibold"
             style={{ transitionDelay: "300ms" }}
           >
             <Link href="/newsletter">
@@ -106,7 +106,7 @@ export default function MobileMenu() {
             </Link>
           </li>
           <li
-            className="border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 text-sm font-semibold"
+            className="border-b text-sm font-semibold"
             style={{ transitionDelay: "325ms" }}
           >
             <Link href="/tweets">
@@ -114,7 +114,7 @@ export default function MobileMenu() {
             </Link>
           </li>
           <li
-            className="border-b border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 text-sm font-semibold"
+            className="border-b text-sm font-semibold"
             style={{ transitionDelay: "350ms" }}
           >
             <Link href="/uses">

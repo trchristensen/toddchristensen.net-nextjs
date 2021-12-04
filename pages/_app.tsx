@@ -9,9 +9,11 @@ function App({ Component, pageProps }: AppProps) {
     <SessionProvider session={pageProps.session}>
       <ThemeProvider
         enableColorScheme
-        enableSystem
-        attribute="class"
-        themes={["dark", "light", "space"]}
+        storageKey="nightwind-mode"
+        defaultTheme="system"
+        attribute={"data-theme"}
+        // value={{ luxury: "luxury" }}
+        themes={["dark", "light", "space", "luxury", "black", "cupcake", "cyberbunk", "retro", "bumblebee"]}
       >
         <Component {...pageProps} />
       </ThemeProvider>
