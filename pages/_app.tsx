@@ -13,7 +13,7 @@ function App({ Component, pageProps }: AppProps) {
         defaultTheme="system"
         attribute={"data-theme"}
         // value={{ luxury: "luxury" }}
-        themes={["dark", "light", "space", "luxury", "black", "cupcake", "cyberbunk", "retro", "bumblebee"]}
+        themes={["light", "dark", "black", "cyberpunk", "synthwave", "bumblebee", "retro", "cupcake", "corporate", "emerald", "valentine", "wireframe"]}
       >
         <Component {...pageProps} />
       </ThemeProvider>

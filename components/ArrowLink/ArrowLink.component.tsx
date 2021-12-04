@@ -4,7 +4,7 @@ export function ArrowLink({ text, href, blank = false }) {
       target={blank ? "_blank" : "_self"}
       rel="noopener noreferrer"
       href={href}
-      className="flex leading-7 rounded-lg text-accent hover:text-accent-focus transition-all h-6"
+      className="flex leading-7 rounded-lg text-accent transition-all h-6 ink-hover hover:text-accent-focus ease-in-out duration-500"
     >
       {text}
       <svg

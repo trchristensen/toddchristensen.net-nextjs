@@ -256,3 +256,7 @@ table {
   @apply focus:shadow-none text-base-content;
   box-shadow: none !important;
 }
+
+.swiper-slide.swiper-slide-active .ProjectCard {
+  @apply mb-8;
+}

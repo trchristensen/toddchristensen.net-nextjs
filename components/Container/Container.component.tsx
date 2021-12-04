@@ -30,7 +30,7 @@ function NavItem({ href, text }) {
         <span className="capsize">{text}</span>
       </a>
     </NextLink>
-  );zz
+  );
 }
 
 export default function Container(props) {

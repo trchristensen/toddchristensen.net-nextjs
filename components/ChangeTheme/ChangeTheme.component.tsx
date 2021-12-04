@@ -7,7 +7,7 @@ export default function ChangeTheme() {
 
     const { resolvedTheme, setTheme } = useTheme();
 
-    const themes = ["light", "dark", "black", "cyberpunk", "synthwave", "bumblebee", "retro", "cupcake", "corporate", "emerald", "valentine"]
+    const themes = ["light", "dark", "black", "cyberpunk", "synthwave", "bumblebee", "retro", "cupcake", "corporate", "emerald", "valentine", "wireframe"]
 
     const selectRandomTheme = () => {
       setTheme(themes[Math.floor(Math.random() * themes.length + 1)])
@@ -15,7 +15,10 @@ export default function ChangeTheme() {
 
   return (
     <div className="flex items-center gap-6 cursor-pointer">
-      <li className="tooltip tooltip-bottom text-xl list-none" data-tip="Resume">
+      <li
+        className="tooltip tooltip-bottom text-xl list-none"
+        data-tip="Resume"
+      >
         <a
           href="https://drive.google.com/file/d/1O9dOB56jeDlxIn7lXGC0SIW36Zu8q0B0/view?usp=sharing"
           target="_blank"
@@ -23,17 +26,21 @@ export default function ChangeTheme() {
           <FaFileCsv />
         </a>
       </li>
-        <li
-          data-tip="Random Theme"
-          className="tooltip tooltip-bottom list-none text-2xl"
-          onClick={selectRandomTheme}
-        >
-          <a>
-            <BiDice3 />
-          </a>
-        </li>
+      <li
+        data-tip="Random Theme"
+        className="tooltip tooltip-bottom list-none text-2xl"
+        onClick={selectRandomTheme}
+      >
+        <a>
+          <BiDice3 />
+        </a>
+      </li>
       <div className="dropdown dropdown-end">
-        <div tabIndex={0} className="m-1 cursor-pointer tooltip tooltip-bottom" data-tip="Theme Menu">
+        <div
+          tabIndex={0}
+          className="m-1 cursor-pointer tooltip tooltip-bottom"
+          data-tip="Theme Menu"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -143,6 +150,15 @@ export default function ChangeTheme() {
             }
           >
             <a>valentine</a>
+          </li>
+          <li
+            onClick={() =>
+              setTheme(
+                resolvedTheme === "wireframe" ? "wireframe" : "wireframe"
+              )
+            }
+          >
+            <a>wireframe</a>
           </li>
         </ul>
       </div>
