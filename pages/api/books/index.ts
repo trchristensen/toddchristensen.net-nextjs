@@ -45,10 +45,11 @@ export default async function handler(
             [...new Set(req.body?.author)].toString()) ||
           null,
         created_by: email,
-        subjects:
-          req.body?.subjects != null && req.body?.subjects.length < 1
-            ? req.body?.subjects.toString()
-            : null,
+        // subjects:
+        //   req.body?.subjects != null && req.body?.subjects.length < 1
+        //     ? req.body?.subjects.toString()
+        //     : null,
+        subjects: req.body?.subjects != null && req.body?.subjects.length < 1 ? req.body?.subjects[0] : null,
         publish_date:
           req.body?.publish_date[req.body?.publish_date.length - 1] || null,
         cover_src: req.body?.cover ? req.body?.cover.toString() : null,

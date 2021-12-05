@@ -6,6 +6,7 @@ import ProjectCard from "components/ProjectCard/ProjectCard";
 import { ArrowLink } from "components/ArrowLink/ArrowLink.component";
 
 import PROJECTS from "data/projects.json";
+import BlogPostCard from "components/Blog/BlogPostCard.component";
 
 export default function Home() {
   
@@ -13,6 +14,7 @@ export default function Home() {
     <Container>
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto pb-16 w-full">
         <IntroSection />
+        <FeaturedPosts />
         <FeaturedProjects />
         <Todo />
       </div>
@@ -56,6 +58,42 @@ const IntroSection = () => (
     </div>
   </section>
 );
+
+
+const FeaturedPosts = () => {
+
+  return (
+    <section className="FeaturedPosts">
+      <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6 text-black dark:text-white">
+        Featured Posts
+      </h3>
+      <div className="flex gap-6 flex-col md:flex-row">
+        <BlogPostCard
+          title="Hello World"
+          slug="hello-world"
+          gradient="border-2 border-accent"
+          // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
+        />
+        <BlogPostCard
+          title="Rust Is The Future of JavaScript Infrastructure"
+          slug="rust"
+          gradient="border-2 border-accent"
+          // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
+        />
+        <BlogPostCard
+          title="Past, Present, and Future of React State Management"
+          slug="react-state-management"
+          gradient="border-2 border-accent"
+          // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
+        />
+      </div>
+      <div className="mt-8 mb-16">
+        <ArrowLink href="blog" text="Read all posts" blank={false} />
+      </div>
+    </section>
+  );
+}
+
 
 const FeaturedProjects = () => {
   return (

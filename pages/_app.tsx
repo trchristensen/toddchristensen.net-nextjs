@@ -12,8 +12,7 @@ function App({ Component, pageProps }: AppProps) {
         storageKey="nightwind-mode"
         defaultTheme="system"
         attribute={"data-theme"}
-        // value={{ luxury: "luxury" }}
-        themes={["light", "dark", "black", "cyberpunk", "synthwave", "bumblebee", "retro", "cupcake", "corporate", "emerald", "valentine", "wireframe"]}
+        themes={["light", "dark", "black", "cyberpunk"]}
       >
         <Component {...pageProps} />
       </ThemeProvider>

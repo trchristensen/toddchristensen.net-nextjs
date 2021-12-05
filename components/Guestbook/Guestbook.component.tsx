@@ -101,7 +101,7 @@ export default function Guestbook({ fallbackData }) {
           // eslint-disable-next-line @next/next/no-html-link-for-pages
           <a
             href="/api/auth/signin/github"
-            className="flex items-center justify-center my-4 font-bold h-8 rounded w-28"
+            className="btn shadow flex items-center justify-center my-4 font-bold h-8 rounded w-28"
             onClick={(e) => {
               e.preventDefault();
               signIn("github");

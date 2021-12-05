@@ -33,7 +33,7 @@ export default function BookmarksPage({ fallbackData }) {
               ({ title, excerpt, link, id, cover, tags, domain }) => (
                 <div
                   key={id}
-                  className="card flex w-full flex-row relative items-center gap-4 rounded bg-base-200 p-1 sm:p-2 py-4"
+                  className="card flex w-full flex-row relative items-center gap-4 border-b-2 border-base-200 p-1 sm:p-2 py-4"
                 >
                   <a href={link} target="_blank">
                     <div className="avatar Bookmark__icon">
@@ -54,7 +54,7 @@ export default function BookmarksPage({ fallbackData }) {
                       </span>
                     </div>
 
-                    <div className="flex gap-0">
+                    <div className="flex gap-1">
                       {tags.map((tag, idx) => (
                         <span className="badge badge-ghost text-xs">
                           {tag}

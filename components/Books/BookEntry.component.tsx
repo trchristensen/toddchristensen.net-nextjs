@@ -24,11 +24,11 @@ export default function BookEntry({ entry, user }) {
   let created = format(new Date(entry.updated_at), "d MMM yyyy");
 
   return (
-    <div className="BookEntry w-full flex flex-col gap-1 pb-4 border-b">
-      <div className="flex w-full gap-4">
+    <div className="BookEntry w-full flex flex-col gap-4 border-b-2 border-base-200 p-1 sm:p-2 py-4">
+      <div className="flex w-full gap-4 items-end">
         <div className="flex flex-col relative">
           <a
-            className="w-[100px] shadow-lg glass rounded-lg"
+            className="w-[100px] shadow-lg rounded-lg"
             href={`https://openlibrary.org/${entry.key}`}
             target="_blank"
           >
@@ -47,7 +47,7 @@ export default function BookEntry({ entry, user }) {
           </a>
         </div>
 
-        <div className="flex flex-col text-base-content p-4 w-full">
+        <div className="flex flex-col text-base-content p-4 rounded w-full">
           <a href={`https://openlibrary.org/${entry.key}`} target="_blank">
             <span className="font-bold text-lg">{entry.title}</span>
           </a>
@@ -77,14 +77,17 @@ export default function BookEntry({ entry, user }) {
               </>
             )}
           </div>
-
-          <div className="mt-2 flex flex-wrap gap-2 gap-y-0 text-sm leading-tight line-clamp-2">
-            {entry.subjects && entry.subjects}
-          </div>
-          <div className="leading-tight mt-2 w-full">
-            {entry.comment && entry.comment}
-            {entry.comment && entry.comment.length > 400 && "..."}
-          </div>
+          {entry.subjects && (
+            <div className="mt-2 flex flex-wrap gap-2 gap-y-0 text-sm leading-tight line-clamp-2">
+              {entry.subjects}
+            </div>
+          )}
+          {entry.comment && (
+            <div className="leading-tight mt-2 w-full">
+              {entry.comment}
+              {entry.comment && entry.comment.length > 400 && "..."}
+            </div>
+          )}
         </div>
       </div>
     </div>
