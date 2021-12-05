@@ -28,8 +28,8 @@ export default function BookmarksPage({ fallbackData }) {
           They are synced straight from raindrops.io
         </p>
         <div className="flex flex-col gap-1">
-          {bookmarks.items &&
-            bookmarks.items.map(
+          {bookmarks?.items &&
+            bookmarks?.items.map(
               ({ title, excerpt, link, id, cover, tags, domain }) => (
                 <div
                   key={id}
@@ -85,21 +85,21 @@ export async function getStaticProps() {
     .then((data) => data.items)
     .catch((err) => err);
 
-  const fallbackData = bookmarks.items.map((raindrop) => ({
-    title: raindrop.title,
-    id: raindrop._id.toString(),
-    link: raindrop.link,
-    excerpt: raindrop.excerpt,
-    cover: raindrop.cover,
-    tags: raindrop.tags,
-    domain: raindrop.domain,
-  }));
+  // const fallbackData = bookmarks.map((raindrop) => ({
+  //   title: raindrop.title,
+  //   id: raindrop._id.toString(),
+  //   link: raindrop.link,
+  //   excerpt: raindrop.excerpt,
+  //   cover: raindrop.cover,
+  //   tags: raindrop.tags,
+  //   domain: raindrop.domain,
+  // }));
 
-  console.log("fbdata", fallbackData);
+  // console.log("fbdata", fallbackData);
 
   return {
     props: {
-      fallbackData,
+      // fallbackData,
     },
     revalidate: 60,
   };
