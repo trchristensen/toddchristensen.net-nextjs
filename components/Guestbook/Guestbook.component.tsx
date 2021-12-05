@@ -5,8 +5,8 @@ import useSWR, { useSWRConfig } from "swr";
 
 import fetcher from "lib/fetcher";
 import { Form, FormState } from "lib/types";
-// import SuccessMessage from "components/SuccessMessage";
-// import ErrorMessage from "components/ErrorMessage";
+import SuccessMessage from "components/SuccessMessage";
+import ErrorMessage from "components/ErrorMessage";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner.component";
 
 function GuestbookEntry({ entry, user }) {
@@ -129,11 +129,9 @@ export default function Guestbook({ fallbackData }) {
           </form>
         )}
         {form.state === Form.Error ? (
-          //   <ErrorMessage>{form.message}</ErrorMessage>
-          "error"
+            <ErrorMessage>{form.message}</ErrorMessage>
         ) : form.state === Form.Success ? (
-          //   <SuccessMessage>{form.message}</SuccessMessage>
-          "success"
+            <SuccessMessage>{form.message}</SuccessMessage>
         ) : (
           <p className="text-sm">
             Your information is only used to display your name and reply by

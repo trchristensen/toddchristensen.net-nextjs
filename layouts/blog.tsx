@@ -8,10 +8,10 @@ import type { PropsWithChildren } from "react";
 import type { Blog } from ".contentlayer/types";
 
 const editUrl = (slug) =>
-  `https://github.com/leerob/leerob.io/edit/main/data/blog/${slug}.mdx`;
+  `https://github.com/trchristensen/portfolio-v3/edit/main/data/blog/${slug}.mdx`;
 const discussUrl = (slug) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `https://leerob.io/blog/${slug}`
+    `https://toddchristensen.net/blog/${slug}`
   )}`;
 
 export default function BlogLayout({
@@ -22,7 +22,7 @@ export default function BlogLayout({
     <Container
       title={`${post.title} – Todd Christensen`}
       description={post.summary}
-      image={`https://leerob.io${post.image}`}
+      image={`http://toddchristensen.net/assets/${post.image}`}
       date={new Date(post.publishedAt).toISOString()}
       type="article"
     >

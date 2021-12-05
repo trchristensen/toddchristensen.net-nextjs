@@ -24,7 +24,7 @@ export default function BookEntry({ entry, user }) {
   let created = format(new Date(entry.updated_at), "d MMM yyyy");
 
   return (
-    <div className="BookEntry w-full flex flex-col gap-1 border-solid pb-4">
+    <div className="BookEntry w-full flex flex-col gap-1 pb-4 border-b">
       <div className="flex w-full gap-4">
         <div className="flex flex-col relative">
           <a
@@ -47,7 +47,7 @@ export default function BookEntry({ entry, user }) {
           </a>
         </div>
 
-        <div className="flex flex-col bg-base-200 text-base-content shadow p-4 rounded w-full">
+        <div className="flex flex-col text-base-content p-4 w-full">
           <a href={`https://openlibrary.org/${entry.key}`} target="_blank">
             <span className="font-bold text-lg">{entry.title}</span>
           </a>

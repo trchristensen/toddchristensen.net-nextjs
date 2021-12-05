@@ -53,10 +53,10 @@ export default function ChangeTheme() {
           </li>
           <li
             onClick={() =>
-              setTheme(resolvedTheme === "black" ? "black" : "black")
+              setTheme(resolvedTheme === "space" ? "space" : "space")
             }
           >
-            <a>black</a>
+            <a>space</a>
           </li>
           <li
             onClick={() =>

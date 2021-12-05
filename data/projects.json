@@ -15,7 +15,7 @@
         { "name": "Apollo" }
       ],
       "imageObject": {
-        "src": "/public/static/images/christy-c.jpeg",
+        "src": "/static/images/christy-c.jpeg",
         "alt": "Portfolio"
       },
       "links": [
@@ -44,7 +44,7 @@
         { "name": "react-query" }
       ],
       "imageObject": {
-        "src": "/public/static/images/dstack-c.jpeg",
+        "src": "/static/images/dstack-c.jpeg",
         "alt": "Portfolio"
       },
       "links": [
@@ -70,7 +70,7 @@
         { "name": "TailwindCSS" }
       ],
       "imageObject": {
-        "src": "/public/static/images/binance-taker-trades-c.jpeg",
+        "src": "/static/images/binance-taker-trades-c.jpeg",
         "alt": "Portfolio"
       },
       "links": [
@@ -109,7 +109,7 @@
         }
       ],
       "imageObject": {
-        "src": "/public/static/images/toddchristensen.net-c.jpeg",
+        "src": "/static/images/toddchristensen.net-c.jpeg",
         "alt": "Portfolio"
       }
     }
