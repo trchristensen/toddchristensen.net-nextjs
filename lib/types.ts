@@ -81,3 +81,7 @@ export type Book = {
   created_by: string;
   read_status: ReadStatus;
 }
+
+export type Views = {
+  total: number;
+};

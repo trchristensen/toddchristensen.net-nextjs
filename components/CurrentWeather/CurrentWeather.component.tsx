@@ -88,22 +88,24 @@ export default function CurrentWeather({ city, countryCode, timezone }) {
     );
 
   return (
-    <div
-      className="text-accent flex flex-row items-center cursor-pointer"
-      onClick={handleUseFahrenheit}
-    >
-      <span>
+    <div className="text-accent flex flex-row items-center">
+      <span
+        onClick={handleUseFahrenheit}
+        className="cursor-pointer tooltip tooltip-top"
+        data-tip={`to ${!useFahrenheit ? "fahrenheit" : "celcius"} `}
+      >
         {/* @ts-ignore */}
         {Math.round(useFahrenheit ? weather.temp_f : weather.temp)}
         {`°${useFahrenheit ? "F" : "C"} `}
       </span>
-      {/* @ts-ignore */}
-      <Image
-        alt={weather.description}
-        width={50}
-        height={50}
-        src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-      />
+      <div className="tooltip tooltip-top" data-tip={weather.description}>
+        <Image
+          alt={weather.description}
+          width={50}
+          height={50}
+          src={`http://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+        />
+      </div>
     </div>
   );
 }

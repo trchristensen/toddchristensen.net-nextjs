@@ -1,9 +1,9 @@
-// const { withContentlayer } = require("next-contentlayer");
+const { withContentlayer } = require("next-contentlayer");
 
 /**
  * @type {import('next').NextConfig}
  */
-module.exports = {
+module.exports = withContentlayer()({
   swcMinify: false,
   images: {
     domains: [
@@ -14,7 +14,7 @@ module.exports = {
       "toddchristensen.net",
       "openweathermap.org",
       "i.scdn.co",
-      "covers.openlibrary.org"
+      "covers.openlibrary.org",
     ],
   },
-};
+});

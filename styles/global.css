@@ -41,6 +41,19 @@ html[data-theme="dark"] {
   background-size: cover;
 }
 
+
+.prose, .prose-dark {
+  @apply text-base-content;
+}
+
+.prose h2, .prose h3, .prose h4, .prose thead, .prose a {
+  @apply text-secondary
+}
+
+.prose strong {
+  @apply text-accent;
+}
+
 /* https://seek-oss.github.io/capsize/ */
 .capsize::before {
   content: "";
@@ -173,7 +186,7 @@ html[data-theme="dark"] {
 
 code[class*="language-"],
 pre[class*="language-"] {
-  @apply text-gray-800 dark:text-gray-50;
+  /* @apply text-gray-800 dark:text-gray-50; */
 }
 
 pre::-webkit-scrollbar {
