@@ -1,4 +1,5 @@
 const { withContentlayer } = require("next-contentlayer");
+const withTM = require('@vercel/edge-functions-ui/transpile')()
 
 /**
  * @type {import('next').NextConfig}

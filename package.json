@@ -11,6 +11,7 @@
     "@tailwindcss/forms": "^0.3.4",
     "@tailwindcss/line-clamp": "^0.2.2",
     "@tailwindcss/typography": "^0.4.1",
+    "@vercel/edge-functions-ui": "^0.2.1",
     "contentlayer": "^0.0.33",
     "daisyui": "^1.16.2",
     "date-fns": "^2.26.0",
@@ -34,8 +35,8 @@
     "remark-gfm": "^2.0.0",
     "swiper": "^7.3.1",
     "swr": "^1.0.1",
-    "use-delayed-render": "^0.0.7",
-    "unsplash-js": "6.3.0"
+    "unsplash-js": "6.3.0",
+    "use-delayed-render": "^0.0.7"
   },
   "devDependencies": {
     "@types/node": "^16.11.10",
