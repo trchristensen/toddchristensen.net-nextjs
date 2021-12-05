@@ -21,6 +21,12 @@ const books = {
   external_link: false,
 };
 
+const bookmarks = {
+  title: "Bookmarks",
+  path: "/bookmarks",
+  external_link: false,
+};
+
 const dashboard = {
   title: "Dashboard",
   path: "/dashboard",
@@ -55,27 +61,26 @@ const uses = {
   external_link: false,
 };
 
-
 export const socialLinks = {
-	twitter: {
-		title: "Twitter",
-		path: "http://twitter.com/shillainmanila",
-		external_link: true
-	},
-	github: {
-		title: "Github",
-		path: "http://twitter.com/trchristensen",
-		external_link: true
-	}
-}
-
+  twitter: {
+    title: "Twitter",
+    path: "http://twitter.com/shillainmanila",
+    external_link: true,
+  },
+  github: {
+    title: "Github",
+    path: "http://twitter.com/trchristensen",
+    external_link: true,
+  },
+};
 
 export const site = {
   mainMenu: [
     home,
-		books,
+    books,
     guestbook,
     // about,
+    bookmarks,
     dashboard,
     blog,
     // snippets,
@@ -84,6 +89,7 @@ export const site = {
     home,
     about,
     guestbook,
+    bookmarks,
     // newsletter,
     dashboard,
     blog,
