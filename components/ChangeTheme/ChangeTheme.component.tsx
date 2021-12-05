@@ -15,26 +15,6 @@ export default function ChangeTheme() {
 
   return (
     <div className="flex items-center gap-6 cursor-pointer">
-      <li
-        className="tooltip tooltip-bottom text-xl list-none hover:text-accent-focus"
-        data-tip="Resume"
-      >
-        <a
-          href="https://drive.google.com/file/d/1O9dOB56jeDlxIn7lXGC0SIW36Zu8q0B0/view?usp=sharing"
-          target="_blank"
-        >
-          <ImProfile />
-        </a>
-      </li>
-      <li
-        data-tip="Random Theme"
-        className="tooltip tooltip-bottom list-none text-2xl hover:text-accent-focus"
-        onClick={selectRandomTheme}
-      >
-        <a>
-          <BiDice3 />
-        </a>
-      </li>
       <div className="dropdown dropdown-end">
         <div
           tabIndex={0}
@@ -87,79 +67,7 @@ export default function ChangeTheme() {
           >
             <a>cyberpunk</a>
           </li>
-          <li
-            onClick={() =>
-              setTheme(
-                resolvedTheme === "synthwave" ? "synthwave" : "synthwave"
-              )
-            }
-          >
-            <a>synthwave</a>
-          </li>
-          <li
-            onClick={() =>
-              setTheme(
-                resolvedTheme === "bumblebee" ? "bumblebee" : "bumblebee"
-              )
-            }
-          >
-            <a>bumblebee</a>
-          </li>
-          <li
-            onClick={() =>
-              setTheme(resolvedTheme === "retro" ? "retro" : "retro")
-            }
-          >
-            <a>retro</a>
-          </li>
-          <li
-            onClick={() =>
-              setTheme(resolvedTheme === "cupcake" ? "cupcake" : "cupcake")
-            }
-          >
-            <a>cupcake</a>
-          </li>
-          <li
-            onClick={() =>
-              setTheme(resolvedTheme === "cupcake" ? "cupcake" : "cupcake")
-            }
-          >
-            <a>cupcake</a>
-          </li>
-          <li
-            onClick={() =>
-              setTheme(resolvedTheme === "emerald" ? "emerald" : "emerald")
-            }
-          >
-            <a>emerald</a>
-          </li>
-          <li
-            onClick={() =>
-              setTheme(
-                resolvedTheme === "corporate" ? "corporate" : "corporate"
-              )
-            }
-          >
-            <a>corporate</a>
-          </li>
-          <li
-            onClick={() =>
-              setTheme(
-                resolvedTheme === "valentine" ? "valentine" : "valentine"
-              )
-            }
-          >
-            <a>valentine</a>
-          </li>
-          <li
-            onClick={() =>
-              setTheme(
-                resolvedTheme === "wireframe" ? "wireframe" : "wireframe"
-              )
-            }
-          >
-            <a>wireframe</a>
-          </li>
+         
         </ul>
       </div>
     </div>
