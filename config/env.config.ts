@@ -10,6 +10,7 @@ function getEnvironmentVariable(environmentVariable: string): string {
 }
 
 export const env = {
+  RAINDROPS_TOKEN: getEnvironmentVariable("RAINDROPS_TOKEN"),
   SPOTIFY_CLIENT_ID: getEnvironmentVariable("SPOTIFY_CLIENT_ID"),
   SPOTIFY_CLIENT_SECRET: getEnvironmentVariable("SPOTIFY_CLIENT_SECRET"),
   SPOTIFY_REFRESH_TOKEN: getEnvironmentVariable("SPOTIFY_REFRESH_TOKEN"),
