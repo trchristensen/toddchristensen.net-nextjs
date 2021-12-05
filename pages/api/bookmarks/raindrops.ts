@@ -8,8 +8,6 @@ export default async function handler(
 
   const query = req.query.collectionId;
 
-  console.log(typeof query)
-
   // @ts-ignore
   const response = await getRaindropsFromCollection(query);
   return res.status(200).json(response);

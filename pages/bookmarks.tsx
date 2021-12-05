@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function BookmarksPage({ fallbackData }) {
   const { data: bookmarks } = useSWR(
-    "http://localhost:3000/api/bookmarks/raindrops?collectionId=21727662",
+    "/api/bookmarks/raindrops?collectionId=21727662",
     fetcher,
     {
       fallbackData,
@@ -66,8 +66,6 @@ export default function BookmarksPage({ fallbackData }) {
               )
             )}
         </div>
-
-        {/* <Guestbook fallbackData={fallbackData} /> */}
       </div>
     </Container>
   );
@@ -81,13 +79,13 @@ export async function getStaticProps() {
   });
 
   const bookmarks = await fetch(
-    "http://localhost:3000/api/bookmarks/raindrops/?collectionId=21727662"
+    "/api/bookmarks/raindrops/?collectionId=21727662"
   )
     .then((res) => res.json())
     .then((data) => data.items)
     .catch((err) => err);
 
-  const fallbackData = bookmarks.map((raindrop) => ({
+  const fallbackData = bookmarks.items.map((raindrop) => ({
     title: raindrop.title,
     id: raindrop._id.toString(),
     link: raindrop.link,
