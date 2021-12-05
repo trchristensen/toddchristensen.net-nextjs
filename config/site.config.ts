@@ -27,6 +27,12 @@ const dashboard = {
   external_link: false,
 };
 
+const bookmarks = {
+  title: "Bookmarks",
+  path: "/bookmarks",
+  external_link: false,
+};
+
 const blog = {
   title: "Blog",
   path: "/blog",
@@ -74,6 +80,7 @@ export const site = {
   mainMenu: [
     home,
 		books,
+	  bookmarks,
     guestbook,
     // about,
     dashboard,
@@ -84,6 +91,7 @@ export const site = {
     home,
     about,
     guestbook,
+	  bookmarks,
     // newsletter,
     dashboard,
     blog,
