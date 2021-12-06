@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { allBlogs } from ".contentlayer/data";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Container from "components/Container/Container.component";
 import { pick } from "lib/utils";
 import { InferGetStaticPropsType } from "next";
@@ -9,6 +9,8 @@ import prisma from "lib/prisma";
 // import { Blog } from ".contentlayer/types";
 import useSWR from "swr";
 import fetcher from "lib/fetcher";
+
+
 export default function Blog({
   posts,
   fallbackData,
@@ -27,6 +29,7 @@ export default function Blog({
     fallbackData,
   });
 
+  
   return (
     <Container
       title="Blog – Todd Christensen"
@@ -37,8 +40,13 @@ export default function Blog({
           Blog
         </h1>
         <p className="mb-4">
-          {`I've been writing online since 2014, mostly about web development and tech careers.
-            In total, I've written ${posts.length} articles on my blog.
+          I just started my first blog, as of December 2021. I think it will
+          start off as a personal diary, knowing it won't get much traffic. But
+          who knows? Maybe it will turn into something beautiful? My mom
+          always told me I'm very smart and creative.
+        </p>
+        <p className="mb-4">
+          {` In total, I've written ${posts.length} articles on my blog.
             Use the search below to filter by title.`}
         </p>
         <div className="relative w-full mb-4">
@@ -72,7 +80,7 @@ export default function Blog({
             {
               // @ts-ignore
               popularPosts &&
-              // @ts-ignore
+                // @ts-ignore
                 popularPosts.map((_) => {
                   return posts.map((post) => {
                     if (post.slug === _.slug)
@@ -125,11 +133,11 @@ export async function getStaticProps() {
     },
   });
 
-  const fallbackData = popularPosts.map((entry) => {
-   
-    return posts.filter(post => post.slug === entry.slug)
-
-  }).slice(0, 3);
+  const fallbackData = popularPosts
+    .map((entry) => {
+      return posts.filter((post) => post.slug === entry.slug);
+    })
+    .slice(0, 3);
 
   return { props: { posts, fallbackData } };
 }

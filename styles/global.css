@@ -41,13 +41,23 @@ html[data-theme="space"] {
   background-size: cover;
 }
 
+.dots {
+  background-image: url("/static/svg/dots004.svg");
+  background-attachment: fixed;
+  background-size: 20%;
+}
 
-.prose, .prose-dark {
+.prose,
+.prose-dark {
   @apply text-base-content;
 }
 
-.prose h2, .prose h3, .prose h4, .prose thead, .prose a {
-  @apply text-secondary
+.prose h2,
+.prose h3,
+.prose h4,
+.prose thead,
+.prose a {
+  @apply text-secondary;
 }
 
 .prose strong {
@@ -76,15 +86,15 @@ html[data-theme="space"] {
 }
 
 /* @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) { */
-  .blur {
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.5);
-  }
-  .no-blur {
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
+.blur {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.no-blur {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
 /* } */
 
 @supports not (backdrop-filter: none) {

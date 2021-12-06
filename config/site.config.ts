@@ -38,6 +38,13 @@ const blog = {
   path: "/blog",
   external_link: false,
 };
+
+const projects = {
+  title: "Projects",
+  path: "/projects",
+  external_link: false,
+};
+
 const snippets = {
   title: "Snippets",
   path: "/snippets",
@@ -77,6 +84,7 @@ export const socialLinks = {
 export const site = {
   mainMenu: [
     home,
+    projects,
     guestbook,
     blog,
     dashboard,
@@ -87,6 +95,7 @@ export const site = {
   ],
   footerMenu: [
     home,
+    projects,
     guestbook,
     blog,
     dashboard,

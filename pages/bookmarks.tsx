@@ -127,7 +127,7 @@ export default function BookmarksPage({ fallbackData }) {
           They are synced straight from raindrops.io
         </p>
         <div className="flex justify-end items-center w-full mb-4 gap-4">
-          <button className="btn btn-primary btn-sm" onClick={handleChangeView}>
+          <button className="btn btn-outline btn-sm" onClick={handleChangeView}>
             { view == "list" ? "grid" : "list" } View
           </button>
         </div>

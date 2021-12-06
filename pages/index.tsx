@@ -50,7 +50,7 @@ const IntroSection = () => (
       </p>
     </div>
     <div className="avatar">
-      <div className="w-[100px] sm:w-[176px] relative mb-8 sm:mb-0 mr-auto rounded-full">
+      <div className="w-[100px] sm:w-[176px] relative mb-8 sm:mb-0 mr-auto rounded-full filter grayscale hover:filter-none">
         <Image
           alt="Todd Christensen"
           layout="responsive"
@@ -123,12 +123,7 @@ const Todo = () => (
       To do:{" "}
     </h3>
     <ol className="list-inside ml-8">
-      <li>
-        books page needs work on crud. add whole link function for adding books.
-        add a recommend feature for people to add books who aren't me... add a
-        read or will read feature
-      </li>
-      <li>Header component</li>
+      <li>Github Section on homepage. includes the commit map/calendar</li>
       <li>blog (powered by hive blockchain)</li>
       <li>Resume</li>
       <li>Custom chat window with AI</li>
@@ -145,6 +140,7 @@ const ContactSection = () => {
   const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [body, setBody] = useState<string>();
+  const [bodyHeight, setBodyHeight] = useState<boolean>(false);
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -189,14 +185,14 @@ const ContactSection = () => {
         Get in touch
       </h3>
       <div>
-        <div className="ContactForm__wrapper border rounded-lg shadow w-full p-4 bg-secondary-focus text-secondary-content">
+        <div className="ContactForm__wrapper rounded shadow w-full p-4 bg-base-200 text-primary-content">
           <form
-            className="ContactForm flex flex-col gap-4"
+            className="ContactForm flex flex-col"
             onSubmit={handleSendMessage}
           >
             <div className="form-control">
               <label className="label">
-                <span className="label-text text-secondary-content font-semibold">
+                <span className="label-text text-base-content font-semibold">
                   Name
                 </span>
               </label>
@@ -213,7 +209,7 @@ const ContactSection = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text text-secondary-content font-semibold">
+                <span className="label-text text-base-content font-semibold">
                   Email
                 </span>
               </label>
@@ -229,26 +225,28 @@ const ContactSection = () => {
               />
             </div>
 
-            <div className="form-control">
+            <div className="form-control relative">
               <label className="label">
-                <span className="label-text text-secondary-content font-semibold">
+                <span className="label-text text-base-content font-semibold">
                   What would you like to say?
                 </span>
               </label>
               <textarea
                 required
-                className="textarea h-24 textarea-bordered text-secondary"
+                onClick={() => setBodyHeight(true)}
+                className={`textarea textarea-bordered text-secondary resize-none pb-[50px] ${bodyHeight === true ? 'h-72' : 'h-42'}`}
                 placeholder="message"
                 value={body}
                 onChange={(event: React.FormEvent<HTMLTextAreaElement>) =>
                   setBody(event.currentTarget.value)
                 }
               ></textarea>
+              <div className="w-full absolute bottom-0">
+                <button type="submit" className="btn shadow rounded w-[calc(100%-8px)] m-1">
+                  Send it
+                </button>
+              </div>
             </div>
-
-            <button type="submit" className="btn btn-primary shadow rounded">
-              Send it
-            </button>
           </form>
           {form.state === Form.Error ? (
             <ErrorMessage>{form.message}</ErrorMessage>
