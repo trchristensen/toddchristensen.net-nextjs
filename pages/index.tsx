@@ -21,7 +21,8 @@ export default function Home() {
         <IntroSection />
         <FeaturedPosts />
         <FeaturedProjects />
-        <Todo />
+        {/* <Todo /> */}
+        <Work />
         <GithubSection />
         <ContactSection />
       </div>
@@ -283,3 +284,53 @@ const GithubSection = () => {
     </section>
   );
 };
+
+
+const Work = () => (
+  <section id="work" className="w-full">
+    <h3 className="mt-16 text-secondary font-bold text-2xl md:text-4xl tracking-tight mb-6 flex flex-row items-end justify-between w-full">
+      Work
+    </h3>
+    <div className="flex flex-col space-y-3">
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://bytoddchristensen.com"
+        className="flex items-center space-x-4 group"
+      >
+        <span className="flex-none font-medium group-hover:underline group-hover:text-accent">
+          byToddChristensen (Freelance)
+        </span>
+        <span className="flex-shrink w-full border-t border-base-content border-dashed"></span>
+        <span className="flex-none text-tertiary">Web Developer</span>
+        <span className="flex-none font-mono text-quaternary">2018-</span>
+      </a>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://designstudio.com"
+        className="flex items-center space-x-4 group"
+      >
+        <span className="flex-none font-medium group-hover:underline group-hover:text-accent">
+          DesignStudio
+        </span>
+        <span className="flex-shrink w-full border-t border-base-content border-dashed"></span>
+        <span className="flex-none text-tertiary">Web Developer</span>
+        <span className="flex-none font-mono text-quaternary">2015-2018</span>
+      </a>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://myspace.com"
+        className="flex items-center space-x-4 group"
+      >
+        <span className="flex-none font-medium group-hover:underline group-hover:text-accent">
+          Myspace
+        </span>
+        <span className="flex-shrink w-full border-t border-base-content border-dashed"></span>
+        <span className="flex-none text-tertiary">Profile Customizer</span>
+        <span className="flex-none font-mono text-quaternary">2002-2006</span>
+      </a>
+    </div>
+  </section>
+);

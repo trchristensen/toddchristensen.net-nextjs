@@ -17,7 +17,7 @@ export default function Heatmap() {
   return (
     <div className="relative w-full bg-base-200 p-4 rounded">
       <CalendarHeatmap
-        startDate={shiftDate(today, -150)}
+        startDate={shiftDate(today, -182)}
         endDate={today}
         values={data}
         classForValue={(value) => {

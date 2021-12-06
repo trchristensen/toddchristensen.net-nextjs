@@ -10,7 +10,7 @@ function App({ Component, pageProps }: AppProps) {
       <ThemeProvider
         enableColorScheme
         storageKey="nightwind-mode"
-        defaultTheme="system"
+        defaultTheme="dark"
         attribute={"data-theme"}
         themes={["light", "dark", "black", "cyberpunk"]}
       >

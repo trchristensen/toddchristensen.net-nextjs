@@ -18,7 +18,7 @@ export default function ChangeTheme() {
       <div className="dropdown dropdown-end">
         <div
           tabIndex={0}
-          className="m-1 cursor-pointer tooltip tooltip-bottom hover:text-accent-focus"
+          className="m-1 cursor-pointer hover:text-accent-focus"
           data-tip="Theme Menu"
         >
           <svg

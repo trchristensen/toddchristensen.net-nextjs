@@ -10,7 +10,7 @@ import { site } from "config/site.config";
 import { FaRocket } from "react-icons/fa";
 import { MdPartyMode } from "react-icons/md";
 import { BiCake, BiMoon, BiSun } from "react-icons/bi";
-import { SiAtom } from 'react-icons/si'
+import { SiAtom } from "react-icons/si";
 import ChangeTheme from "components/ChangeTheme/ChangeTheme.component";
 
 function NavItem({ href, text }) {
@@ -21,9 +21,7 @@ function NavItem({ href, text }) {
     <NextLink href={href}>
       <a
         className={cn(
-          isActive
-            ? "font-semibold"
-            : "font-normal",
+          isActive ? "font-semibold" : "font-normal",
           "hidden md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-base-200 transition-all"
         )}
       >
@@ -33,7 +31,7 @@ function NavItem({ href, text }) {
   );
 }
 
-export default function Container(props) {
+export default function OSContainer(props) {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
 
@@ -90,7 +88,7 @@ export default function Container(props) {
               <NavItem key={idx} href={navItem.path} text={navItem.title} />
             ))}
           </div>
-         <ChangeTheme />
+          <ChangeTheme />
         </nav>
       </div>
       <main id="skip" className="flex flex-col justify-center px-4">
