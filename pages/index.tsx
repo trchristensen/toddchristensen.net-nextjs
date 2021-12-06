@@ -22,6 +22,7 @@ export default function Home() {
         <FeaturedProjects />
         <Todo />
         <ContactSection />
+        <GitHubSection />
       </div>
     </Container>
   );
@@ -260,3 +261,9 @@ const ContactSection = () => {
     </section>
   );
 };
+
+
+const GitHubSection = () => {
+
+  return(<></>)
+}
