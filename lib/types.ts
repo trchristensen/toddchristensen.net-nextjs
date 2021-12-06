@@ -112,11 +112,12 @@ export type Unsplash = {
 };
 
 export type Raindrop = {
-  id: number | string,
-  title: string,
-  excerpt?: string,
-  link: string,
-  tags?: string[],
-  cover: string,
-  created: string
-}
+  _id: number | string;
+  title: string;
+  excerpt?: string;
+  link: string;
+  tags?: string[];
+  cover: string;
+  created: string;
+  domain: string;
+};

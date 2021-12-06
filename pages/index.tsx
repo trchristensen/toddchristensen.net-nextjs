@@ -7,9 +7,13 @@ import { ArrowLink } from "components/ArrowLink/ArrowLink.component";
 
 import PROJECTS from "data/projects.json";
 import BlogPostCard from "components/Blog/BlogPostCard.component";
+import { FormEvent, useState } from "react";
+import { Form, FormState } from "lib/types";
+import ErrorMessage from "components/ErrorMessage";
+import SuccessMessage from "components/SuccessMessage";
+import { mutate } from "swr";
 
 export default function Home() {
-  
   return (
     <Container>
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto pb-16 w-full">
@@ -17,6 +21,7 @@ export default function Home() {
         <FeaturedPosts />
         <FeaturedProjects />
         <Todo />
+        <ContactSection />
       </div>
     </Container>
   );
@@ -59,9 +64,7 @@ const IntroSection = () => (
   </section>
 );
 
-
 const FeaturedPosts = () => {
-
   return (
     <section className="FeaturedPosts">
       <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6">
@@ -92,8 +95,7 @@ const FeaturedPosts = () => {
       </div>
     </section>
   );
-}
-
+};
 
 const FeaturedProjects = () => {
   return (
@@ -121,12 +123,142 @@ const Todo = () => (
       To do:{" "}
     </h3>
     <ol className="list-inside ml-8">
-      <li>books page needs work on crud. add whole link function for adding books. add a recommend feature for people to add books who aren't me... add a read or will read feature</li>
+      <li>
+        books page needs work on crud. add whole link function for adding books.
+        add a recommend feature for people to add books who aren't me... add a
+        read or will read feature
+      </li>
       <li>Header component</li>
       <li>blog (powered by hive blockchain)</li>
       <li>Resume</li>
       <li>Custom chat window with AI</li>
-      <li>Hobbies page (music production, gaming production, <span className="line-through">books i've read</span>, travel</li>
+      <li>
+        Hobbies page (music production, gaming production,{" "}
+        <span className="line-through">books i've read</span>, travel
+      </li>
     </ol>
   </section>
 );
+
+const ContactSection = () => {
+  const [form, setForm] = useState<FormState>({ state: Form.Initial });
+  const [name, setName] = useState<string>();
+  const [email, setEmail] = useState<string>();
+  const [body, setBody] = useState<string>();
+
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+    setForm({ state: Form.Loading });
+
+    const res = await fetch("/api/contact", {
+      body: JSON.stringify({
+        name,
+        email,
+        body,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+
+    const { error } = await res.json();
+    if (error) {
+      setForm({
+        state: Form.Error,
+        message: error,
+      });
+      return;
+    }
+
+    setName(null)
+    setEmail(null)
+    setBody(null)
+
+    mutate("/api/guestbook");
+    setForm({
+      state: Form.Success,
+      message: `Hooray! Thanks for the message! I'll get in touch with you shortly.`,
+    });
+
+  };
+
+  return (
+    <section id="Contact" className="w-full">
+      <h3 className="mt-16 text-secondary font-bold text-2xl md:text-4xl tracking-tight mb-6 flex flex-row items-end justify-between w-full">
+        Get in touch
+      </h3>
+      <div>
+        <div className="ContactForm__wrapper border rounded-lg shadow w-full p-4 bg-secondary-focus text-secondary-content">
+          <form
+            className="ContactForm flex flex-col gap-4"
+            onSubmit={handleSendMessage}
+          >
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-secondary-content font-semibold">
+                  Name
+                </span>
+              </label>
+              <input
+                required
+                type="text"
+                placeholder="name"
+                className="input input-bordered text-secondary"
+                value={name}
+                onChange={(event: React.FormEvent<HTMLInputElement>) =>
+                  setName(event.currentTarget.value)
+                }
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-secondary-content font-semibold">
+                  Email
+                </span>
+              </label>
+              <input
+                required
+                type="email"
+                placeholder="email"
+                className="input input-bordered text-secondary"
+                value={email}
+                onChange={(event: React.FormEvent<HTMLInputElement>) =>
+                  setEmail(event.currentTarget.value)
+                }
+              />
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-secondary-content font-semibold">
+                  What would you like to say?
+                </span>
+              </label>
+              <textarea
+                required
+                className="textarea h-24 textarea-bordered text-secondary"
+                placeholder="message"
+                value={body}
+                onChange={(event: React.FormEvent<HTMLTextAreaElement>) =>
+                  setBody(event.currentTarget.value)
+                }
+              ></textarea>
+            </div>
+
+            <button type="submit" className="btn btn-primary shadow rounded">
+              Send it
+            </button>
+          </form>
+          {form.state === Form.Error ? (
+            <ErrorMessage>{form.message}</ErrorMessage>
+          ) : form.state === Form.Success ? (
+            <SuccessMessage>{form.message}</SuccessMessage>
+          ) : (
+            <></>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};

@@ -5,8 +5,8 @@ import { signIn, useSession } from "next-auth/react";
 import useSWR, { useSWRConfig } from "swr";
 import fetcher from "lib/fetcher";
 import { Form, FormState } from "lib/types";
-// import SuccessMessage from 'components/SuccessMessage';
-// import ErrorMessage from 'components/ErrorMessage';
+import SuccessMessage from 'components/SuccessMessage';
+import ErrorMessage from 'components/ErrorMessage';
 
 export default function BookEntry({ entry, user }) {
   const { mutate } = useSWRConfig();

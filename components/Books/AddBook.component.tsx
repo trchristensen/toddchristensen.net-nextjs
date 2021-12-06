@@ -100,19 +100,19 @@ const BookResult = ({ book }) => (
         </div>
       )}
       <div className="BookResult__Content flex flex-col y-gap-2">
-        <p className="BookResult__Title font-bold text-lg text-gray-800 dark:text-gray-200">
+        <p className="BookResult__Title font-bold text-lg">
           {book?.title}
         </p>
-        <p className="BookResult__Author text-sm text-gray-700 dark:text-gray-300">
+        <p className="BookResult__Author text-sm">
           {book?.author}
         </p>
         {book?.publish_date && (
-          <p className="BookResult__Published text-xs mb-1 mt-3 italic text-gray-500">
+          <p className="BookResult__Published text-xs mb-1 mt-3 italic">
             First published: {book?.publish_date[book?.publish_date.length - 1]}
           </p>
         )}
         {book?.subjects && (
-          <p className="BookResult__Subjects text-gray-500 text-sm">
+          <p className="BookResult__Subjects text-sm">
             {book?.subjects.join(", ")}
           </p>
         )}
@@ -219,7 +219,7 @@ export default function AddBook({ session }) {
                     className="form-checkbox rounded-md h-5 w-5"
                     onClick={handleReadBook}
                   />
-                  <span className="ml-2 text-gray-700 dark:text-gray-300 font-semibold">
+                  <span className="ml-2 font-semibold">
                     Have you read the book yet?
                   </span>
                 </label>
@@ -254,7 +254,7 @@ export default function AddBook({ session }) {
                       aria-label="What did you think of the book?"
                       placeholder="What did you think of the book?"
                       required
-                      className="pl-4 pr-32 py-2 mt-1 input input-bordered"
+                      className="pl-4 pr-32 py-2 mt-1 input input-bordered w-full"
                     />
                   </div>
                 </>

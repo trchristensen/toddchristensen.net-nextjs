@@ -104,7 +104,7 @@ export default function BookmarksPage({ fallbackData }) {
 
   const [view, setView] = useState("list");
   const handleChangeView = () => {
-    const newView = view == "list" ? "list" : "grid";
+    const newView = view == "list" ? "grid" : "list";
     setView(newView);
     localStorage.setItem("view-type", newView);
   };
@@ -128,7 +128,7 @@ export default function BookmarksPage({ fallbackData }) {
         </p>
         <div className="flex justify-end items-center w-full mb-4 gap-4">
           <button className="btn btn-primary btn-sm" onClick={handleChangeView}>
-            {view} View
+            { view == "list" ? "grid" : "list" } View
           </button>
         </div>
 
@@ -151,7 +151,7 @@ export async function getStaticProps() {
 
   const bookmarks = await getRaindropsFromCollection("21727662");
 
-  const fallbackData = await bookmarks?.items.map((raindrop) => ({
+  const fallbackData = await bookmarks?.items.map((raindrop:Raindrop) => ({
     title: raindrop.title,
     id: raindrop._id.toString(),
     link: raindrop.link,
