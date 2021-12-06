@@ -12,6 +12,7 @@ import { Form, FormState } from "lib/types";
 import ErrorMessage from "components/ErrorMessage";
 import SuccessMessage from "components/SuccessMessage";
 import { mutate } from "swr";
+import Heatmap from "components/Github/Heatmap.component";
 
 export default function Home() {
   return (
@@ -21,8 +22,8 @@ export default function Home() {
         <FeaturedPosts />
         <FeaturedProjects />
         <Todo />
+        <GithubSection />
         <ContactSection />
-        <GitHubSection />
       </div>
     </Container>
   );
@@ -168,16 +169,15 @@ const ContactSection = () => {
       return;
     }
 
-    setName(null)
-    setEmail(null)
-    setBody(null)
+    setName(null);
+    setEmail(null);
+    setBody(null);
 
     mutate("/api/guestbook");
     setForm({
       state: Form.Success,
       message: `Hooray! Thanks for the message! I'll get in touch with you shortly.`,
     });
-
   };
 
   return (
@@ -235,7 +235,9 @@ const ContactSection = () => {
               <textarea
                 required
                 onClick={() => setBodyHeight(true)}
-                className={`textarea textarea-bordered text-secondary resize-none pb-[50px] ${bodyHeight === true ? 'h-72' : 'h-42'}`}
+                className={`textarea textarea-bordered text-secondary resize-none pb-[50px] ${
+                  bodyHeight === true ? "h-72" : "h-42"
+                }`}
                 placeholder="message"
                 value={body}
                 onChange={(event: React.FormEvent<HTMLTextAreaElement>) =>
@@ -243,7 +245,10 @@ const ContactSection = () => {
                 }
               ></textarea>
               <div className="w-full absolute bottom-0">
-                <button type="submit" className="btn shadow rounded w-[calc(100%-8px)] m-1">
+                <button
+                  type="submit"
+                  className="btn shadow rounded w-[calc(100%-8px)] m-1"
+                >
                   Send it
                 </button>
               </div>
@@ -262,8 +267,19 @@ const ContactSection = () => {
   );
 };
 
-
-const GitHubSection = () => {
-
-  return(<></>)
-}
+const GithubSection = () => {
+  return (
+    <section id="Github" className="w-full">
+      <h3 className="mt-16 text-secondary font-bold text-2xl md:text-4xl tracking-tight mb-6 flex flex-row items-end justify-between w-full">
+        Github Stats
+      </h3>
+      <p className="mb-16">
+        Admittedly in the early stages of my career I didn't think much of git,
+        or understand the potential it has. Recently, I have decided to make up
+        for that. You can see my Github stats below, showing my overall
+        activity.
+      </p>
+      <Heatmap />
+    </section>
+  );
+};
