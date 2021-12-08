@@ -4,6 +4,7 @@ import cn from "classnames";
 
 import fetcher from "lib/fetcher";
 import { Views } from "lib/types";
+import { useTheme } from "next-themes";
 
 export default function BlogPostCard({ title, slug, gradient }) {
   const { data } = useSWR<Views>(`/api/views/${slug}`, fetcher);

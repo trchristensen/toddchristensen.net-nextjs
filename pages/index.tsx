@@ -14,7 +14,6 @@ import SuccessMessage from "components/SuccessMessage";
 import { mutate } from "swr";
 import Heatmap from "components/Github/Heatmap.component";
 
-
 export default function Home() {
   return (
     <Container>
@@ -109,23 +108,25 @@ const FeaturedProjects = () => {
   );
 };
 
-const Todo = () => (
-  <section id="Hobbies">
-    <h3 className="mt-16 text-secondary font-bold text-2xl md:text-4xl tracking-tight mb-6 flex flex-row items-end justify-between w-full">
-      To do:{" "}
-    </h3>
-    <ol className="list-inside ml-8">
-      <li>Github Section on homepage. includes the commit map/calendar</li>
-      <li>blog (powered by hive blockchain)</li>
-      <li>Resume</li>
-      <li>Custom chat window with AI</li>
-      <li>
-        Hobbies page (music production, gaming production,{" "}
-        <span className="line-through">books i've read</span>, travel
-      </li>
-    </ol>
-  </section>
-);
+const Todo = () => {
+  return (
+    <section id="Hobbies" className="glass">
+      <h3 className="mt-16 text-secondary font-bold text-2xl md:text-4xl tracking-tight mb-6 flex flex-row items-end justify-between w-full">
+        To do:{" "}
+      </h3>
+      <ol className="list-inside ml-8">
+        <li>Github Section on homepage. includes the commit map/calendar</li>
+        <li>blog (powered by hive blockchain)</li>
+        <li>Resume</li>
+        <li>Custom chat window with AI</li>
+        <li>
+          Hobbies page (music production, gaming production,{" "}
+          <span className="line-through">books i've read</span>, travel
+        </li>
+      </ol>
+    </section>
+  );
+};
 
 const ContactSection = () => {
   const [form, setForm] = useState<FormState>({ state: Form.Initial });
