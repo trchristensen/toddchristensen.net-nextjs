@@ -1,8 +1,8 @@
-import { ArrowLink } from 'components/ArrowLink/ArrowLink.component';
-import { FaGithub } from 'react-icons/fa';
-import { BiLinkExternal } from 'react-icons/bi';
-import { ILink, IProjectCard } from 'lib/types';
-
+import { ArrowLink } from "components/ArrowLink/ArrowLink.component";
+import { FaGithub } from "react-icons/fa";
+import { BiLinkExternal } from "react-icons/bi";
+import { ILink, IProjectCard } from "lib/types";
+import Image from "next/image";
 
 export default function ProjectCard({
   title,
@@ -11,14 +11,16 @@ export default function ProjectCard({
   icon,
   tags,
   imageObject,
-  links
+  links,
 }: IProjectCard) {
   return (
     <div className="ProjectCard relative flex flex-col items-center justify-center mx-auto rounded overflow-hidden pt-4  bg-base-200 p-4 shadow-xl">
       {/* <div className="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1521903062400-b80f2cb8cb9d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80)" }}></div> */}
 
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
+        width={1400}
+        height={908}
         src={imageObject.src}
         alt={imageObject.alt}
         className={`projectCard__image rounded drop-shadow-lg filter grayscale hover:filter-none`}

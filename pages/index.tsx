@@ -14,6 +14,7 @@ import SuccessMessage from "components/SuccessMessage";
 import { mutate } from "swr";
 import Heatmap from "components/Github/Heatmap.component";
 
+
 export default function Home() {
   return (
     <Container>
@@ -268,11 +269,14 @@ const GithubSection = () => {
         for that. You can see my Github stats below, showing my overall
         activity.
       </p>
+      <img
+        className="mb-4"
+        src="https://raw.githubusercontent.com/trchristensen/github-stats/master/generated/overview.svg"
+      />
       <Heatmap />
     </section>
   );
 };
-
 
 const Work = () => (
   <section id="work" className="w-full">
