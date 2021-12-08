@@ -117,7 +117,7 @@ export default function Guestbook({ fallbackData }) {
               aria-label="Your message"
               placeholder="Your message..."
               required
-              className="input input-bordered pl-4 pr-32 py-2 mt-1 block w-full rounded-md"
+              className="input input-bordered pl-4 pr-32 py-2 mt-1 block w-full rounded-md text-base-content"
             />
             <button
               style={{ minHeight: 40 }}
@@ -129,9 +129,9 @@ export default function Guestbook({ fallbackData }) {
           </form>
         )}
         {form.state === Form.Error ? (
-            <ErrorMessage>{form.message}</ErrorMessage>
+          <ErrorMessage>{form.message}</ErrorMessage>
         ) : form.state === Form.Success ? (
-            <SuccessMessage>{form.message}</SuccessMessage>
+          <SuccessMessage>{form.message}</SuccessMessage>
         ) : (
           <p className="text-sm">
             Your information is only used to display your name and reply by

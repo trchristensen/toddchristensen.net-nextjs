@@ -17,7 +17,7 @@ export default function Heatmap() {
   return (
     <div className="relative w-full bg-base-200 p-4 rounded">
       <CalendarHeatmap
-        startDate={shiftDate(today, -182)}
+        startDate={shiftDate(today, -365)}
         endDate={today}
         values={data}
         classForValue={(value) => {
@@ -33,7 +33,7 @@ export default function Heatmap() {
         }}
         showWeekdayLabels={true}
         onClick={(value) =>
-          alert(`Clicked on value with count: ${value.count}`)
+          null
         }
       />
       <ReactTooltip className="bg-base-300 text-base-content" />
