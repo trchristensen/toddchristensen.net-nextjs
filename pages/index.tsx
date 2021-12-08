@@ -80,18 +80,6 @@ const FeaturedPosts = () => {
           gradient="border-2 border-accent"
           // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
         />
-        <BlogPostCard
-          title="Rust Is The Future of JavaScript Infrastructure"
-          slug="rust"
-          gradient="border-2 border-accent"
-          // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
-        />
-        <BlogPostCard
-          title="Past, Present, and Future of React State Management"
-          slug="react-state-management"
-          gradient="border-2 border-accent"
-          // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
-        />
       </div>
       <div className="mt-8 mb-16">
         <ArrowLink href="blog" text="Read all posts" blank={false} />
