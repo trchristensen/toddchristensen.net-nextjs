@@ -2,23 +2,15 @@ import prisma from "lib/prisma";
 import Container from "components/Container/Container.component";
 import Books from "components/Books/Books.component";
 import { books } from ".prisma/client";
+import OSContainer from "components/OSContainer/OSContainer.component";
+import { withProviders } from "components/Providers/withProviders";
+import { useState } from "react";
+import { ListDetailView, SiteLayout } from "components/Layouts";
 
 export default function BookPage({ fallbackData }) {
   return (
-    <Container
-      title="Guestbook – Todd Christensen"
-      description="Sign my digital guestbook and share some wisdom."
-    >
-      <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
-        <h1 className="text-primary font-bold text-3xl md:text-5xl tracking-tight mb-4">
-          Books
-        </h1>
-        <p className="mb-8">
-          I try to read as much as I can. This is a list of the books I've recently read, am currently reading, and am going to read. I read non-fiction almost exclusively but am open to reading just about anything. You can also recommend any books if you'd like, at the bottom of the page. Might add a comments feature if this page gets any engagement, at all.
-        </p>
-        <Books fallbackData={fallbackData} />
-      </div>
-    </Container>
+    <>
+    </>
   );
 }
 
@@ -29,7 +21,9 @@ export async function getStaticProps() {
     },
   });
 
-  const fallbackData = entries.map((entry:books) => ({
+  console.log(entries)
+
+  const fallbackData = entries.map((entry: books) => ({
     id: entry.id.toString(),
     title: entry.title,
     author: entry.author,
@@ -45,7 +39,7 @@ export async function getStaticProps() {
     key: entry.key,
     comment: entry.comment,
     created_by: entry.created_by,
-    read_status: entry?.read_status
+    read_status: entry?.read_status,
   }));
 
   return {
@@ -55,3 +49,31 @@ export async function getStaticProps() {
     revalidate: 60,
   };
 }
+
+BookPage.getLayout = withProviders(function getLayout(page) {
+  const [scrollContainerRef, setScrollContainerRef] = useState(null);
+
+  return (
+    <SiteLayout>
+      <ListDetailView
+        list={<> {JSON.stringify(fallbackData)} </>}
+        // list={<ListContainer children={null} onRef={setScrollContainerRef} />}
+        hasDetail={false}
+        detail={page}
+      />
+      <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
+        <h1 className="text-primary font-bold text-3xl md:text-5xl tracking-tight mb-4">
+          Books
+        </h1>
+        <p className="mb-8">
+          I try to read as much as I can. This is a list of the books I've
+          recently read, am currently reading, and am going to read. I read
+          non-fiction almost exclusively but am open to reading just about
+          anything. You can also recommend any books if you'd like, at the
+          bottom of the page. Might add a comments feature if this page gets any
+          engagement, at all.
+        </p>
+      </div>
+    </SiteLayout>
+  );
+});

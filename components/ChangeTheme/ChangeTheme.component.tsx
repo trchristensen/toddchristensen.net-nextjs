@@ -15,7 +15,7 @@ export default function ChangeTheme() {
 
   return (
     <div className="flex items-center gap-6 cursor-pointer">
-      <div className="dropdown dropdown-end">
+      <div className="dropdown dropdown-top">
         <div
           tabIndex={0}
           className="m-1 cursor-pointer hover:text-accent-focus"

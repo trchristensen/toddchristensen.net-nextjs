@@ -24,14 +24,25 @@
 }
 
 html {
-  min-width: 360px;
-  scroll-behavior: smooth;
+  /* min-width: 360px; */
+  /* scroll-behavior: smooth;
+  max-height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%; */
+  /* font-size: 1rem; */
+  /* line-height: 1.5rem; */
 }
 
 #__next {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* min-height: 100vh; */
 }
 
 html[data-theme="space"] {
@@ -41,11 +52,11 @@ html[data-theme="space"] {
   background-size: cover;
 }
 
-.dots {
+/* .dots {
   background-image: url("/static/svg/dots004.svg");
   background-attachment: fixed;
   background-size: 20%;
-}
+} */
 
 .prose,
 .prose-dark {
@@ -308,7 +319,6 @@ table {
 /*
  * Default color scale
  */
-
 
 .react-calendar-heatmap .color-empty {
   fill: #eeeeee;

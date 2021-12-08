@@ -9,10 +9,11 @@ import Link from 'next/link';
 // import YouTube from 'components/metrics/Youtube';
 import TopTracks from 'components/Spotify/TopTracks.component';
 import Container from 'components/Container/Container.component';
+import OSContainer from "components/OSContainer/OSContainer.component";
 
 export default function Dashboard() {
   return (
-    <Container
+    <OSContainer
       title="Dashboard – Todd Christensen"
       description="My personal dashboard, built with Next.js API routes deployed as serverless functions."
     >
@@ -55,6 +56,6 @@ export default function Dashboard() {
         </p>
         <TopTracks />
       </div>
-    </Container>
+    </OSContainer>
   );
 }

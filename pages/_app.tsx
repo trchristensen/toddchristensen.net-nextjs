@@ -1,23 +1,17 @@
 import "styles/global.css";
-
+import { createContext, useState } from "react";
 import type { AppProps } from "next/app";
-import { ThemeProvider } from "next-themes";
-import { SessionProvider } from "next-auth/react";
+import { SiteLayout } from "components/Layouts";
+import { Providers } from "components/Providers";
 
-function App({ Component, pageProps }: AppProps) {
-  return (
-    <SessionProvider session={pageProps.session}>
-      <ThemeProvider
-        enableColorScheme
-        storageKey="nightwind-mode"
-        defaultTheme="dark"
-        attribute={"data-theme"}
-        themes={["light", "dark", "black", "cyberpunk"]}
-      >
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </SessionProvider>
-  );
+export default function App({ Component, pageProps }) {
+  const getLayout =
+    Component.getLayout ||
+    ((page) => (
+      <Providers pageProps={pageProps}>
+        <SiteLayout>{page}</SiteLayout>
+      </Providers>
+    ));
+
+  return getLayout(<Component {...pageProps} />);
 }
-
-export default App;

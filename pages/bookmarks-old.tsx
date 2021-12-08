@@ -1,11 +1,12 @@
 import prisma from "lib/prisma";
 import Container from "components/Container/Container.component";
-import { Raindrop } from "lib/types";
+import { Bookmark } from "lib/types";
 import useSWR from "swr";
 import fetcher from "lib/fetcher";
 import Image from "next/image";
 import { getRaindropsFromCollection } from "lib/raindrop";
 import { useEffect, useState } from "react";
+import OSContainer from "components/OSContainer/OSContainer.component";
 
 function GridView({ bookmarks }) {
   return (
@@ -114,7 +115,7 @@ export default function BookmarksPage({ fallbackData }) {
   }, []);
 
   return (
-    <Container
+    <OSContainer
       title={`Bookmarks – ${process.env.SITE_NAME}`}
       description="Sign my digital guestbook and share some wisdom."
     >
@@ -138,7 +139,7 @@ export default function BookmarksPage({ fallbackData }) {
           <GridView bookmarks={bookmarks} />
         )}
       </div>
-    </Container>
+    </OSContainer>
   );
 }
 
@@ -151,7 +152,7 @@ export async function getStaticProps() {
 
   const bookmarks = await getRaindropsFromCollection("21727662");
 
-  const fallbackData = await bookmarks?.items.map((raindrop:Raindrop) => ({
+  const fallbackData = await bookmarks?.items.map((raindrop:Bookmark) => ({
     title: raindrop.title,
     id: raindrop._id.toString(),
     link: raindrop.link,

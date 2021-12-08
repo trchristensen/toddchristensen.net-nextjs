@@ -111,7 +111,7 @@ export type Unsplash = {
   views: number;
 };
 
-export type Raindrop = {
+export type Bookmark = {
   _id: number | string;
   title: string;
   excerpt?: string;

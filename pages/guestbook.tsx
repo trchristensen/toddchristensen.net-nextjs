@@ -1,10 +1,11 @@
 import prisma from "lib/prisma";
 import Container from "components/Container/Container.component";
 import Guestbook from "components/Guestbook/Guestbook.component";
+import OSContainer from "components/OSContainer/OSContainer.component";
 
 export default function GuestbookPage({ fallbackData }) {
   return (
-    <Container
+    <OSContainer
       title={`Guestbook – ${process.env.SITE_NAME}`}
       description="Sign my digital guestbook and share some wisdom."
     >
@@ -18,7 +19,7 @@ export default function GuestbookPage({ fallbackData }) {
         </p>
         <Guestbook fallbackData={fallbackData} />
       </div>
-    </Container>
+    </OSContainer>
   );
 }
 

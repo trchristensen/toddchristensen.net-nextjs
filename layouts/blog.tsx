@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { parseISO, format } from "date-fns";
 
-import Container from "components/Container/Container.component";
+import OSContainer from "components/OSContainer/OSContainer.component";
 // import Subscribe from "components/Subscribe";
 import ViewCounter from "components/ViewCounter/ViewCounter.component";
 import type { PropsWithChildren } from "react";
@@ -19,7 +19,7 @@ export default function BlogLayout({
   post,
 }: PropsWithChildren<{ post: Blog }>) {
   return (
-    <Container
+    <OSContainer
       title={`${post.title} – Todd Christensen`}
       description={post.summary}
       image={`http://toddchristensen.net/assets/${post.image}`}
@@ -74,6 +74,6 @@ export default function BlogLayout({
           </a>
         </div>
       </article>
-    </Container>
+    </OSContainer>
   );
 }

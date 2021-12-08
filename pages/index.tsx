@@ -13,24 +13,25 @@ import ErrorMessage from "components/ErrorMessage";
 import SuccessMessage from "components/SuccessMessage";
 import { mutate } from "swr";
 import Heatmap from "components/Github/Heatmap.component";
+import OSContainer from "components/OSContainer/OSContainer.component";
 
 export default function Home() {
   return (
-    <Container>
-      <div className="flex flex-col justify-center items-start max-w-2xl mx-auto pb-16 w-full">
+    <OSContainer>
+      <div className="w-full max-w-3xl px-4 py-8 pb-10 mx-auto md:px-8">
         <IntroSection />
-        <FeaturedPosts />
-        <FeaturedProjects />
+        {/* <FeaturedPosts /> */}
+        {/* <FeaturedProjects /> */}
         {/* <Todo /> */}
         <Work />
         <GithubSection />
         <ContactSection />
       </div>
-    </Container>
+    </OSContainer>
   );
 }
 
-const IntroSection = () => (
+export const IntroSection = () => (
   <section
     id="IntroSection"
     className="flex flex-col-reverse sm:flex-row items-start"
@@ -47,7 +48,7 @@ const IntroSection = () => (
           Open to job offers
         </span>
       </div>
-      <p className="mb-16">
+      <p className="mb-4">
         Realizing my ideas through code. California native, currently residing
         in the Philippines 🇵🇭
       </p>

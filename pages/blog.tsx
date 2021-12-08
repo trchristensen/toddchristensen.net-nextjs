@@ -9,6 +9,7 @@ import prisma from "lib/prisma";
 // import { Blog } from ".contentlayer/types";
 import useSWR from "swr";
 import fetcher from "lib/fetcher";
+import OSContainer from "components/OSContainer/OSContainer.component";
 
 
 export default function Blog({
@@ -31,7 +32,7 @@ export default function Blog({
 
   
   return (
-    <Container
+    <OSContainer
       title="Blog – Todd Christensen"
       description="The ramblings of an incoherent, self-important, nobody."
     >
@@ -119,7 +120,7 @@ export default function Blog({
           <BlogPost key={post.title} {...post} />
         ))}
       </div>
-    </Container>
+    </OSContainer>
   );
 }
 

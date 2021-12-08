@@ -16,6 +16,7 @@ module.exports = withContentlayer()({
       "openweathermap.org",
       "i.scdn.co",
       "covers.openlibrary.org",
+      "avatars.githubusercontent.com",
     ],
   },
 });

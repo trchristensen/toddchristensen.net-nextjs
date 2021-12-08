@@ -4,9 +4,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "postinstall": "npx prisma generate"
+    "postinstall": "npx prisma generate",
+    "db:dev": "pscale connect portfolio dev --port 3310",
+    "db:prod": "pscale connect portfolio main --port 3309"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.2",
     "@prisma/client": "^3.5.0",
     "@tailwindcss/forms": "^0.3.4",
     "@tailwindcss/line-clamp": "^0.2.2",
@@ -16,6 +19,7 @@
     "daisyui": "^1.16.2",
     "date-fns": "^2.26.0",
     "date-fns-tz": "^1.1.6",
+    "framer-motion": "^5.4.2",
     "globby": "12.0.2",
     "motion": "^10.4.0",
     "next": "latest",
@@ -26,9 +30,11 @@
     "react": "^17.0.2",
     "react-calendar-heatmap": "^1.8.1",
     "react-dom": "^17.0.2",
+    "react-feather": "^2.0.9",
     "react-icons": "^4.3.1",
     "react-select": "^5.2.1",
     "react-tooltip": "^4.2.21",
+    "react-visibility-sensor": "^5.1.1",
     "reading-time": "^1.5.0",
     "rehype": "12.0.0",
     "rehype-autolink-headings": "6.1.0",
