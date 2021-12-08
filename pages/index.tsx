@@ -269,10 +269,10 @@ const GithubSection = () => {
         for that. You can see my Github stats below, showing my overall
         activity.
       </p>
-      <img
+      {/* <img
         className="mb-4"
         src="https://raw.githubusercontent.com/trchristensen/github-stats/master/generated/overview.svg"
-      />
+      /> */}
       <Heatmap />
     </section>
   );
