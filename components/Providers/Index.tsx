@@ -34,7 +34,11 @@ export function Providers({ children, pageProps }: Props) {
   );
 }
 
-export const SoundContext = createContext(true);
+export const SoundContext = createContext({
+  soundEnabled: false,
+  toggleSound: () => {},
+  playClick: () => {},
+});
 
 export const SoundProvider = ({ children }) => {
   const [soundEnabled, setSoundEnabled] = useState(true);

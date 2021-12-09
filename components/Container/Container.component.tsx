@@ -100,9 +100,9 @@ export default function Container(props) {
             ))}
           </div>
           {soundEnabled ? (
-            <Volume2 onClick={() => toggleSound(!soundEnabled)} />
+            <Volume2 onClick={() => toggleSound()} />
           ) : (
-            <VolumeX onClick={() => toggleSound(!soundEnabled)} />
+            <VolumeX onClick={() => toggleSound()} />
           )}
 
           <ChangeTheme />
