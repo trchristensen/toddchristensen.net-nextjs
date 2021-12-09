@@ -8,7 +8,6 @@ import {
   useContext,
 } from "react";
 import { ThemeProvider } from "next-themes";
-import { SessionProvider } from "next-auth/react";
 import useSound from "use-sound";
 
 interface Props {
@@ -19,17 +18,15 @@ interface Props {
 export function Providers({ children, pageProps }: Props) {
   return (
     <>
-      <SessionProvider session={pageProps.session}>
-        <ThemeProvider
-          enableColorScheme
-          storageKey="nightwind-mode"
-          defaultTheme="dark"
-          attribute={"data-theme"}
-          themes={["light", "dark", "black", "cyberpunk"]}
-        >
-          <SoundProvider>{children}</SoundProvider>
-        </ThemeProvider>
-      </SessionProvider>
+      <ThemeProvider
+        enableColorScheme
+        storageKey="nightwind-mode"
+        defaultTheme="dark"
+        attribute={"data-theme"}
+        themes={["light", "dark", "black", "cyberpunk"]}
+      >
+        <SoundProvider>{children}</SoundProvider>
+      </ThemeProvider>
     </>
   );
 }
@@ -43,9 +40,9 @@ export const SoundContext = createContext({
 export const SoundProvider = ({ children }) => {
   const [soundEnabled, setSoundEnabled] = useState(true);
 
-  const [playClick] = useSound('/sounds/start.mp3', {
+  const [playClick] = useSound("/sounds/start.mp3", {
     soundEnabled,
-  })
+  });
 
   useEffect(() => {
     setSoundEnabled(
@@ -71,8 +68,8 @@ export const SoundProvider = ({ children }) => {
   const contextValue = {
     soundEnabled,
     toggleSound,
-    playClick
-  }
+    playClick,
+  };
 
   return (
     <SoundContext.Provider value={contextValue}>
@@ -82,5 +79,5 @@ export const SoundProvider = ({ children }) => {
 };
 
 export function useSoundContext() {
-  return useContext(SoundContext)
+  return useContext(SoundContext);
 }
