@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useTheme } from "next-themes";
 import NextLink from "next/link";
 import cn from "classnames";
@@ -12,14 +12,23 @@ import { MdPartyMode } from "react-icons/md";
 import { BiCake, BiMoon, BiSun } from "react-icons/bi";
 import { SiAtom } from "react-icons/si";
 import ChangeTheme from "components/ChangeTheme/ChangeTheme.component";
+import useSound from "use-sound";
+import { Volume2, VolumeX } from 'react-feather'
+import { useSoundContext } from "components/Providers/Index";
+
+
+
 
 function NavItem({ href, text }) {
   const router = useRouter();
   const isActive = router.asPath === href;
+  const { playClick } = useSoundContext();
+    
 
   return (
     <NextLink href={href}>
       <a
+        onClick={() => playClick()}
         className={cn(
           isActive ? "font-semibold" : "font-normal",
           "hidden md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-base-200 transition-all"
@@ -31,9 +40,11 @@ function NavItem({ href, text }) {
   );
 }
 
-export default function OSContainer(props) {
+export default function Container(props) {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
+  const { toggleSound, soundEnabled } = useSoundContext();
+  const [playActive] = useSound("/sounds/start.mp3", { volume: 0.25 });
 
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);
@@ -88,6 +99,12 @@ export default function OSContainer(props) {
               <NavItem key={idx} href={navItem.path} text={navItem.title} />
             ))}
           </div>
+          {soundEnabled ? (
+            <Volume2 onClick={() => toggleSound(!soundEnabled)} />
+          ) : (
+            <VolumeX onClick={() => toggleSound(!soundEnabled)} />
+          )}
+
           <ChangeTheme />
         </nav>
       </div>

@@ -4,7 +4,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "postinstall": "npx prisma generate"
+    "postinstall": "npx prisma generate",
+    "db:dev": "pscale connect portfolio dev --port 3309",
+    "db:prod": "pscale connect portfolio main --port 3309",
+    "studio": "npx prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^3.5.0",
@@ -26,6 +29,7 @@
     "react": "^17.0.2",
     "react-calendar-heatmap": "^1.8.1",
     "react-dom": "^17.0.2",
+    "react-feather": "^2.0.9",
     "react-icons": "^4.3.1",
     "react-select": "^5.2.1",
     "react-tooltip": "^4.2.21",
@@ -38,9 +42,11 @@
     "remark-gfm": "^2.0.0",
     "swiper": "^7.3.1",
     "swr": "^1.0.1",
-    "use-delayed-render": "^0.0.7"
+    "use-delayed-render": "^0.0.7",
+    "use-sound": "^4.0.1"
   },
   "devDependencies": {
+    "@svgr/webpack": "^6.1.1",
     "@types/node": "^16.11.10",
     "@types/react": "^17.0.37",
     "autoprefixer": "^10.2.6",
