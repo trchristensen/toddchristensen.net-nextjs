@@ -4,10 +4,15 @@ import NowPlaying from "components/Spotify/NowPlaying.component";
 import Link from "next/link";
 import { locale } from "config/locale.config";
 import { site } from "config/site.config";
+import useSound from "use-sound";
 const { TIMEZONE, CURRENT_CITY, CURRENT_COUNTRY_CODE } = locale;
+import { useSoundContext } from "components/Providers/Index"; 
 
-const ExternalLink = ({ href, children }) => (
+const ExternalLink = ({ href, children, onClick }) => {
+  
+  return(
   <a
+    onClick={onClick}
     className="link-hover hover:text-accent-focus transition ease-in-out duration-500"
     target="_blank"
     rel="noopener noreferrer"
@@ -15,9 +20,18 @@ const ExternalLink = ({ href, children }) => (
   >
     {children}
   </a>
-);
+  )
+}
+
+
 
 export default function Footer() {
+
+    const { playClick } = useSoundContext();
+
+    // const [playActive] = useSound("/sounds/start.mp3", { volume: 0.25 });
+  
+
   return (
     <footer className="flex flex-col justify-center items-start max-w-2xl mx-auto w-full pb-8">
       <hr className="w-full border-1 border-base-300 mb-8" />
@@ -26,12 +40,19 @@ export default function Footer() {
         {site.footerMenu.map((link, idx) => {
           idx++;
           return link.external_link ? (
-            <ExternalLink key={idx} href={link.path}>
+            <ExternalLink
+              key={idx}
+              href={link.path}
+              onClick={() => playClick()}
+            >
               {link.title}
             </ExternalLink>
           ) : (
             <Link key={idx} href={link.path}>
-              <a className="link-hover hover:text-accent-focus transition ease-in-out duration-500">
+              <a
+                onClick={() => playClick()}
+                className="link-hover hover:text-accent-focus transition ease-in-out duration-500"
+              >
                 {link.title}
               </a>
             </Link>

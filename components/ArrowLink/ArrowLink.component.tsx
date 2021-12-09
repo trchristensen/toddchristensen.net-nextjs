@@ -1,6 +1,12 @@
+import useSound from "use-sound";
+
 export function ArrowLink({ text, href, blank = false }) {
+
+  const [playActive] = useSound("/sounds/start.mp3", { volume: 0.25 });
+
   return (
     <a
+      onClick={() => playActive()}
       target={blank ? "_blank" : "_self"}
       rel="noopener noreferrer"
       href={href}
