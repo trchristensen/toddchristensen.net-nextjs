@@ -1,10 +1,10 @@
 import { useMDXComponent } from "next-contentlayer/hooks";
 // import { getTweets } from "lib/twitter";
 import components from "components/MDXComponents/MDXComponents";
-import BlogLayout from "layouts/blog";
 // import Tweet from "components/Tweet";
 import { allProjects } from ".contentlayer/data";
 import type { Project } from ".contentlayer/types";
+import ProjectLayout from "layouts/project";
 
 export default function Post({ post, tweets }: { post: Project; tweets: any[] }) {
   const Component = useMDXComponent(post.body.code);
@@ -14,7 +14,7 @@ export default function Post({ post, tweets }: { post: Project; tweets: any[] })
   // };
 
   return (
-    <BlogLayout post={post}>
+    <ProjectLayout post={post}>
       <Component
         components={
           {
@@ -23,7 +23,7 @@ export default function Post({ post, tweets }: { post: Project; tweets: any[] })
           } as any
         }
       />
-    </BlogLayout>
+    </ProjectLayout>
   );
 }
 
