@@ -8,6 +8,8 @@ import BlogPost from "components/Blog/BlogPost.component";
 import prisma from "lib/prisma";
 import useSWR from "swr";
 import fetcher from "lib/fetcher";
+import ProjectPost from "components/Project/ProjectPost.component";
+import { Search } from "react-feather";
 
 export default function Projects({
   projects,
@@ -34,12 +36,8 @@ export default function Projects({
         <h1 className="mb-4 text-3xl font-bold tracking-tight md:text-5xl">
           Projects
         </h1>
-        <p className="mb-4">
-         Here are a few of my projects.
-        </p>
-        <p className="mb-4">
-          {`Use the search below to filter by title.`}
-        </p>
+        <p className="mb-4">Here are a few of my projects.</p>
+        <p className="mb-4">{`Use the search below to filter by title.`}</p>
         <div className="relative w-full mb-4">
           <input
             aria-label="Search articles"
@@ -48,31 +46,15 @@ export default function Projects({
             placeholder="Search articles"
             className="input input-bordered block w-full px-4 py-2 border rounded-md"
           />
-          <svg
-            className="absolute w-5 h-5 right-3 top-3"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
+          <Search className="absolute w-5 h-5 right-3 top-3" />
         </div>
-        {!searchValue && (
-          <>
-          </>
-        )}
+        {!searchValue && <></>}
         <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight">
           All Projects
         </h3>
         {!filteredProjects.length && <p className="mb-4">No projects found.</p>}
         {filteredProjects.map((project) => (
-          <BlogPost key={project.title} {...project} />
+          <ProjectPost key={project.title} {...project} />
         ))}
       </div>
     </Container>

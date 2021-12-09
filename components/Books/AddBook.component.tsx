@@ -10,8 +10,8 @@ import { signIn, useSession } from "next-auth/react";
 import useSWR, { useSWRConfig } from "swr";
 import fetcher from "lib/fetcher";
 import { Form, FormState } from "lib/types";
-// import SuccessMessage from 'components/SuccessMessage';
-// import ErrorMessage from 'components/ErrorMessage';
+import SuccessMessage from 'components/SuccessMessage';
+import ErrorMessage from 'components/ErrorMessage';
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner.component";
 import BookEntry from "./BookEntry.component";
 import CounterInput from "components/CounterInput/CounterInput.component";
@@ -276,12 +276,10 @@ export default function AddBook({ session }) {
           </div>
         )}
         {form.state === Form.Error
-          ? // <ErrorMessage>{form.message}</ErrorMessage>
-            console.log("error")
+          ?  <ErrorMessage>{form.message}</ErrorMessage>
           : form.state === Form.Success
-          ? console.log("success")
-          : // <SuccessMessage>{form.message}</SuccessMessage>
-            null}
+          ?  <SuccessMessage>{form.message}</SuccessMessage>
+          :  null}
       </div>
     </>
   );

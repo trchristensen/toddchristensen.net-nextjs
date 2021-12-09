@@ -100,9 +100,9 @@ export default function Container(props) {
             ))}
           </div>
           {soundEnabled ? (
-            <Volume2 onClick={() => toggleSound()} />
+            <Volume2 className="cursor-pointer" onClick={() => toggleSound()} />
           ) : (
-            <VolumeX onClick={() => toggleSound()} />
+            <VolumeX className="cursor-pointer" onClick={() => toggleSound()} />
           )}
 
           <ChangeTheme />

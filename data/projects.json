@@ -112,6 +112,33 @@
         "src": "/static/images/toddchristensen.net-c.jpeg",
         "alt": "Portfolio"
       }
+    },
+    {
+      "title": "Juicesauce",
+      "description": "An app that I've been planning for nearly a decade now and still haven't finished. One of these days...",
+      "href": "juicesauce.com/",
+      "icon": "juicesauce",
+      "tags": [
+        {
+          "name": "React"
+        },
+        {
+          "name": "NextJS"
+        },
+        {
+          "name": "TailwindCSS"
+        },
+        {
+          "name": "PlanetScale"
+        },
+        {
+          "name": "Prisma"
+        }
+      ],
+      "imageObject": {
+        "src": "/static/images/toddchristensen.net-c.jpeg",
+        "alt": "Portfolio"
+      }
     }
   ]
 }

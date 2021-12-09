@@ -9,6 +9,7 @@ import prisma from "lib/prisma";
 // import { Blog } from ".contentlayer/types";
 import useSWR from "swr";
 import fetcher from "lib/fetcher";
+import { Search } from "react-feather";
 
 
 export default function Blog({
@@ -42,8 +43,8 @@ export default function Blog({
         <p className="mb-4">
           I just started my first blog, as of December 2021. I think it will
           start off as a personal diary, knowing it won't get much traffic. But
-          who knows? Maybe it will turn into something beautiful? My mom
-          always told me I'm very smart and creative.
+          who knows? Maybe it will turn into something beautiful? My mom always
+          told me I'm very smart and creative.
         </p>
         <p className="mb-4">
           {` In total, I've written ${posts.length} articles on my blog.
@@ -57,20 +58,7 @@ export default function Blog({
             placeholder="Search articles"
             className="input input-bordered block w-full px-4 py-2 border rounded-md"
           />
-          <svg
-            className="absolute w-5 h-5 right-3 top-3"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
+          <Search className="absolute w-5 h-5 right-3 top-3" />
         </div>
         {!searchValue && (
           <>

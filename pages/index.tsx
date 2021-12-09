@@ -13,6 +13,8 @@ import ErrorMessage from "components/ErrorMessage";
 import SuccessMessage from "components/SuccessMessage";
 import { mutate } from "swr";
 import Heatmap from "components/Github/Heatmap.component";
+import LRProjectCard from "components/ProjectCard/LRProjectCard";
+import Projects from "data/projects.json";
 
 export default function Home() {
   return (
@@ -20,8 +22,25 @@ export default function Home() {
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto pb-16 w-full">
         <IntroSection />
         <FeaturedPosts />
-        <FeaturedProjects />
+        {/* <FeaturedProjects /> */}
         {/* <Todo /> */}
+        <section className="mt-16 w-full gap flex flex-col">
+          <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6">
+            Featured Projects
+          </h3>
+          {Projects?.data.map((p) => (
+            <LRProjectCard
+              title={p.title}
+              description={p.description}
+              href="#"
+              key={p.title}
+              icon={null}
+            />
+          ))}
+          <div className="flex mt-8 mb-8">
+        <ArrowLink href="/projects" blank={false} text="View all projects" />
+      </div>
+        </section>
         <Work />
         <GithubSection />
         <ContactSection />
@@ -81,7 +100,7 @@ const FeaturedPosts = () => {
           // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
         />
       </div>
-      <div className="mt-8 mb-16">
+      <div className="mt-8 mb-8">
         <ArrowLink href="blog" text="Read all posts" blank={false} />
       </div>
     </section>
@@ -260,7 +279,7 @@ const ContactSection = () => {
 
 const GithubSection = () => {
   return (
-    <section id="Github" className="w-full">
+    <section id="Github" className="w-full mb-8">
       <h3 className="mt-16 text-secondary font-bold text-2xl md:text-4xl tracking-tight mb-6 flex flex-row items-end justify-between w-full">
         Github Stats
       </h3>
@@ -280,7 +299,7 @@ const GithubSection = () => {
 };
 
 const Work = () => (
-  <section id="work" className="w-full">
+  <section id="work" className="w-full mb-8">
     <h3 className="mt-16 text-secondary font-bold text-2xl md:text-4xl tracking-tight mb-6 flex flex-row items-end justify-between w-full">
       Work
     </h3>

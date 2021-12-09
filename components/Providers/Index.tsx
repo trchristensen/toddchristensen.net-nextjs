@@ -40,13 +40,14 @@ export const SoundContext = createContext({
 export const SoundProvider = ({ children }) => {
   const [soundEnabled, setSoundEnabled] = useState(true);
 
-  const [playClick] = useSound("/sounds/start.mp3", {
+  const [playClick] = useSound("/sounds/click1.mp3",  {
+    volume: 0.25,
     soundEnabled,
   });
 
   useEffect(() => {
     setSoundEnabled(
-      window.localStorage.getItem("sound") === "off" ? false : true
+      window.localStorage.getItem("sound") === "on" ? true : false
     );
   }, []);
 
