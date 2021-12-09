@@ -12,3 +12,4 @@ jobs:
       - name: cURL request
         # Hit the webhook endpoint to rebuild  from the "main" branch
         run: curl -X POST -d {} https://toddchristensen.net/api/github-stats
+        
