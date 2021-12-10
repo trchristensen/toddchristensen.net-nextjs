@@ -77,7 +77,8 @@ export default async function handler(
               },
               create: {
                 email,
-                avatar: image,
+                name,
+                avatar: image
               },
             },
           },

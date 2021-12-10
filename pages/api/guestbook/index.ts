@@ -46,6 +46,7 @@ export default async function handler(
             },
             create: {
               email,
+              name,
               avatar: image,
             }
           },

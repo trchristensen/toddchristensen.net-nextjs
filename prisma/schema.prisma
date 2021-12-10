@@ -59,7 +59,7 @@ model comment {
 
 model user {
   id        BigInt           @id @default(autoincrement())
-  name      String           @db.VarChar(128)
+  name      String           @db.VarChar(128) @default("")
   email     String           @unique @db.VarChar(256)
   avatar    String           @db.VarChar(256)
   createdAt DateTime         @default(now()) @db.DateTime(6)
