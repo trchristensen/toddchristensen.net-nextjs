@@ -6,49 +6,47 @@ import fetcher from "lib/fetcher";
 import Image from "next/image";
 import { getRaindropsFromCollection } from "lib/raindrop";
 import { useEffect, useState } from "react";
+import cn from "classnames";
+import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner.component";
 
-function GridView({ bookmarks }) {
+function BookmarkFilter({onChange, categoryValue}) {
+
+
   return (
-    <div className="w-full relative grid base: grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-      {bookmarks?.items &&
-        bookmarks.items.map(({ link, cover, title, tags }) => (
-          <div className="mb-[-8px]">
-            <a
-              className="w-full h-full"
-              data-tip={title}
-              href={link}
-              target="_blank"
-            >
-              <div className="Bookmark__icon w-full">
-                <div
-                  style={{
-                    aspectRatio: "1/1",
-                    backgroundImage: `url('${cover}')`,
-                  }}
-                  className="flex bg-center rounded-btn shadow-xl object-center bg-cover min-w-32 min-h-32 w-full h-full flex-col justify-between"
-                >
-                  <div className="w-full h-full opacity-0 hover:bg-base-100 hover:opacity-100 flex justify-center items-center flex-col gap-4 p-4 transition-opacity duration-500 ease-in-out">
-                  {/* begin */}
-                  <div className="text-sm font-medium leading-snug">
-                    <span className="">{title}</span>
-                  </div>
-                  <div className="flex flex-wrap space-evenly gap-1 p-1 w-full justify-center">
-                    {tags &&
-                      tags
-                        .slice(0, 3)
-                        .map((tag) => (
-                          <span className="badge badge-sm badge-accent text-accent-content text-xs">
-                            {tag}
-                          </span>
-                        ))}
-                  </div>
-                  {/* end */}
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        ))}
+    <div className="BookmarkFilter flex flex-row gap-4 items-center">
+      <button
+        className={cn(
+          categoryValue == "21727662"
+            ? "font-semibold bg-base-200"
+            : "font-normal",
+          "hidden md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-base-200 transition-all"
+        )}
+        onClick={() => onChange("portfolio")}
+      >
+        Portfolio
+      </button>
+      <button
+        className={cn(
+          categoryValue == "21810124"
+            ? "font-semibold bg-base-200"
+            : "font-normal",
+          "hidden md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-base-200 transition-all"
+        )}
+        onClick={() => onChange("tool")}
+      >
+        Tool
+      </button>
+      <button
+        className={cn(
+          categoryValue == "21810130"
+            ? "font-semibold bg-base-200"
+            : "font-normal",
+          "hidden md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-base-200 transition-all"
+        )}
+        onClick={() => onChange("article")}
+      >
+        Article
+      </button>
     </div>
   );
 }
@@ -94,24 +92,26 @@ function ListView({ bookmarks }) {
 }
 
 export default function BookmarksPage({ fallbackData }) {
-  const { data: bookmarks } = useSWR(
-    "/api/bookmarks/raindrops?collectionId=21727662",
+  
+  
+  const [category, setCategory] = useState('21727662')
+
+  const { data: bookmarks, error } = useSWR(
+    "/api/bookmarks/raindrops?collectionId=" + category,
     fetcher,
-    {
-      fallbackData,
-    }
+    {fallbackData}
   );
+  
 
-  const [view, setView] = useState("list");
-  const handleChangeView = () => {
-    const newView = view == "list" ? "grid" : "list";
-    setView(newView);
-    localStorage.setItem("view-type", newView);
-  };
-
-  useEffect(() => {
-    setView(localStorage.getItem("view-type"));
-  }, []);
+  const handleCategoryChange = (category) => {
+    const collections = {
+      portfolio: "21727662",
+      tool: "21810124",
+      article: "21810130",
+    };
+    setCategory(collections[category])
+    
+  }
 
   return (
     <Container
@@ -127,16 +127,15 @@ export default function BookmarksPage({ fallbackData }) {
           They are synced straight from raindrops.io
         </p>
         <div className="flex justify-end items-center w-full mb-4 gap-4">
-          <button className="btn btn-outline btn-sm" onClick={handleChangeView}>
-            { view == "list" ? "grid" : "list" } View
-          </button>
+          <BookmarkFilter
+            onChange={handleCategoryChange}
+            categoryValue={category}
+          />
         </div>
 
-        {view == "list" ? (
-          <ListView bookmarks={bookmarks} />
-        ) : (
-          <GridView bookmarks={bookmarks} />
-        )}
+        {error &&  JSON.stringify(error)}
+        {!bookmarks && <span className="text-base-content text-3xl">Loading...</span>}
+        {bookmarks && <ListView bookmarks={bookmarks} />}
       </div>
     </Container>
   );
