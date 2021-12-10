@@ -8,6 +8,7 @@ import { Form, FormState } from "lib/types";
 import SuccessMessage from "components/SuccessMessage";
 import ErrorMessage from "components/ErrorMessage";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner.component";
+import { guestbookEntry } from ".prisma/client";
 
 function GuestbookEntry({ entry, user }) {
   const { mutate } = useSWRConfig();
@@ -23,22 +24,22 @@ function GuestbookEntry({ entry, user }) {
 
   return (
     <div className="GuestbookEntry flex flex-row gap-4">
-      {entry.avatar_src && (
+      {entry.createdBy.avatar && (
         <div className="avatar">
-          <div className="mb-8 rounded shadow w-14 h-14">
-            <img src={entry.avatar_src} />
+          <div className="mb-8 rounded shadow w-14 h-14"> 
+            <img src={entry.createdBy.avatar} />
           </div>
         </div>
-      )}
-      <div className="GuestbookEntry__card rounded shadow card overflow-visible bg-base-200 p-2 sm:p-4 flex flex-col space-y-2 w-full before:content-[''] after:content-[''] before:bg-base-200 after:bg-base-200 before:w-[15px] before:h-[15px] before:absolute before:left-[-7px] before:top-[25%] before:transform before:rotate-45 before:rounded before:-z-1 before:shadow after:w-[15px] after:h-[15px] after:absolute after:left-[-7px] after:top-[25%] after:transform after:rotate-45 after:rounded">
+      )} 
+       <div className="GuestbookEntry__card rounded shadow card overflow-visible bg-base-200 p-2 sm:p-4 flex flex-col space-y-2 w-full before:content-[''] after:content-[''] before:bg-base-200 after:bg-base-200 before:w-[15px] before:h-[15px] before:absolute before:left-[-7px] before:top-[25%] before:transform before:rotate-45 before:rounded before:-z-1 before:shadow after:w-[15px] after:h-[15px] after:absolute after:left-[-7px] after:top-[25%] after:transform after:rotate-45 after:rounded">
         <div className="w-full text-medium">{entry.body}</div>
         <div className="flex items-center space-x-3">
-          <p className="text-sm text-base-content">{entry.created_by}</p>
+          <p className="text-sm text-base-content">{entry.createdBy.email}</p>
           <span className="opacity-40">/</span>
           <p className="text-sm text-base-content">
-            {format(new Date(entry.updated_at), "d MMM yyyy 'at' h:mm bb")}
+            {format(new Date(entry.createdAt), "d MMM yyyy 'at' h:mm bb")}
           </p>
-          {user && entry.created_by === user.name && (
+          {user && entry.createdBy.email === user.email && (
             <>
               <span className="opacity-40">/</span>
               <button className="text-sm text-accent" onClick={deleteEntry}>
@@ -47,8 +48,8 @@ function GuestbookEntry({ entry, user }) {
             </>
           )}
         </div>
-      </div>
-    </div>
+          </div>
+    </div> 
   );
 }
 

@@ -63,24 +63,6 @@ export enum ReadStatus {
   READING = "READING"
 }
 
-export type Book = {
-  id?: bigint | number;
-  title: string;
-  subtitle?: string;
-  author: string;
-  description?: string;
-  num_pages?: number;
-  cover_src?: string;
-  publish_date?: string;
-  subjects?: string;
-  key?: string;
-  comment?: string;
-  rating?: number;
-  created_at?: any;
-  updated_at?: any;
-  created_by: string;
-  read_status: ReadStatus;
-}
 
 export type Views = {
   total: number;

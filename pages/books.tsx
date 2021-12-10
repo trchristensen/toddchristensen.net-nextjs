@@ -1,7 +1,8 @@
 import prisma from "lib/prisma";
 import Container from "components/Container/Container.component";
 import Books from "components/Books/Books.component";
-import { books } from ".prisma/client";
+import { book } from ".prisma/client";
+import { BigIntToString } from "lib/utils";
 
 export default function BookPage({ fallbackData }) {
   return (
@@ -23,30 +24,16 @@ export default function BookPage({ fallbackData }) {
 }
 
 export async function getStaticProps() {
-  const entries = await prisma.books.findMany({
+  const entries = await prisma.book.findMany({
     orderBy: {
-      updated_at: "desc",
+      updatedAt: "desc",
     },
+    include: {
+      createdBy: true
+    }
   });
 
-  const fallbackData = entries.map((entry:books) => ({
-    id: entry.id.toString(),
-    title: entry.title,
-    author: entry.author,
-    description: entry.description,
-    rating: entry.rating,
-    created_at: entry.created_at.toString(),
-    updated_at: entry.updated_at.toString(),
-    subtitle: entry.subtitle,
-    num_pages: entry.num_pages,
-    cover_src: entry.cover_src,
-    publish_date: entry.publish_date,
-    subjects: entry.subjects,
-    key: entry.key,
-    comment: entry.comment,
-    created_by: entry.created_by,
-    read_status: entry?.read_status
-  }));
+  const fallbackData = JSON.parse(BigIntToString(entries))
 
   return {
     props: {

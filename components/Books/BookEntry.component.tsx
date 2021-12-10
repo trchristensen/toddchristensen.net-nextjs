@@ -21,7 +21,7 @@ export default function BookEntry({ entry, user }) {
     mutate("/api/books");
   };
 
-  let created = format(new Date(entry.updated_at), "d MMM yyyy");
+  let created = format(new Date(entry.updatedAt), "d MMM yyyy");
 
   return (
     <div className="BookEntry w-full flex flex-col gap-4 border-b-2 border-base-200 p-1 sm:p-2 py-4">
@@ -32,13 +32,13 @@ export default function BookEntry({ entry, user }) {
             href={`https://openlibrary.org/${entry.key}`}
             target="_blank"
           >
-            {entry.cover_src ? (
+            {entry.cover ? (
               <Image
                 className="rounded-lg"
                 width={329}
                 height={500}
                 layout="responsive"
-                src={entry.cover_src}
+                src={entry.cover}
                 alt={entry.title + "cover"}
               />
             ) : (
@@ -65,7 +65,7 @@ export default function BookEntry({ entry, user }) {
             <div className="spacing-0 mt-2 sm:mt-[-6px]">
               <p className="text-xs leading-none">added {created}</p>
             </div>
-            {user && entry.created_by === user.email && (
+            {user && entry.createdBy.email === user.email && (
               <>
                 <span className="hidden sm:flex">/</span>
                 <button

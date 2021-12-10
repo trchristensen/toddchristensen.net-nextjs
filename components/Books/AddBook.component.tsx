@@ -18,7 +18,7 @@ import CounterInput from "components/CounterInput/CounterInput.component";
 import AsyncSelect from "react-select/async";
 import { colors } from "react-select/dist/declarations/src/theme";
 import { locale } from "config/locale.config";
-import { books } from ".prisma/client";
+import { book } from ".prisma/client";
 
 function SearchResult({ book }) {
   return (
@@ -88,10 +88,10 @@ function AutocompleteSearch({ onSelect }) {
 }
 
 interface IBookResult {
-  book: books;
+  book: book;
 }
 
-const BookResult = ({ book }) => (
+const BookResult = ({ book }:IBookResult) => (
   <div className="w-full">
     <div className="BookResult__Card flex flex-col gap-y-4 sm:gap-y-0 sm:flex-row gap-4 pt-8">
       {book?.cover && (
@@ -106,14 +106,14 @@ const BookResult = ({ book }) => (
         <p className="BookResult__Author text-sm">
           {book?.author}
         </p>
-        {book?.publish_date && (
+        {book?.publishDate && (
           <p className="BookResult__Published text-xs mb-1 mt-3 italic">
-            First published: {book?.publish_date[book?.publish_date.length - 1]}
+            First published: {book?.publishDate[book?.publishDate.length - 1]}
           </p>
         )}
         {book?.subjects && (
           <p className="BookResult__Subjects text-sm">
-            {book?.subjects.join(", ")}
+            {book?.subjects}
           </p>
         )}
       </div>
@@ -153,7 +153,7 @@ export default function AddBook({ session }) {
         ...bookData,
         comment,
         rating,
-        read_status: "HAS_READ",
+        readStatus: "HAS_READ",
       }),
       headers: {
         "Content-Type": "application/json",

@@ -9,3 +9,8 @@ export const pick = (obj, keys) => {
     return acc;
   }, {});
 };
+
+
+export function BigIntToString(obj: Object) {
+  return JSON.stringify(obj, (_, v) => (typeof v === "bigint" ? v.toString() : v));
+}

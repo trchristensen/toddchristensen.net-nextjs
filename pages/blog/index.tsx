@@ -115,7 +115,7 @@ export async function getStaticProps() {
   const posts = allBlogs.map((post) =>
     pick(post, ["slug", "title", "summary", "publishedAt"])
   );
-  const popularPosts = await prisma.views.findMany({
+  const popularPosts = await prisma.view.findMany({
     orderBy: {
       count: "desc",
     },

@@ -1,6 +1,7 @@
 import prisma from "lib/prisma";
 import Container from "components/Container/Container.component";
 import Guestbook from "components/Guestbook/Guestbook.component";
+import { BigIntToString } from "lib/utils";
 
 export default function GuestbookPage({ fallbackData }) {
   return (
@@ -23,23 +24,20 @@ export default function GuestbookPage({ fallbackData }) {
 }
 
 export async function getStaticProps() {
-  const entries = await prisma.guestbook.findMany({
+  const entries = await prisma?.guestbookEntry.findMany({
     orderBy: {
-      updated_at: "desc",
+      createdAt: "desc"
     },
+    include: {
+      createdBy: true
+    }
   });
 
-  const fallbackData = entries.map((entry) => ({
-    id: entry.id.toString(),
-    body: entry.body,
-    avatar_src: entry.avatar_src,
-    created_by: entry.created_by.toString(),
-    updated_at: entry.updated_at.toString(),
-  }));
-
+  const fallbackData = JSON.parse(BigIntToString(entries))
+  
   return {
     props: {
-      fallbackData,
+      fallbackData: fallbackData,
     },
     revalidate: 60,
   };

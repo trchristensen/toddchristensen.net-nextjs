@@ -1,26 +1,24 @@
 datasource db {
-    provider             = "mysql"
-    url                  = env("DATABASE_URL")
-    shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
-    referentialIntegrity = "prisma"
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["referentialIntegrity"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
-model guestbook {
-  id         BigInt   @id @default(autoincrement())
-  email      String   @db.VarChar(256)
-  avatar_src String   @db.VarChar(256)
-  body       String   @db.VarChar(500)
-  created_by String   @db.VarChar(256)
-  created_at DateTime @default(now()) @db.DateTime(6)
-  updated_at DateTime @default(now()) @db.DateTime(6)
+model guestbookEntry {
+  id        BigInt   @id @default(autoincrement())
+  createdBy user     @relation(fields: [authorId], references: [id])
+  authorId  BigInt   @db.BigInt
+  createdAt DateTime @default(now()) @db.DateTime(6)
+  body      String   @db.LongText
 }
 
-model views {
+model view {
   slug  String @id @db.VarChar(128)
   count BigInt @default(1)
 }
@@ -31,21 +29,41 @@ enum ReadStatus {
   READING
 }
 
-model books {
-  id             BigInt     @id @default(autoincrement())
-  title          String     @db.VarChar(256)
-  subtitle       String?    @db.VarChar(256)
-  author         String     @db.VarChar(256)
-  description    String?    @db.VarChar(1000)
-  publish_date   String?    @db.VarChar(128)
-  num_pages      Int?       @db.Int
-  cover_src      String?    @db.VarChar(256)
-  subjects       String?    @db.VarChar(2000)
-  key            String?    @db.VarChar(256)
-  comment        String?    @db.VarChar(1000)
-  rating         Float?     @db.Float
-  created_at     DateTime   @default(now()) @db.DateTime(6)
-  updated_at     DateTime   @default(now()) @db.DateTime(6)
-  created_by     String     @db.VarChar(256)
-  read_status    ReadStatus @default(HAS_NOT_READ)
+model book {
+  id          BigInt     @id @default(autoincrement())
+  title       String     @db.VarChar(256)
+  subtitle    String?    @db.VarChar(256)
+  author      String     @db.VarChar(256)
+  description String?    @db.Text
+  publishDate String?    @db.VarChar(128)
+  numPages    Int?       @db.Int
+  cover       String?    @db.VarChar(256)
+  subjects    String?    @db.Text
+  key         String?    @db.VarChar(256)
+  comment     String?    @db.Text
+  rating      Float?     @db.Float
+  createdAt   DateTime   @default(now()) @db.DateTime(6)
+  updatedAt   DateTime   @default(now()) @db.DateTime(6)
+  createdBy   user       @relation(fields: [authorId], references: [id])
+  authorId    BigInt     @db.BigInt
+  readStatus  ReadStatus @default(HAS_NOT_READ)
+}
+
+model comment {
+  id        BigInt   @id @default(autoincrement())
+  createdAt DateTime @default(now()) @db.DateTime(6)
+  body      String   @db.Text
+  createdBy user     @relation(fields: [authorId], references: [id])
+  authorId  BigInt   @db.BigInt
+}
+
+model user {
+  id        BigInt           @id @default(autoincrement())
+  name      String           @db.VarChar(128)
+  email     String           @unique @db.VarChar(256)
+  avatar    String           @db.VarChar(256)
+  createdAt DateTime         @default(now()) @db.DateTime(6)
+  books     book[]
+  guestbook guestbookEntry[]
+  comments  comment[]
 }

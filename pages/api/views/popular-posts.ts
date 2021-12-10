@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   try {
 
-    const popularPosts = await prisma.views.findMany({
+    const popularPosts = await prisma.view.findMany({
        orderBy: {
            count: "desc"
        }

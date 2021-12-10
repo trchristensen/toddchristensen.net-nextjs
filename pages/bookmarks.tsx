@@ -142,12 +142,7 @@ export default function BookmarksPage({ fallbackData }) {
 }
 
 export async function getStaticProps() {
-  const entries = await prisma.guestbook.findMany({
-    orderBy: {
-      updated_at: "desc",
-    },
-  });
-
+  
   const bookmarks = await getRaindropsFromCollection("21727662");
 
   const fallbackData = await bookmarks?.items.map((raindrop:Raindrop) => ({

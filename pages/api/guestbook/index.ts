@@ -1,27 +1,28 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react';
-import prisma from 'lib/prisma';
+import type { NextApiRequest, NextApiResponse } from "next";
+import { getSession } from "next-auth/react";
+import prisma from "lib/prisma";
+import { id } from "date-fns/locale";
+import { BigIntToString } from "lib/utils";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === 'GET') {
-    const entries = await prisma.guestbook.findMany({
+  if (req.method === "GET") {
+    const entries = await prisma?.guestbookEntry.findMany({
       orderBy: {
-        updated_at: 'desc'
-      }
+        createdAt: "desc"
+      },
+      include: {
+        createdBy: true,
+      },
     });
+    const stringd = BigIntToString(entries)
+    console.log(stringd)
+  
 
     return res.json(
-      entries.map((entry) => ({
-        id: entry.id.toString(),
-        email: entry.email,
-        avatar_src: entry.avatar_src,
-        body: entry.body,
-        created_by: entry.created_by,
-        updated_at: entry.updated_at
-      }))
+      stringd
     );
   }
 
@@ -29,28 +30,35 @@ export default async function handler(
   const { email, name, image } = session.user;
 
   if (!session) {
-    return res.status(403).send('Unauthorized');
+    return res.status(403).send("Unauthorized");
   }
 
-  console.log('SESSION USER ====> ', session)
+  console.log("SESSION USER ====> ", session);
 
-  if (req.method === 'POST') {
-    const newEntry = await prisma.guestbook.create({
+  if (req.method === "POST") {
+    const newEntry = await prisma.guestbookEntry.create({
       data: {
-        email,
-        avatar_src: image || '',
-        body: (req.body.body || '').slice(0, 500),
-        created_by: name
-      }
+        body: (req.body.body || "").slice(0, 500),
+        createdBy: {
+          connectOrCreate: {
+            where: {
+              email: email
+            },
+            create: {
+              email,
+              avatar: image,
+            }
+          },
+        },
+      },
     });
 
     return res.status(200).json({
       id: newEntry.id.toString(),
       body: newEntry.body,
-      created_by: newEntry.created_by,
-      updated_at: newEntry.updated_at
+      
     });
   }
 
-  return res.send('Method not allowed.');
+  return res.send("Method not allowed.");
 }
