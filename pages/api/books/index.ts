@@ -38,7 +38,7 @@ export default async function handler(
   if (req.method === "POST") {
     if (email === "toddchristensen@protonmail.com") {
       // @ts-ignore
-      const payload: book = {
+      const payload = {
         title: req.body?.title,
         author:
           (req.body?.author &&
@@ -68,8 +68,8 @@ export default async function handler(
       console.log("PAYLOAD ==> ", payload);
 
       const newEntry = await prisma.book.create({
-        // @ts-ignore
         data: {
+          ...payload,
           createdBy: {
             connectOrCreate: {
               where: {
@@ -81,7 +81,6 @@ export default async function handler(
               },
             },
           },
-          ...payload,
         },
       });
 
