@@ -16,6 +16,9 @@ export default async function handler(
     where: {
       id: Number(id),
     },
+    include: {
+      createdBy: true
+    }
   });
 
   const stringd = BigIntToString(entry)
@@ -24,7 +27,7 @@ export default async function handler(
     return res.json(stringd);
   }
 
-  if (!email || email !== entry.) {
+  if (!email || email !== entry.createdBy.email) {
     return res.status(403).send("Unauthorized");
   }
 
