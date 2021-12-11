@@ -34,7 +34,7 @@ function GuestbookEntry({ entry, user }) {
        <div className="GuestbookEntry__card rounded shadow card overflow-visible bg-base-200 p-2 sm:p-4 flex flex-col space-y-2 w-full before:content-[''] after:content-[''] before:bg-base-200 after:bg-base-200 before:w-[15px] before:h-[15px] before:absolute before:left-[-7px] before:top-[25%] before:transform before:rotate-45 before:rounded before:-z-1 before:shadow after:w-[15px] after:h-[15px] after:absolute after:left-[-7px] after:top-[25%] after:transform after:rotate-45 after:rounded">
         <div className="w-full text-medium">{entry.body}</div>
         <div className="flex items-center space-x-3">
-          <p className="text-sm text-base-content">{entry.createdBy.email}</p>
+          <p className="text-sm text-base-content">{entry.createdBy.name}</p>
           <span className="opacity-40">/</span>
           <p className="text-sm text-base-content">
             {format(new Date(entry.createdAt), "d MMM yyyy 'at' h:mm bb")}

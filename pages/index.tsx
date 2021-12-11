@@ -15,6 +15,9 @@ import { mutate } from "swr";
 import Heatmap from "components/Github/Heatmap.component";
 import LRProjectCard from "components/ProjectCard/LRProjectCard";
 import Projects from "data/projects.json";
+import ClickSound from "components/Sounds/ClickSound";
+import toast from "react-hot-toast";
+import { AlertOctagon, Send } from "react-feather";
 
 export default function Home() {
   return (
@@ -28,18 +31,27 @@ export default function Home() {
           <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-6">
             Featured Projects
           </h3>
+          <div className="flex w-full gap-2 flex-col">
           {Projects?.data.map((p) => (
-            <LRProjectCard
-              title={p.title}
-              description={p.description}
-              href="#"
-              key={p.title}
-              icon={null}
-            />
+            <div key={p.title}>
+              <ClickSound>
+                <LRProjectCard
+                  title={p.title}
+                  description={p.description}
+                  href="#"
+                  icon={null}
+                />
+              </ClickSound>
+            </div>
           ))}
+          </div>
           <div className="flex mt-8 mb-8">
-        <ArrowLink href="/projects" blank={false} text="View all projects" />
-      </div>
+            <ArrowLink
+              href="/projects"
+              blank={false}
+              text="View all projects"
+            />
+          </div>
         </section>
         <Work />
         <GithubSection />
@@ -95,6 +107,18 @@ const FeaturedPosts = () => {
       <div className="flex gap-6 flex-col md:flex-row">
         <BlogPostCard
           title="Hello World"
+          slug="hello-world"
+          gradient="border-2 border-accent"
+          // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
+        />
+        <BlogPostCard
+          title="I'm baby mumblecore"
+          slug="hello-world"
+          gradient="border-2 border-accent"
+          // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
+        />
+        <BlogPostCard
+          title="Humblebrag taiyaki photo booth paleo"
           slug="hello-world"
           gradient="border-2 border-accent"
           // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
@@ -267,9 +291,10 @@ const ContactSection = () => {
           {form.state === Form.Error ? (
             <ErrorMessage>{form.message}</ErrorMessage>
           ) : form.state === Form.Success ? (
-            <SuccessMessage>{form.message}</SuccessMessage>
+            toast('sent!' + <Send />)
+            // <SuccessMessage>{form.message}</SuccessMessage>
           ) : (
-            <></>
+            toast(<AlertOctagon /> + 'something went wrong :(')
           )}
         </div>
       </div>

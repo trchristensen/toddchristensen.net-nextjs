@@ -44,7 +44,6 @@ export default function Container(props) {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const { toggleSound, soundEnabled } = useSoundContext();
-  const [playActive] = useSound("/sounds/start.mp3", { volume: 0.25 });
 
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);
