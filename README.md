@@ -2,9 +2,10 @@
 
 ### Built with
 
-- [x] Next.Js
+- [x] Next.js
 - [x] Tailwind CSS
 - [x] SWR
 - [x] Prisma
+- [x] PlanetScale DB (can use anything prisma supports, though)
 
 ![screenshot](./screenshot.png)
