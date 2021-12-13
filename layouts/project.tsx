@@ -8,7 +8,7 @@ import type { PropsWithChildren } from "react";
 import type { Project } from ".contentlayer/types";
 
 const editUrl = (slug) =>
-  `https://github.com/trchristensen/portfolio-v3.io/edit/main/data/blog/${slug}.mdx`;
+  `https://github.com/trchristensen/toddchristensen.net/edit/main/data/blog/${slug}.mdx`;
 const discussUrl = (slug) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
     `https://toddchristensen.net/blog/${slug}`

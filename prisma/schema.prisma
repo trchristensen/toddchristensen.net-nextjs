@@ -40,13 +40,40 @@ model book {
   cover       String?    @db.VarChar(256)
   subjects    String?    @db.Text
   key         String?    @db.VarChar(256)
-  comment     String?    @db.Text
   rating      Float?     @db.Float
   createdAt   DateTime   @default(now()) @db.DateTime(6)
   updatedAt   DateTime   @default(now()) @db.DateTime(6)
   createdBy   user       @relation(fields: [authorId], references: [id])
   authorId    BigInt     @db.BigInt
   readStatus  ReadStatus @default(HAS_NOT_READ)
+  comment     String?    @db.Text
+  comments    comment[]
+
+}
+
+model user {
+  id        BigInt           @id @default(autoincrement())
+  name      String           @default("") @db.VarChar(128)
+  email     String           @unique @db.VarChar(256)
+  avatar    String           @db.VarChar(256)
+  createdAt DateTime         @default(now()) @db.DateTime(6)
+  books     book[]
+  guestbook guestbookEntry[]
+  comments  comment[]
+}
+
+// enum PostType {
+//   BLOG
+//   PROJECT
+//   COMMENT
+//   BOOK
+//   GUESTBOOKENTRY
+// }
+
+model post {
+  id       BigInt    @id @default(autoincrement())
+  slug     String    @unique @db.VarChar(256)
+  comments comment[]
 }
 
 model comment {
@@ -55,15 +82,8 @@ model comment {
   body      String   @db.Text
   createdBy user     @relation(fields: [authorId], references: [id])
   authorId  BigInt   @db.BigInt
-}
-
-model user {
-  id        BigInt           @id @default(autoincrement())
-  name      String           @db.VarChar(128) @default("")
-  email     String           @unique @db.VarChar(256)
-  avatar    String           @db.VarChar(256)
-  createdAt DateTime         @default(now()) @db.DateTime(6)
-  books     book[]
-  guestbook guestbookEntry[]
-  comments  comment[]
+  book      book?    @relation(fields: [bookId], references: [id])
+  bookId    BigInt?
+  post      post?    @relation(fields: [postId], references: [id])
+  postId    BigInt?
 }

@@ -30,10 +30,6 @@ export default async function handler(
 
   transporter.sendMail(mailData, function (err, info) {
     if (err) res.status(500).send("Message failed! :( Pleae don't give up. I would love to hear from you!");
-    else {
-      res.status(200).send("Message sent! It's on its way now!");
-    }
-
   })
 
 

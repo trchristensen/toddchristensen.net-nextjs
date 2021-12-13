@@ -26,4 +26,13 @@ module.exports = withContentlayer()({
 
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: "/qr",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
 });

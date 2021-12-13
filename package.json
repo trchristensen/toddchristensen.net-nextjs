@@ -5,8 +5,8 @@
     "build": "next build",
     "start": "next start",
     "postinstall": "npx prisma generate",
-    "db:main": "pscale connect db main --port 3309",
-    "db:dev": "pscale connect db dev --port 3310",
+    "db:main": "pscale connect db dev --port 3309",
+    "db:dev": "pscale connect db shadow --port 3310",
     "studio": "npx prisma studio"
   },
   "dependencies": {
