@@ -15,6 +15,7 @@ import ChangeTheme from "components/ChangeTheme/ChangeTheme.component";
 import useSound from "use-sound";
 import { Volume2, VolumeX } from 'react-feather'
 import { useSoundContext } from "components/Providers/Index";
+import { Toaster } from "react-hot-toast";
 
 
 
@@ -111,6 +112,7 @@ export default function Container(props) {
         {children}
         <Footer />
       </main>
+      <Toaster />
     </div>
   );
 }

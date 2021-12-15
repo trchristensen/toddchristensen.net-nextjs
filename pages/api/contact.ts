@@ -2,6 +2,7 @@
 
 import { NextApiRequest, NextApiResponse } from "next";
 import { env } from "config/env.config";
+import { Form, FormState } from "lib/types";
 
 let nodemailer = require("nodemailer");
 
@@ -29,9 +30,15 @@ export default async function handler(
   };
 
   transporter.sendMail(mailData, function (err, info) {
-    if (err) res.status(500).send("Message failed! :( Pleae don't give up. I would love to hear from you!");
+    if (err) res.status(500).json({
+      state: 'Error',
+      message: "Error!" + JSON.stringify(err)
+    });
   })
 
-
+res.status(200).json({
+  state: 'Success',
+  message: "Message sent! I love you. Have a great day."
+})
 
 }

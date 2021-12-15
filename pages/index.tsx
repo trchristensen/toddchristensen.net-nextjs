@@ -32,18 +32,18 @@ export default function Home() {
             Featured Projects
           </h3>
           <div className="flex w-full gap-2 flex-col">
-          {Projects?.data.map((p) => (
-            <div key={p.title}>
-              <ClickSound>
-                <LRProjectCard
-                  title={p.title}
-                  description={p.description}
-                  href={p.href}
-                  icon={null}
-                />
-              </ClickSound>
-            </div>
-          ))}
+            {Projects?.data.map((p) => (
+              <div key={p.title}>
+                <ClickSound>
+                  <LRProjectCard
+                    title={p.title}
+                    description={p.description}
+                    href={p.href}
+                    icon={null}
+                  />
+                </ClickSound>
+              </div>
+            ))}
           </div>
           <div className="flex mt-8 mb-8">
             <ArrowLink
@@ -182,24 +182,18 @@ const ContactSection = () => {
       method: "POST",
     });
 
-    const { error } = await res.json();
-    if (error) {
-      setForm({
-        state: Form.Error,
-        message: error,
-      });
-      return;
+    const response = await res.json();
+    if (response.error) {
+      toast("oops! something went wrong :( please try again.");
     }
 
-    setName(null);
-    setEmail(null);
-    setBody(null);
+    setName('');
+    setEmail('');
+    setBody('');
 
     mutate("/api/guestbook");
-    setForm({
-      state: Form.Success,
-      message: `Hooray! Thanks for the message! I'll get in touch with you shortly.`,
-    });
+    
+    toast.success("sent! i love you. have a nice day!");
   };
 
   return (
@@ -276,14 +270,6 @@ const ContactSection = () => {
               </div>
             </div>
           </form>
-          {form.state === Form.Error ? (
-            <ErrorMessage>{form.message}</ErrorMessage>
-          ) : form.state === Form.Success ? (
-            toast('sent!' + <Send />)
-            // <SuccessMessage>{form.message}</SuccessMessage>
-          ) : (
-            toast(<AlertOctagon /> + 'something went wrong :(')
-          )}
         </div>
       </div>
     </section>
