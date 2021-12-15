@@ -38,7 +38,7 @@ export default function Home() {
                 <LRProjectCard
                   title={p.title}
                   description={p.description}
-                  href="#"
+                  href={p.href}
                   icon={null}
                 />
               </ClickSound>
@@ -107,18 +107,6 @@ const FeaturedPosts = () => {
       <div className="flex gap-6 flex-col md:flex-row">
         <BlogPostCard
           title="Hello World"
-          slug="hello-world"
-          gradient="border-2 border-accent"
-          // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
-        />
-        <BlogPostCard
-          title="I'm baby mumblecore"
-          slug="hello-world"
-          gradient="border-2 border-accent"
-          // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
-        />
-        <BlogPostCard
-          title="Humblebrag taiyaki photo booth paleo"
           slug="hello-world"
           gradient="border-2 border-accent"
           // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
