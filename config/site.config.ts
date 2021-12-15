@@ -71,7 +71,7 @@ const uses = {
 export const socialLinks = {
   twitter: {
     title: "Twitter",
-    path: "http://twitter.com/shillainmanila",
+    path: "http://twitter.com/christensen_tr",
     external_link: true,
   },
   github: {
