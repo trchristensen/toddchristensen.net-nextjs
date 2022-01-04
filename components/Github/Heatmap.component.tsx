@@ -3,11 +3,23 @@ import ReactTooltip from "react-tooltip";
 const data = require("data/github_heatmap.json");
 
 
+
 CalendarHeatmap.prototype.getHeight = function () {
   return (
     this.getWeekWidth() + (this.getMonthLabelSize() - this.props.gutterSize)
   );
 };
+
+
+
+function getGithubCommitCount(){
+  let count = 0;
+  const commits = data.map((date) => (count = count + date.count));
+  console.log("commits", count);
+  
+  return count;
+}
+
 
 import styles from "./heatmap.module.css";
 
@@ -16,6 +28,9 @@ export default function Heatmap() {
 
   return (
     <div className="relative w-full bg-base-200 p-4 rounded">
+      <p className="mb-4 text-sm italic">
+        {getGithubCommitCount()} commits in the last year.
+      </p>
       <CalendarHeatmap
         startDate={shiftDate(today, -365)}
         endDate={today}
@@ -32,9 +47,7 @@ export default function Heatmap() {
           };
         }}
         showWeekdayLabels={true}
-        onClick={(value) =>
-          null
-        }
+        onClick={(value) => null}
       />
       <ReactTooltip className="bg-base-300 text-base-content" />
     </div>
