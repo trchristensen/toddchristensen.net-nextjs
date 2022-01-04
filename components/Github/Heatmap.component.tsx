@@ -28,7 +28,7 @@ export default function Heatmap() {
         }}
         tooltipDataAttrs={(value) => {
           return {
-            "data-tip": `${value.date.slice(0, 10)} has count: ${value.count}`,
+            "data-tip": `${value.date?.slice(0, 10)} has count: ${value.count}`,
           };
         }}
         showWeekdayLabels={true}
