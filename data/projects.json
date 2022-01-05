@@ -29,6 +29,27 @@
       ]
     },
     {
+      "title": "Crypto Hunt",
+      "description": "Product Hunt for the crypto World. WIP",
+      "href": "https://cryptohub-zeta.vercel.app/",
+      "icon": null,
+      "tags": [
+        { "name": "Blitzjs" },
+        { "name": "React" },
+        { "name": "Prisma2" },
+        { "name": "oauth" },
+        { "name": "react-query" },
+        { "name": "MYSQL" }
+      ],
+      "imageObject": {
+        "src": "",
+        "alt": ""
+      },
+      "links": [
+       
+      ]
+    },
+    {
       "title": "stackd",
       "description": "A question/answer platform built on the Hive social media blockchain.",
       "href": "https://dstack-zeta.vercel.app/",
