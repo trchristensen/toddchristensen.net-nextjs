@@ -153,7 +153,7 @@ export default function AddBook({ session }) {
         ...bookData,
         comment,
         rating,
-        readStatus: "HAS_READ",
+        readStatus: readBook ? "HAS_READ" : "HAS_NOT_READ",
       }),
       headers: {
         "Content-Type": "application/json",
