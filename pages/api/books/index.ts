@@ -20,6 +20,7 @@ export default async function handler(
       },
       include: {
         createdBy: true,
+        comments: true,
       },
     });
 
@@ -45,7 +46,7 @@ export default async function handler(
             // @ts-ignore
             [...new Set(req.body?.author)].toString()) ||
           null,
-        // createdBy: email,
+        createdBy: email,
         subjects:
           req.body?.subjects != null && req.body?.subjects.length < 1
             ? req.body?.subjects.toString()
