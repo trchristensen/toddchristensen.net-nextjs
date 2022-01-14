@@ -106,6 +106,12 @@ const FeaturedPosts = () => {
       </h3>
       <div className="flex gap-6 flex-col md:flex-row">
         <BlogPostCard
+          title="Dev Log - Jan 13, 2022"
+          slug="jan-13-2022"
+          gradient="border-2 border-accent"
+          // gradient="from-[#FCA5A5] via-[#EF4444] to-[#991B1B]"
+        />
+        <BlogPostCard
           title="Hello World"
           slug="hello-world"
           gradient="border-2 border-accent"
