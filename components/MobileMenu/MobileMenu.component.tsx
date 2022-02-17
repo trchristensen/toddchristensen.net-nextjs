@@ -73,14 +73,14 @@ export default function MobileMenu() {
               <a className="flex w-auto pb-4">Books I've Read</a>
             </Link>
           </li>
-          <li
+          {/* <li
             className="border-b text-sm font-semibold"
             style={{ transitionDelay: "200ms" }}
           >
             <Link href="/dashboard">
               <a className="flex w-auto pb-4">Dashboard</a>
             </Link>
-          </li>
+          </li> */}
           <li
             className="border-b text-sm font-semibold"
             style={{ transitionDelay: "250ms" }}
@@ -91,36 +91,44 @@ export default function MobileMenu() {
           </li>
           <li
             className="border-b text-sm font-semibold"
+            style={{ transitionDelay: "200ms" }}
+          >
+            <Link href="https://docs.google.com/document/d/1AVXTyyuJYV1dfKAlz2BPQqpF041rQx1kz1Ug9BHOmbU/edit">
+              <a className="flex w-auto pb-4">Resume</a>
+            </Link>
+          </li>
+          <li
+            className="border-b text-sm font-semibold"
             style={{ transitionDelay: "275ms" }}
           >
             <Link href="/snippets">
               <a className="flex w-auto pb-4">Snippets</a>
             </Link>
           </li>
-          <li
+          {/* <li
             className="border-b text-sm font-semibold"
             style={{ transitionDelay: "300ms" }}
           >
             <Link href="/newsletter">
               <a className="flex w-auto pb-4">Newsletter</a>
             </Link>
-          </li>
-          <li
+          </li> */}
+          {/* <li
             className="border-b text-sm font-semibold"
             style={{ transitionDelay: "325ms" }}
           >
             <Link href="/tweets">
               <a className="flex w-auto pb-4">Tweets</a>
             </Link>
-          </li>
-          <li
+          </li> */}
+          {/* <li
             className="border-b text-sm font-semibold"
             style={{ transitionDelay: "350ms" }}
           >
             <Link href="/uses">
               <a className="flex w-auto pb-4">Uses</a>
             </Link>
-          </li>
+          </li> */}
         </ul>
       )}
     </>

@@ -26,8 +26,8 @@ export default function Books({ fallbackData }) {
     ?.filter(
       (_: book) =>
         _.readStatus == "READING"
-        // &&
-        // _.createdBy.email == "toddchristensen@protonmail.com"
+        &&
+        _.createdBy.email == "toddchristensen@protonmail.com"
     )
     .map((entry) => (
       <BookEntry key={entry.id} entry={entry} user={session?.user} />
@@ -46,8 +46,8 @@ export default function Books({ fallbackData }) {
   const plan_to_read = entries
     ?.filter(
       (_: book) => _.readStatus == "HAS_NOT_READ"
-      // &&
-      // _.createdBy.email == EMAIL
+      &&
+      _.createdBy.email == EMAIL
     )
     .map((entry) => (
       <BookEntry key={entry.id} entry={entry} user={session?.user} />
@@ -56,8 +56,8 @@ export default function Books({ fallbackData }) {
   const user_recommended = entries
     ?.filter(
       (_: book) => _.readStatus == "HAS_NOT_READ"
-      // &&
-      // _.createdBy.email != EMAIL
+      &&
+      _.createdBy.email != EMAIL
     )
     .map((entry) => (
       <BookEntry key={entry.id} entry={entry} user={session?.user} />

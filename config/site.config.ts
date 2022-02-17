@@ -21,6 +21,12 @@ const books = {
   external_link: false,
 };
 
+const resume = {
+  title: "Resume",
+  path: "https://docs.google.com/document/d/1AVXTyyuJYV1dfKAlz2BPQqpF041rQx1kz1Ug9BHOmbU/edit?usp=sharing",
+  external_link: true,
+};
+
 const bookmarks = {
   title: "Bookmarks",
   path: "/bookmarks",
@@ -87,9 +93,10 @@ export const site = {
     projects,
     guestbook,
     blog,
-    dashboard,
+    // dashboard,
     bookmarks,
     books,
+    resume
     // about,
     // snippets,
   ],
@@ -98,13 +105,14 @@ export const site = {
     projects,
     guestbook,
     blog,
-    dashboard,
+    // dashboard,
     bookmarks,
     // about,
     // newsletter,
     // snippets,
     // tweets,
     // uses,
+    resume,
     socialLinks.twitter,
     socialLinks.github,
   ],
